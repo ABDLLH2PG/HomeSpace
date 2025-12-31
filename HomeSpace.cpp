@@ -1,22 +1,19 @@
 #include <iostream>
 using namespace std;
 
-// function declaration
-int Sum2Numbers(int, int);
 
+// This is I Default Parameters ( c , d)
+int MySum(int a, int b, int c = 0, int d = 0)
+{
+	return (a + b + c + d);
+}
 
 int main()
 {
-	cout << "Result: " << Sum2Numbers(10, 20) << endl;
-
+	cout << MySum(10, 20) << endl;
+	cout << MySum(10, 20, 30) << endl;
+	cout << MySum(10, 20, 30, 40) << endl;
 
 
 	return 0;
 }
-
-// function definition
-int Sum2Numbers(int Num1, int Num2)
-{
-	return Num1 + Num2;
-}
-
