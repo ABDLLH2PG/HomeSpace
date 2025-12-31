@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-//Lesson #12, BitWise AND operator
+//Lesson #13, BitWise OR operator
 
 int main()
 {
-	cout << "Result: " << (12 & 25);
+	cout << "Result: " << (12 | 25);
 	cout << endl;
 
 
