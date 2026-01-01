@@ -1,35 +1,31 @@
 #include <iostream>
 using namespace std;
 
-//Function Overloading
+//Lesson #17 - Call Stack/Call Hierarchy
 
-int MySum(int Num1, int Num2)
+void Function4()
 {
-	return (Num1 + Num2);
+	cout << "Hi I'm function4 " << endl;
 }
 
-double MySum(double num1, double num2)
+void Function3()
 {
-	return (num1 + num2);
+	Function4();
 }
 
-int MySum(int Num1, int Num2, int Num3)
+void Function2()
 {
-	return (Num1 + Num2 + Num3);
+	Function3();
 }
 
-int MySum(int Num1, int Num2, int Num3, int Num4)
+void Function1()
 {
-	return (Num1 + Num2 + Num3 + Num4);
+	Function2();
 }
-
 
 int main()
 {
-	cout << MySum(10, 20) << endl;
-	cout << MySum(10.5, 20.5) << endl;
-	cout << MySum(10, 20, 30) << endl;
-	cout << MySum(10, 20, 30, 40) << endl;
+	Function1();
 
 
 	return 0;
