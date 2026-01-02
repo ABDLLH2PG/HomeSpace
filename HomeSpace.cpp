@@ -1,32 +1,37 @@
 #include <iostream>
 using namespace std;
 
-//Lesson #19 - Recursion (HomeWork-1)
+//Lesson #19 - Recursion (HomeWork-2)
 
 //My Solution:
-void PrintNumbers(int M, int N)
+int CalculatePowerOfM(int N, int M)
 {
-	if (M >= N)
+	int Sum = 1;
+
+	if (M != 0)
 	{
-		cout << M << endl;
-		PrintNumbers(M - 1, N);
+		Sum *= N;
+		Sum *= CalculatePowerOfM(N, M - 1);
 	}
+
+	return Sum;
 }
 
 //Doctor Solution:
-void PrintNumbersFromMToN(int M, int N)
+int MyPower(int Base, int Power)
 {
-	if (M >= N)
+	if (Power == 0)
+		return 1;
+	else
 	{
-		cout << M << endl;
-		PrintNumbersFromMToN(M - 1, N);
+		return (Base * MyPower(Base, Power - 1));
 	}
 }
 
 int main()
 {
-	PrintNumbers(10, 1);
-	PrintNumbersFromMToN(10, 1);
+	cout << CalculatePowerOfM(2, 4) << endl;
+	cout << MyPower(2, 4) << endl;
 
 	return 0;
 }
