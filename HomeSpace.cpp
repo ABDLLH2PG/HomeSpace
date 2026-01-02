@@ -1,43 +1,22 @@
 #include <iostream>
 using namespace std;
 
-//Visual Studio Function Tips
-//1- Go To Definition
-//2- Go To Declaration
-//3- View Call Hierarchy
-//4- Find All References
-//5- Peek Definition
-//6- Rename Function
+//Lesson #19 - Recursion
 
-void Function2();
-
-void koko()
+void PrintNumbers(int N, int M)
 {
-	cout << "Hi I'm function4 " << endl;
-}
-
-void Function3()
-{
-	koko();
-}
-
-void Function2()
-{
-	Function3();
-}
-
-void Function1()
-{
-	Function2();
-	koko();
+	if (N <= M)
+	{
+		cout << N << endl;
+		PrintNumbers(N + 1, M);
+	}
 }
 
 
 int main()
 {
-	Function1();
+	PrintNumbers(1, 10);
 
-	
 
 	return 0;
 }
