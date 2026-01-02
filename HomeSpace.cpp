@@ -1,22 +1,32 @@
 #include <iostream>
 using namespace std;
 
-//Lesson #19 - Recursion
+//Lesson #19 - Recursion (HomeWork-1)
 
-void PrintNumbers(int N, int M)
+//My Solution:
+void PrintNumbers(int M, int N)
 {
-	if (N <= M)
+	if (M >= N)
 	{
-		cout << N << endl;
-		PrintNumbers(N + 1, M);
+		cout << M << endl;
+		PrintNumbers(M - 1, N);
 	}
 }
 
+//Doctor Solution:
+void PrintNumbersFromMToN(int M, int N)
+{
+	if (M >= N)
+	{
+		cout << M << endl;
+		PrintNumbersFromMToN(M - 1, N);
+	}
+}
 
 int main()
 {
-	PrintNumbers(1, 10);
-
+	PrintNumbers(10, 1);
+	PrintNumbersFromMToN(10, 1);
 
 	return 0;
 }
