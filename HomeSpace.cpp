@@ -1,24 +1,17 @@
 #include <iostream>
 using namespace std;
 
-//Lesson #24 - Float Format (printf)
+//Lesson #24 - Float Format (printf) [ œ—Ì» „‰ ÃÌ„Ì 1]
 int main()
 {
-	float PI = 3.14159265;
-	
-	//Precision specifiication
-	printf("Precision specification of %.*f \n", 1, PI);
-	printf("Precision specification of %.*f \n", 2, PI);
-	printf("Precision specification of %.*f \n", 3, PI);
-	printf("Precision specification of %.*f \n", 4, PI);
+	float Grade1 = 95.5, Grade2 = 88.0, Grade3 = 70.25;
+	float Average = (Grade1 + Grade2 + Grade3) / 3.0;
 
-	float x = 7.0, y = 9.0;
-	printf("\nThe float division is : %.3f / %.3f = %.3f \n\n", x, y, x / y);
+	printf("The Average is %.*f \n\n", 3, Average);
 
-	double d = 12.45;
-	printf("The double value is : %.3f \n", d);
-	printf("The double value is : %.4f \n", d);
+	printf("The Average is %.3f \n", Average);
 
-	
+
+
 	return 0;
 }
