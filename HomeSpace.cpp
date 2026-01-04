@@ -1,16 +1,14 @@
 #include <iostream>
 using namespace std;
 
-//Lesson #24 - Float Format (printf) [ œ—Ì» „‰ ÃÌ„Ì 1]
+//Lesson #24 - Float Format (printf) [ œ—Ì» „‰ ÃÌ„Ì 2]
 int main()
 {
-	float Grade1 = 95.5, Grade2 = 88.0, Grade3 = 70.25;
-	float Average = (Grade1 + Grade2 + Grade3) / 3.0;
+	double DollarToRiyal = 3.7512345;
 
-	printf("The Average is %.*f \n\n", 3, Average);
+	printf("Price (Low Precision): %.1f \n\n", DollarToRiyal);
 
-	printf("The Average is %.3f \n", Average);
-
+	printf("Price (High Precision): %.*f \n", 5, DollarToRiyal);
 
 
 	return 0;
