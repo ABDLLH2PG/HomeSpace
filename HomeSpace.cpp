@@ -1,20 +1,16 @@
 #include <iostream>
 using namespace std;
 
-//Lesson #20 - Static Variables
-void MyFunc()
-{
-	static int Number = 1;
-	cout << "Value of Number: " << Number << "\n";
-
-	Number++;
-}
-
+//Lesson #21 - Automatic Variables
 int main()
 {
-	MyFunc();
-	MyFunc();
-	MyFunc();
+	auto x = 10; //type int
+	auto y = 12.5; //type double
+	auto k = "Mohammed"; //type string
+
+	cout << x << endl;
+	cout << y << endl;
+	cout << k << endl;
 
 
 	return 0;
