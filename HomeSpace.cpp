@@ -1,16 +1,12 @@
 #include <iostream>
 using namespace std;
 
-//Lesson #23 - Integer Format(printf) [ œ—Ì» «÷«›Ì „‰ ÃÌ„Ì 1]
+//Lesson #23 - Integer Format(printf) [ œ—Ì» «÷«›Ì „‰ ÃÌ„Ì 2]
 int main()
 {
-	int Hours = 5, Minutes = 9, Seconds = 1;
+	int Price = 50, Quantity = 3;
 
-	printf("The Time is: %0*d:%0*d:%0*d \n\n", 2, Hours, 2, Minutes, 2, Seconds);
-
-	int TotalItems = 100, Downloaded = 7;
-
-	printf("Progress: [%0*d/%0*d] \n", 3, Downloaded, 3, TotalItems);
+	printf("Price: %d, Qty: %d, Total: %0*d \n", Price, Quantity, 4, Price * Quantity);
 
 
 	return 0;
