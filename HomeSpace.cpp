@@ -1,14 +1,23 @@
 #include <iostream>
 using namespace std;
 
-//Lesson #24 - Float Format (printf) [ œ—Ì» „‰ ÃÌ„Ì 2]
+//Lesson #25 - String and Char Format(printf)
 int main()
 {
-	double DollarToRiyal = 3.7512345;
+	char Name[] = "Mohammed Abu-Hadhoud";
+	char SchoolName[] = "Programming Advices";
 
-	printf("Price (Low Precision): %.1f \n\n", DollarToRiyal);
+	// print string and String
+	printf("Dear %s, How are you?\n\n", Name);
+	printf("Welcome to %s School!\n\n", SchoolName);
 
-	printf("Price (High Precision): %.*f \n", 5, DollarToRiyal);
+	char c = 'S';
+
+	printf("Setting the width of c :%*c \n", 1, c);
+	printf("Setting the width of c :%*c \n", 2, c);
+	printf("Setting the width of c :%*c \n", 3, c);
+	printf("Setting the width of c :%*c \n", 4, c);
+	printf("Setting the width of c :%*c \n", 5, c);
 
 
 	return 0;
