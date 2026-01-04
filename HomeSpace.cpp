@@ -1,23 +1,17 @@
 #include <iostream>
 using namespace std;
 
-//Lesson #23 - Integer Format (printf)
+//Lesson #23 - Integer Format(printf) [ œ—Ì» «÷«›Ì „‰ ÃÌ„Ì 1]
 int main()
 {
-	int Page = 1, TotalPages = 10;
+	int Hours = 5, Minutes = 9, Seconds = 1;
 
-	// print string and int variable
-	printf("The page number = %d \n", Page);
-	printf("You are in Page %d of %d \n", Page, TotalPages);
+	printf("The Time is: %0*d:%0*d:%0*d \n\n", 2, Hours, 2, Minutes, 2, Seconds);
 
-	//Width specification
-	printf("The page number = %0*d \n", 2, Page);
-	printf("The page number = %0*d \n", 3, Page);
-	printf("The page number = %0*d \n", 4, Page);
-	printf("The page number = %0*d \n", 5, Page);
+	int TotalItems = 100, Downloaded = 7;
 
-	int Number1 = 20, Number2 = 30;
-	printf("The Result of %d + %d = %d \n", Number1, Number2, Number1 + Number2);
+	printf("Progress: [%0*d/%0*d] \n", 3, Downloaded, 3, TotalItems);
+
 
 	return 0;
 }
