@@ -1,17 +1,23 @@
 #include <iostream>
 using namespace std;
 
-//Lesson #21 - Automatic Variables
+//Lesson #23 - Integer Format (printf)
 int main()
 {
-	auto x = 10; //type int
-	auto y = 12.5; //type double
-	auto k = "Mohammed"; //type string
+	int Page = 1, TotalPages = 10;
 
-	cout << x << endl;
-	cout << y << endl;
-	cout << k << endl;
+	// print string and int variable
+	printf("The page number = %d \n", Page);
+	printf("You are in Page %d of %d \n", Page, TotalPages);
 
+	//Width specification
+	printf("The page number = %0*d \n", 2, Page);
+	printf("The page number = %0*d \n", 3, Page);
+	printf("The page number = %0*d \n", 4, Page);
+	printf("The page number = %0*d \n", 5, Page);
+
+	int Number1 = 20, Number2 = 30;
+	printf("The Result of %d + %d = %d \n", Number1, Number2, Number1 + Number2);
 
 	return 0;
 }
