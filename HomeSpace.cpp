@@ -1,15 +1,15 @@
 #include <iostream>
 using namespace std;
 
-//Lesson #25 - String and Char Format(printf) [ œ—Ì» „‰ ÃÌ„Ì 1]
+//Lesson #25 - String and Char Format(printf) [ œ—Ì» „‰ ÃÌ„Ì 2]
 int main()
 {
-	char EmployeeName[] = "Ahmed";
-	char Grade = 'A';
+	char star = '*';
 
-	printf("Employee: %s, Performance: %c \n", EmployeeName, Grade);
-
-
+	printf("%*c \n", 1, star);
+	printf("%*c \n", 2, star);
+	printf("%*c \n", 3, star);
+	printf("%*c \n", 4, star);
 
 	return 0;
 }
