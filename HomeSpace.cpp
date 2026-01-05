@@ -1,15 +1,20 @@
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
-//Lesson #25 - String and Char Format(printf) [ œ—Ì» „‰ ÃÌ„Ì 2]
+//Lesson #26 - Setw Manipulator
 int main()
 {
-	char star = '*';
+	cout << "---------|--------------------------------|---------|" << endl;
+	cout << "  Code   |              Name              |  Mark   |" << endl;
+	cout << "---------|--------------------------------|---------|" << endl;
 
-	printf("%*c \n", 1, star);
-	printf("%*c \n", 2, star);
-	printf("%*c \n", 3, star);
-	printf("%*c \n", 4, star);
+	cout << setw(9) << "C101" << "|" << setw(32) << "introduction to Programming 1" << "|" << setw(9) << "95" << "|" << endl;
+	cout << setw(9) << "C102" << "|" << setw(32) << "Computer Hardware" << "|" << setw(9) << "88" << "|" << endl;
+	cout << setw(9) << "C1035243" << "|" << setw(32) << "Network" << "|" << setw(9) << "75" << "|" << endl;
+	cout << "---------|--------------------------------|---------|" << endl;
+
+
 
 	return 0;
 }
