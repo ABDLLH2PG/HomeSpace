@@ -1,22 +1,40 @@
 #include <iostream>
 using namespace std;
 
-//Lesson #27 - Two Dimensional Arrays
-int main()
+//Lesson #27 - Two Dimensional Arrays [HomeWork Solution]
+void StoreMultiplicationTable(int Table[10][10])
 {
-	//int x[Rows][Cols]:
-	int x[3][4] = { {1,2,3,4}, {5,6,7,8}, {9,10,11,12} };
-
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		for (int j = 0; j < 4; j++)
+		for (int j = 0; j < 10; j++)
 		{
-			cout << x[i][j] << " ";
+			Table[i][j] = ((i + 1) * (j + 1));
+		}
+	}
+}
+
+void PrintMultiplicationTable(int Table[10][10])
+{
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			printf("%0*d ", 2, Table[i][j]);
 		}
 
 		cout << endl;
 	}
-	
+}
+
+int main()
+{
+	// int Table[Rows][Cols];
+	int Table[10][10];
+
+	StoreMultiplicationTable(Table);
+
+	PrintMultiplicationTable(Table);
+
 
 	return 0;
 }
