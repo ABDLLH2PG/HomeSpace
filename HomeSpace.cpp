@@ -1,20 +1,22 @@
 #include <iostream>
-#include <iomanip>
 using namespace std;
 
-//Lesson #26 - Setw Manipulator
+//Lesson #27 - Two Dimensional Arrays
 int main()
 {
-	cout << "---------|--------------------------------|---------|" << endl;
-	cout << "  Code   |              Name              |  Mark   |" << endl;
-	cout << "---------|--------------------------------|---------|" << endl;
+	//int x[Rows][Cols]:
+	int x[3][4] = { {1,2,3,4}, {5,6,7,8}, {9,10,11,12} };
 
-	cout << setw(9) << "C101" << "|" << setw(32) << "introduction to Programming 1" << "|" << setw(9) << "95" << "|" << endl;
-	cout << setw(9) << "C102" << "|" << setw(32) << "Computer Hardware" << "|" << setw(9) << "88" << "|" << endl;
-	cout << setw(9) << "C1035243" << "|" << setw(32) << "Network" << "|" << setw(9) << "75" << "|" << endl;
-	cout << "---------|--------------------------------|---------|" << endl;
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			cout << x[i][j] << " ";
+		}
 
-
+		cout << endl;
+	}
+	
 
 	return 0;
 }
