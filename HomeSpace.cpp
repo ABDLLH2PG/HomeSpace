@@ -2,21 +2,26 @@
 #include <vector>
 using namespace std;
 
-//Lesson #28 - Introduction, Declaration and Initialization
+// Lesson #29 - Add elements
 int main()
 {
-	// std::vector<T> vector_name;
+	vector <int> vNumbers;
 
-	vector <int> vNumbers = { 10, 20, 30, 40, 50 };
+	vNumbers.push_back(10);
+	vNumbers.push_back(20);
+	vNumbers.push_back(30);
+	vNumbers.push_back(40);
+	vNumbers.push_back(50);
 
-	cout << "Numbers Vector = ";
+	cout << "Numbers Vector: \n\n";
 
+	//ranged loop
 	for (int &Number : vNumbers)
 	{
-		cout << Number << "  ";
+		cout << Number << endl;
 	}
 
 	cout << endl;
-
+	 
 	return 0;
 }
