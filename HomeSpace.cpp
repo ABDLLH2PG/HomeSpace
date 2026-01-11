@@ -2,82 +2,51 @@
 #include <vector>
 using namespace std;
 
-//Lesson #29 - Add elements [Al HomeWork]
-void ReadNumbers(vector <int> & vNumbers)
+// Lesson #30 - Vector of Structure
+struct stEmployee
 {
-	char ReadMore = 'Y';
-	int Number = 0;
-
-	do
-	{
-		cout << "Please enter a number ? ";
-		cin >> Number;
-
-		vNumbers.push_back(Number);
-
-		cout << "\nDo you want to add more numbers ? Y/N ? ";
-		cin >> ReadMore;
-
-	} while (ReadMore == 'Y' || ReadMore == 'y');
-
-}
-
-int SumVectorNumbers(vector <int> & vNumbers)
-{
-	int Sum = 0;
-
-	for (int Number : vNumbers)
-	{
-		Sum += Number;
-	}
-
-	return Sum;
-}
-
-int MaxNumber(vector <int> & vNumbers)
-{
-	int Max = vNumbers[0];
-
-	for (int Number : vNumbers)
-	{
-		if (Number > Max)
-		{
-			Max = Number;
-		}
-	}
-
-	return Max;
-}
-
-void PrintVectorNumbers(vector <int> & vNumbers)
-{
-	for (int i = 0; i < vNumbers.size(); i++)
-	{
-		cout << vNumbers[i];
-
-		if (i < vNumbers.size() - 1)
-		{
-			cout << ", ";
-		}
-	}
-
-	cout << endl;
-}
+	string FirstName;
+	string LastName;
+	float Salary;
+};
 
 
 int main()
 {
-	vector <int> vNumbers;
+	stEmployee tempEmployee;
 
-	ReadNumbers(vNumbers);
+	vector <stEmployee> vEmployees;
 
-	cout << "\nNumbers Vector: ";
-	PrintVectorNumbers(vNumbers);
+	tempEmployee.FirstName = "Mohammed";
+	tempEmployee.LastName = "Abu-Hahdoud";
+	tempEmployee.Salary = 5000;
 
-	cout << "Total Sum: " << SumVectorNumbers(vNumbers) << endl;
+	vEmployees.push_back(tempEmployee);
 
-	cout << "Maximum Number: " << MaxNumber(vNumbers) << endl;
+	tempEmployee.FirstName = "Ali";
+	tempEmployee.LastName = "Maher";
+	tempEmployee.Salary = 300;
 
+	vEmployees.push_back(tempEmployee);
+
+	tempEmployee.FirstName = "Aya";
+	tempEmployee.LastName = "Omran";
+	tempEmployee.Salary = 1000;
+
+	vEmployees.push_back(tempEmployee);
+
+	cout << "Employees Vector: \n\n";
+
+	//ranged loop
+	for (stEmployee &Employee : vEmployees)
+	{
+		cout << "FirstName: " << Employee.FirstName << endl;
+		cout << "LastName : " << Employee.LastName << endl;
+		cout << "Salary   : " << Employee.Salary << endl;
+		cout << endl;
+	}
+
+	cout << endl;
 
 	return 0;
 }
