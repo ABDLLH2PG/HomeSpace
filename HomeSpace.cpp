@@ -1,8 +1,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
-// Lesson #30 - Vector of Structure
+// Lesson # 30 - Vector of Structure [HomeWork]
 struct stEmployee
 {
 	string FirstName;
@@ -10,32 +9,34 @@ struct stEmployee
 	float Salary;
 };
 
-
-int main()
+void ReadEmployees(vector <stEmployee> & vEmployees)
 {
+	char ReadMore = 'Y';
 	stEmployee tempEmployee;
 
-	vector <stEmployee> vEmployees;
+	do
+	{
+		cout << "Please enter FirstName? ";
+		cin >> tempEmployee.FirstName;
 
-	tempEmployee.FirstName = "Mohammed";
-	tempEmployee.LastName = "Abu-Hahdoud";
-	tempEmployee.Salary = 5000;
+		cout << "Please enter Lastname? ";
+		cin >> tempEmployee.LastName;
 
-	vEmployees.push_back(tempEmployee);
+		cout << "Please enter Salary? ";
+		cin >> tempEmployee.Salary;
 
-	tempEmployee.FirstName = "Ali";
-	tempEmployee.LastName = "Maher";
-	tempEmployee.Salary = 300;
+		vEmployees.push_back(tempEmployee);
 
-	vEmployees.push_back(tempEmployee);
+		cout << "\nDo you want to read more employees ? Y/N ? ";
+		cin >> ReadMore;
 
-	tempEmployee.FirstName = "Aya";
-	tempEmployee.LastName = "Omran";
-	tempEmployee.Salary = 1000;
+	} while (ReadMore == 'Y' || ReadMore == 'y');
 
-	vEmployees.push_back(tempEmployee);
+}
 
-	cout << "Employees Vector: \n\n";
+void PrintEmployees(vector <stEmployee> & vEmployees)
+{
+	cout << "\nEmployees Vector: \n\n";
 
 	//ranged loop
 	for (stEmployee &Employee : vEmployees)
@@ -45,8 +46,16 @@ int main()
 		cout << "Salary   : " << Employee.Salary << endl;
 		cout << endl;
 	}
+}
 
-	cout << endl;
+
+int main()
+{
+	vector <stEmployee> vEmployees;
+
+	ReadEmployees(vEmployees);
+	PrintEmployees(vEmployees);
+
 
 	return 0;
 }
