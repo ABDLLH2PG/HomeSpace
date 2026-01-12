@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-// Lesson #31 - Remove elements
+// Lesson #32 - Vector Functions
 int main()
 {
 	vector <int> vNumbers;
@@ -13,33 +13,19 @@ int main()
 	vNumbers.push_back(40);
 	vNumbers.push_back(50);
 
-	// The pop_back Function remove 1 value (the last value enter the vector);
-	vNumbers.pop_back();
-	vNumbers.pop_back();
-	vNumbers.pop_back();
-	vNumbers.pop_back();
-	vNumbers.pop_back();
-	
 
-	// The empty Function return true or false if vector is empty or not;
-	if (!vNumbers.empty())
-		vNumbers.pop_back();
+	cout << "First Element: " << vNumbers.front() << endl;
+	cout << "Last Element: " << vNumbers.back() << endl;
 
-	// The size Function return number of stack value in vector;
-	// The clear Function clear all value in vector;
-	if (vNumbers.size() > 0)
-		vNumbers.clear();
+	//returns the number of elements present in the vector
+	cout << "Size: " << vNumbers.size() << endl;
 
+	//check the overall size of a vector
+	cout << "Capacity : " << vNumbers.capacity() << endl;
 
-	cout << "Numbers Vector: \n\n";
+	//return 1 (true) if the vector is empty
+	cout << "Empty : " << vNumbers.empty() << endl;
 
-	//ranged loop
-	for (int& Number : vNumbers)
-	{
-		cout << Number << endl;
-	}
-
-	cout << endl;
 
 	return 0;
 }
