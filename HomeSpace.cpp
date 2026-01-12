@@ -1,61 +1,45 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-// Lesson # 30 - Vector of Structure [HomeWork]
-struct stEmployee
-{
-	string FirstName;
-	string LastName;
-	float Salary;
-};
 
-void ReadEmployees(vector <stEmployee> & vEmployees)
-{
-	char ReadMore = 'Y';
-	stEmployee tempEmployee;
-
-	do
-	{
-		cout << "Please enter FirstName? ";
-		cin >> tempEmployee.FirstName;
-
-		cout << "Please enter Lastname? ";
-		cin >> tempEmployee.LastName;
-
-		cout << "Please enter Salary? ";
-		cin >> tempEmployee.Salary;
-
-		vEmployees.push_back(tempEmployee);
-
-		cout << "\nDo you want to read more employees ? Y/N ? ";
-		cin >> ReadMore;
-
-	} while (ReadMore == 'Y' || ReadMore == 'y');
-
-}
-
-void PrintEmployees(vector <stEmployee> & vEmployees)
-{
-	cout << "\nEmployees Vector: \n\n";
-
-	//ranged loop
-	for (stEmployee &Employee : vEmployees)
-	{
-		cout << "FirstName: " << Employee.FirstName << endl;
-		cout << "LastName : " << Employee.LastName << endl;
-		cout << "Salary   : " << Employee.Salary << endl;
-		cout << endl;
-	}
-}
-
-
+// Lesson #31 - Remove elements
 int main()
 {
-	vector <stEmployee> vEmployees;
+	vector <int> vNumbers;
 
-	ReadEmployees(vEmployees);
-	PrintEmployees(vEmployees);
+	vNumbers.push_back(10);
+	vNumbers.push_back(20);
+	vNumbers.push_back(30);
+	vNumbers.push_back(40);
+	vNumbers.push_back(50);
 
+	// The pop_back Function remove 1 value (the last value enter the vector);
+	vNumbers.pop_back();
+	vNumbers.pop_back();
+	vNumbers.pop_back();
+	vNumbers.pop_back();
+	vNumbers.pop_back();
+	
+
+	// The empty Function return true or false if vector is empty or not;
+	if (!vNumbers.empty())
+		vNumbers.pop_back();
+
+	// The size Function return number of stack value in vector;
+	// The clear Function clear all value in vector;
+	if (vNumbers.size() > 0)
+		vNumbers.clear();
+
+
+	cout << "Numbers Vector: \n\n";
+
+	//ranged loop
+	for (int& Number : vNumbers)
+	{
+		cout << Number << endl;
+	}
+
+	cout << endl;
 
 	return 0;
 }
