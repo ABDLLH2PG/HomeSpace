@@ -1,19 +1,20 @@
 #include <iostream>
 using namespace std;
 
-// Lesson #34 - Creating References
+// Lesson #35 - What is Pointer?
 int main()
 {
 	int a = 10;
-	int & x = a;
 	
-	cout << &a << endl;
-	cout << &x << endl;
+	cout << "a value        = " << a << endl;
+	cout << "a address      = " << &a << endl;
 
-	x = 20;
+	int * p = &a;
 
-	cout << a << endl;
-	cout << x << endl;
+
+	cout << "Pointer Value  = " << p;
+
+	cout << endl;
 
 	return 0;
 }
