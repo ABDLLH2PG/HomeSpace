@@ -1,24 +1,19 @@
 #include <iostream>
 using namespace std;
 
-// Lesson #33 - Call ByRef/ByVal Important Review. 
-void Function1(int &x)
-{
-	x++;
-}
-
-
+// Lesson #34 - Creating References
 int main()
 {
 	int a = 10;
+	int & x = a;
+	
+	cout << &a << endl;
+	cout << &x << endl;
+
+	x = 20;
 
 	cout << a << endl;
-	cout << &a << endl;
-
-	Function1(a);
-
-	cout << "\na after calling function1 = " << a << endl;
-
+	cout << x << endl;
 
 	return 0;
 }
