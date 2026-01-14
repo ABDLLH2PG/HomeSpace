@@ -1,28 +1,28 @@
 #include <iostream>
 using namespace std;
 
-// Lesson #37 - Common Mistakes with Pointers 
+// Lesson #38 - Pointers vs References
 int main()
 {
-	int x, * p;
+	int a = 10;
+	int &x = a;
 
-	// Wrong!
-	// p is an address but x is not
-	//p = x;
+	cout << &a << endl;
+	cout << &x << endl;
+
+	cout << a << endl;
+	cout << x << endl;
+
+	int *p = &a;
 	
-	// Correct!
-	// p is an address and so is &x
-	p = &x;
+	cout << p << endl;
+	cout << *p << endl;
 
-	// Wrong!
-	// &x is and address
-	// *p is the value stored in &x
-	//*p = &x;
+	int b = 20;
+	p = &b;
 
-	// Correct!
-	// *p is the value and so x
-	*p = x;
-
+	cout << p << endl;
+	cout << *p << endl;
 
 	return 0;
 }
