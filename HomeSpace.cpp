@@ -1,31 +1,28 @@
 #include <iostream>
 using namespace std;
 
-// Lesson #36 - Dereferencing Pointer
+// Lesson #37 - Common Mistakes with Pointers 
 int main()
 {
-	int a = 10;
+	int x, * p;
 
-	cout << "a value       = " << a << endl;
-	cout << "a address     = " << &a << endl;
+	// Wrong!
+	// p is an address but x is not
+	//p = x;
+	
+	// Correct!
+	// p is an address and so is &x
+	p = &x;
 
-	int * p;
-	p = &a;
+	// Wrong!
+	// &x is and address
+	// *p is the value stored in &x
+	//*p = &x;
 
-	cout << "Pointer Value = " << p << endl;
-	cout << "Value of the address that p is pointing to is " << *p << endl;
+	// Correct!
+	// *p is the value and so x
+	*p = x;
 
-	*p = 20;
-
-	cout << a << endl;
-	cout << *p << endl;
-
-	a = 30;
-
-	cout << a << endl;
-	cout << *p << endl;
-
-	cout << endl;
 
 	return 0;
 }
