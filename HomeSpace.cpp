@@ -1,29 +1,31 @@
 #include <iostream>
 using namespace std;
 
-// Lesson #39 - Call by Reference: Using pointers
-void Swap(int *n1, int *n2)
-{
-	int temp;
-	temp = *n1;
-	*n1 = *n2;
-	*n2 = temp;
-}
-
-
+// Lesson #40 - Pointers and Arrays
 int main()
 {
-	int a = 1, b = 2;
-	
-	cout << "Before swapping" << endl;
-	cout << "a = " << a << endl;
-	cout << "b = " << b << endl;
+	int arr[4] = {10, 20, 30, 40};
+	int *ptr;
+	ptr = arr;
 
-	Swap(&a, &b);
+	// ptr is equivalent to &arr[0];
+	// ptr + 1 is equivalent to &arr[1];
+	// ptr + 2 is equivalent to &arr[2];
+	// ptr + 3 is equivalent to &arr[3];
 
-	cout << "\nAfter swapping" << endl;
-	cout << "a = " << a << endl;
-	cout << "b = " << b << endl;
+
+	cout << "Addresses are:\n";
+
+	cout << ptr << endl;
+	cout << ptr + 1 << endl;
+	cout << ptr + 2 << endl;
+	cout << ptr + 3 << endl;
+
+	cout << "\nValue are: \n";
+	cout << *(ptr) << endl;
+	cout << *(ptr + 1) << endl;
+	cout << *(ptr + 2) << endl;
+	cout << *(ptr + 3) << endl;
 
 
 	return 0;
