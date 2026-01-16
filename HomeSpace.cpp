@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// Lesson #40 - Pointers and Arrays
+// Lesson #40 - Pointers and Arrays [Extra Example]
 int main()
 {
 	int arr[4] = {10, 20, 30, 40};
@@ -15,18 +15,12 @@ int main()
 
 
 	cout << "Addresses are:\n";
-
-	cout << ptr << endl;
-	cout << ptr + 1 << endl;
-	cout << ptr + 2 << endl;
-	cout << ptr + 3 << endl;
+	for (int i = 0; i < 4; i++)
+		cout << ptr + i << endl;
 
 	cout << "\nValue are: \n";
-	cout << *(ptr) << endl;
-	cout << *(ptr + 1) << endl;
-	cout << *(ptr + 2) << endl;
-	cout << *(ptr + 3) << endl;
-
+	for (int j = 0; j < 4; j++)
+		cout << *(ptr + j) << endl;
 
 	return 0;
 }
