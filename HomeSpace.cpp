@@ -1,28 +1,24 @@
 #include <iostream>
 using namespace std;
 
-// Lesson #41 - Pointers and Structure
-struct stEmployee
-{
-	string Name;
-	float Salary;
-};
-
+// Lesson #42 - Pointer to Void 
 int main()
 {
-	stEmployee Employee1, * ptr;
+	void *ptr;
 
-	Employee1.Name = "Mohammed Abu-Hadhoud";
-	Employee1.Salary = 5000;
+	float f1 = 10.5;
+	int x = 50;
 
-	cout << Employee1.Name << endl;
-	cout << Employee1.Salary << endl;
+	ptr = &f1;
 
-	ptr = &Employee1;
+	cout << ptr << endl;
+	cout << *(static_cast<float*>(ptr)) << endl;
 
-	cout << "\Using Pointer:\n";
-	cout << ptr->Name << endl;
-	cout << ptr->Salary << endl;
+	ptr = &x;
+
+	cout << ptr << endl;
+	cout << *(static_cast<int*>(ptr)) << endl;
+
 
 	return 0;
 }
