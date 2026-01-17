@@ -1,26 +1,28 @@
 #include <iostream>
 using namespace std;
 
-// Lesson #40 - Pointers and Arrays [Extra Example]
+// Lesson #41 - Pointers and Structure
+struct stEmployee
+{
+	string Name;
+	float Salary;
+};
+
 int main()
 {
-	int arr[4] = {10, 20, 30, 40};
-	int *ptr;
-	ptr = arr;
+	stEmployee Employee1, * ptr;
 
-	// ptr is equivalent to &arr[0];
-	// ptr + 1 is equivalent to &arr[1];
-	// ptr + 2 is equivalent to &arr[2];
-	// ptr + 3 is equivalent to &arr[3];
+	Employee1.Name = "Mohammed Abu-Hadhoud";
+	Employee1.Salary = 5000;
 
+	cout << Employee1.Name << endl;
+	cout << Employee1.Salary << endl;
 
-	cout << "Addresses are:\n";
-	for (int i = 0; i < 4; i++)
-		cout << ptr + i << endl;
+	ptr = &Employee1;
 
-	cout << "\nValue are: \n";
-	for (int j = 0; j < 4; j++)
-		cout << *(ptr + j) << endl;
+	cout << "\Using Pointer:\n";
+	cout << ptr->Name << endl;
+	cout << ptr->Salary << endl;
 
 	return 0;
 }
