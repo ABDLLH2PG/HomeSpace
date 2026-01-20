@@ -1,30 +1,35 @@
 #include <iostream>
 using namespace std;
 
-// Lesson #43 - Memory Management: new and delete
+// Lesson #44 - Dynamic Arrays: new and delete
 int main()
 {
-	// declare an int pointer
-	int *ptrX;
+	int num;
+	cout << "Enter total number of students: ";
+	cin >> num;
 
-	// declare a float pointer
-	float *ptrY;
+	float* ptr;
 
-	// dynamically allocate memory
-	ptrX = new int;
-	ptrY = new float;
+	// memory allocation of num number of floats
+	ptr = new float[num];
 
-	// assigning value to the memory
-	*ptrX = 45;
-	*ptrY = 58.35f;
+	cout << "Enter grades of students." << endl;
 
-	cout << *ptrX << endl;
-	cout << *ptrY << endl;
+	for (int i = 0; i < num; i++)
+	{
+		cout << "Student" << i + 1 << ": ";
+		cin >> *(ptr + i);
+	}
 
-	// deallocate the memory
-	delete ptrX;
-	delete ptrY;
+	cout << "\nDisplaying grades of students." << endl;
 
+	for (int i = 0; i < num; i++)
+	{
+		cout << "Student" << i + 1 << ": " << *(ptr + i) << endl;
+	}
+
+	// ptr memory is released
+	delete[] ptr;
 
 	return 0;
 }
