@@ -2,19 +2,23 @@
 #include <vector>
 using namespace std;
 
-// Lesson #48 - Vector Iterators
+// Lesson #49 - Try Catch
 int main()
 {
 	vector <int> vNum{ 1, 2, 3, 4, 5 };
 
-	// declare iterator 
-	vector <int> ::iterator iter;
-
-	for (iter = vNum.begin(); iter != vNum.end(); iter++)
+	try
 	{
-		cout << *iter << "  ";
-	}
 
+		cout << vNum.at(5);
+
+	}
+	catch (...)
+	{
+		
+		cout << "out of bound\n";
+
+	}
 
 	return 0;
 }
