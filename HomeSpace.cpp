@@ -1,35 +1,23 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-// Lesson #44 - Dynamic Arrays: new and delete
+// Lesson #46 - Access Elements
 int main()
 {
-	int num;
-	cout << "Enter total number of students: ";
-	cin >> num;
+	vector <int> vNum{ 1, 2, 3, 4, 5 };
 
-	float* ptr;
+	cout << "\n\n using .at(i) \n";
+	cout << "Element at Index 0: " << vNum.at(0) << endl;
+	cout << "Element at Index 2: " << vNum.at(2) << endl;
+	cout << "Element at Index 4: " << vNum.at(4) << endl;
 
-	// memory allocation of num number of floats
-	ptr = new float[num];
+	
+	cout << "\n\n using [i]\n";
+	cout << "Element at Index 0: " << vNum[0] << endl;
+	cout << "Element at Index 2: " << vNum[2] << endl;
+	cout << "Element at Index 4: " << vNum[4] << endl;
 
-	cout << "Enter grades of students." << endl;
-
-	for (int i = 0; i < num; i++)
-	{
-		cout << "Student" << i + 1 << ": ";
-		cin >> *(ptr + i);
-	}
-
-	cout << "\nDisplaying grades of students." << endl;
-
-	for (int i = 0; i < num; i++)
-	{
-		cout << "Student" << i + 1 << ": " << *(ptr + i) << endl;
-	}
-
-	// ptr memory is released
-	delete[] ptr;
-
+	
 	return 0;
 }
