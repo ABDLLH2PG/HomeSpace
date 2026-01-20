@@ -1,23 +1,29 @@
 #include <iostream>
 using namespace std;
 
-// Lesson #42 - Pointer to Void 
+// Lesson #43 - Memory Management: new and delete
 int main()
 {
-	void *ptr;
+	// declare an int pointer
+	int *ptrX;
 
-	float f1 = 10.5;
-	int x = 50;
+	// declare a float pointer
+	float *ptrY;
 
-	ptr = &f1;
+	// dynamically allocate memory
+	ptrX = new int;
+	ptrY = new float;
 
-	cout << ptr << endl;
-	cout << *(static_cast<float*>(ptr)) << endl;
+	// assigning value to the memory
+	*ptrX = 45;
+	*ptrY = 58.35f;
 
-	ptr = &x;
+	cout << *ptrX << endl;
+	cout << *ptrY << endl;
 
-	cout << ptr << endl;
-	cout << *(static_cast<int*>(ptr)) << endl;
+	// deallocate the memory
+	delete ptrX;
+	delete ptrY;
 
 
 	return 0;
