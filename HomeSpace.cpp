@@ -2,22 +2,38 @@
 #include <vector>
 using namespace std;
 
-// Lesson #46 - Access Elements
+// Lesson #47 - Change Elements
 int main()
 {
 	vector <int> vNum{ 1, 2, 3, 4, 5 };
 
-	cout << "\n\n using .at(i) \n";
-	cout << "Element at Index 0: " << vNum.at(0) << endl;
-	cout << "Element at Index 2: " << vNum.at(2) << endl;
-	cout << "Element at Index 4: " << vNum.at(4) << endl;
+	cout << "Initial Vector: ";
 
-	
-	cout << "\n\n using [i]\n";
-	cout << "Element at Index 0: " << vNum[0] << endl;
-	cout << "Element at Index 2: " << vNum[2] << endl;
-	cout << "Element at Index 4: " << vNum[4] << endl;
+	for (const int& i : vNum)
+	{
+		cout << i << " ";
+	}
 
-	
+	cout << "\n\nUpdated Vector: ";
+
+	for (int& i : vNum)
+	{
+		i = 20;
+		cout << i << " ";
+	}
+
+	vNum[1] = 40;
+	vNum.at(2) = 80;
+	vNum.at(4) = 90;
+
+	cout << "\n\nUpdated Vector: ";
+
+	for (const int& i : vNum)
+	{
+		cout << i << " ";
+	}
+
+	cout << endl;
+
 	return 0;
 }
