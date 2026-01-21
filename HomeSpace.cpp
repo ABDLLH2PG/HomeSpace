@@ -1,34 +1,22 @@
 #include <iostream>
-#include <cctype>
+#include <fstream>
 using namespace std;
 
-// Lesson #51 - Some CCTYPE Functions
+// Lesson #52 - Write Mode: Write Data To File
 int main()
 {
-	char x;
-	char w;
+	fstream MyFile;
 
-	x = toupper('a');
-	w = tolower('A');
+	MyFile.open("MyFile.txt", ios::out); //Write Mode
 
-	cout << "Converting a to A: " << x << endl;
-	cout << "Converting A to a: " << w << endl;
+	if (MyFile.is_open())
+	{
+		MyFile << "Hi, this is the first line\n";
+		MyFile << "Hi, this is the second line\n";
+		MyFile << "Hi, this is the third line\n";
 
-	// Digits (A to Z)
-	// returns zero if not, and non zero if yes
-	cout << "isupper('A') " << isupper('A') << endl;
-
-	// lower case (a to z)
-	// returns zero if not, and non zero if yes
-	cout << "islower('a') " << islower('a') << endl;
-
-	// Digits (0 to 9)
-	// returns zero if not, and non zero if yes
-	cout << "isdigit('9') " << isdigit('9') << endl;
-
-	// punctuation characters are !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
-	// return zero if not, and non zero if yes
-	cout << "ispunct(';') " << ispunct(';') << endl;
+		MyFile.close();
+	}
 
 
 	return 0;
