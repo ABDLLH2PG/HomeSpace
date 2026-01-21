@@ -2,22 +2,24 @@
 #include <fstream>
 using namespace std;
 
-// Lesson #52 - Write Mode: Write Data To File
+// Lesson #53 - Append Mode: Append Data to File
 int main()
 {
 	fstream MyFile;
 
-	MyFile.open("MyFile.txt", ios::out); //Write Mode
+	MyFile.open("MyFile.txt", ios::out | ios::app); //append Mode
 
 	if (MyFile.is_open())
 	{
-		MyFile << "Hi, this is the first line\n";
-		MyFile << "Hi, this is the second line\n";
-		MyFile << "Hi, this is the third line\n";
+		MyFile << "My name is Abdullah\n";
+		MyFile << "I have 19 Years old\n";
+		MyFile << "I love ProgrammingAdvice\n";
+
 
 		MyFile.close();
 	}
 
 
+	
 	return 0;
 }
