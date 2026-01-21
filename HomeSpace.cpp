@@ -1,50 +1,34 @@
 #include <iostream>
-#include <string>
+#include <cctype>
 using namespace std;
 
-// Lesson #50 - String Object: (Common Methods)
+// Lesson #51 - Some CCTYPE Functions
 int main()
 {
-	string S1 = "My Name is Mohammed Abu-Hadhoud, I Love Programming.";
+	char x;
+	char w;
 
-	//Print the length of the stirng
-	cout << S1.length() << endl;
+	x = toupper('a');
+	w = tolower('A');
 
-	//Returns the letter at position 3
-	cout << S1.at(3) << endl;
-	
-	//Adds @ProgrammingAdvices to the end of stirng
-	S1.append(" @ProgrammingAdvices");
-	cout << S1 << endl;
+	cout << "Converting a to A: " << x << endl;
+	cout << "Converting A to a: " << w << endl;
 
-	//inserts Ali at position 7
-	S1.insert(7, " Ali ");
-	cout << S1 << endl;
+	// Digits (A to Z)
+	// returns zero if not, and non zero if yes
+	cout << "isupper('A') " << isupper('A') << endl;
 
-	//Prints all the next 8 letters from position 16.
-	cout << S1.substr(16, 8) << endl;
+	// lower case (a to z)
+	// returns zero if not, and non zero if yes
+	cout << "islower('a') " << islower('a') << endl;
 
-	//Adds one character to the end of the string
-	S1.push_back('X');
-	cout << S1 << endl;
+	// Digits (0 to 9)
+	// returns zero if not, and non zero if yes
+	cout << "isdigit('9') " << isdigit('9') << endl;
 
-	//Removes one character from the end of the string
-	S1.pop_back();
-	cout << S1 << endl;
-
-	//Finds Ali in the stirng
-	cout << S1.find("Ali") << endl;
-	//Finds ali in the stirng
-	cout << S1.find("ali") << endl;
-
-	if (S1.find("ali") == S1.npos)
-	{
-		cout << "ali is not found";
-	}
-
-	//clears all stirng letters.
-	S1.clear();
-	cout << S1 << endl;
+	// punctuation characters are !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+	// return zero if not, and non zero if yes
+	cout << "ispunct(';') " << ispunct(';') << endl;
 
 
 	return 0;
