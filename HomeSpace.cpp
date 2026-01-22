@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// Lesson #57 - Delete Record From File
+// Lesson #58 - Update Record In File
 void LoadDataFromFileToVector(string FileName, vector <string>& vFileContent)
 {
 	fstream MyFile;
@@ -45,7 +45,7 @@ void SaveVectorToFile(string FileName, vector <string> vFileContent)
 	}
 }
 
-void DeleteRecordFromFile(string FileName, string Record)
+void UpdateRecordInFile(string FileName, string Record, string UpdateTo)
 {
 	vector <string> vFileContent;
 
@@ -55,7 +55,7 @@ void DeleteRecordFromFile(string FileName, string Record)
 	{
 		if (Line == Record)
 		{
-			Line = "";
+			Line == UpdateTo;
 		}
 	}
 
@@ -87,7 +87,7 @@ int main()
 	cout << "File Content Before Delete:\n";
 	PrintFileContenet("MyFile.txt");
 
-	DeleteRecordFromFile("MyFile.txt", "Ali");
+	UpdateRecordInFile("MyFile.txt", "Ali", "Omer");
 
 	cout << "\n\nFile Content After Delete:\n";
 	PrintFileContenet("MyFile.txt");
