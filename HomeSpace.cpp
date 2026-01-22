@@ -1,96 +1,21 @@
+#pragma warning(disable : 4996)
 #include <iostream>
-#include <string>
-#include <vector>
-#include <fstream>
+#include <ctime>
 
 using namespace std;
 
-// Lesson #58 - Update Record In File
-void LoadDataFromFileToVector(string FileName, vector <string>& vFileContent)
-{
-	fstream MyFile;
-
-	MyFile.open(FileName, ios::in); //Read Mode
-
-	if (MyFile.is_open())
-	{
-		string Line;
-
-		while (getline(MyFile, Line))
-		{
-			vFileContent.push_back(Line);
-		}
-
-		MyFile.close();
-	}
-}
-
-void SaveVectorToFile(string FileName, vector <string> vFileContent)
-{
-	fstream MyFile;
-
-	MyFile.open(FileName, ios::out); //Write Mode
-
-	if (MyFile.is_open())
-	{
-		for (string& Line : vFileContent)
-		{
-			if (Line != "")
-			{
-				MyFile << Line << endl;
-			}
-		}
-
-		MyFile.close();
-	}
-}
-
-void UpdateRecordInFile(string FileName, string Record, string UpdateTo)
-{
-	vector <string> vFileContent;
-
-	LoadDataFromFileToVector(FileName, vFileContent);
-
-	for (string& Line : vFileContent)
-	{
-		if (Line == Record)
-		{
-			Line == UpdateTo;
-		}
-	}
-
-	SaveVectorToFile(FileName, vFileContent);
-}
-
-void PrintFileContenet(string FileName)
-{
-	fstream MyFile;
-
-	MyFile.open(FileName, ios::in); //Read Mode
-
-	if (MyFile.is_open())
-	{
-		string Line;
-
-		while (getline(MyFile, Line))
-		{
-			cout << Line << endl;
-		}
-
-		MyFile.close();
-	}
-}
-
-
+// Datatime: Local/UTC Time
 int main()
 {
-	cout << "File Content Before Delete:\n";
-	PrintFileContenet("MyFile.txt");
+	time_t t = time(0); // get time now
 
-	UpdateRecordInFile("MyFile.txt", "Ali", "Omer");
+	char* dt = ctime(&t); // convert in string form
+	cout << "Local data and time is: " << dt << "\n";
 
-	cout << "\n\nFile Content After Delete:\n";
-	PrintFileContenet("MyFile.txt");
+	tm* gmtm = gmtime(&t); // converting now to tm struct for UTC data/time
+	dt = asctime(gmtm);
+	cout << "UTC data and time is: " << dt;
+
 
 	return 0;
 }
