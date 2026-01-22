@@ -5,20 +5,21 @@
 
 using namespace std;
 
-// Lesson #55 - Load Data From File to Vector
-void LoadDataFromFileToVector(string FileName, vector <string>& vFileContent)
+// Lesson #56 - Save Vector to File
+void SaveVectorToFile(string FileName, vector <string> vFileContent)
 {
 	fstream MyFile;
 
-	MyFile.open(FileName, ios::in); //Read Mode
+	MyFile.open(FileName, ios::out);
 
 	if (MyFile.is_open())
 	{
-		string Line;
-
-		while (getline(MyFile, Line))
+		for (string& Line : vFileContent)
 		{
-			vFileContent.push_back(Line);
+			if (Line != "")
+			{
+				MyFile << Line << endl;
+			}
 		}
 
 		MyFile.close();
@@ -28,15 +29,9 @@ void LoadDataFromFileToVector(string FileName, vector <string>& vFileContent)
 
 int main()
 {
-	vector <string> vFileContenet;
+	vector <string> vFileContenet{ "Ali", "Shadi", "Maher", "Fadi", "Lama" };
 
-	LoadDataFromFileToVector("MyFile.txt", vFileContenet);
-
-	for (string& Line : vFileContenet)
-	{
-		cout << Line << endl;
-	}
-
+	SaveVectorToFile("MyFile.txt", vFileContenet);
 
 	return 0;
 }
