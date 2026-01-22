@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include <fstream>
 
 using namespace std;
 
-// Lesson #54 - Read Mode: Print file Content [AI HomeWork]
-void PrintFileContenetWithStudentCounter(string FileName)
+// Lesson #55 - Load Data From File to Vector
+void LoadDataFromFileToVector(string FileName, vector <string>& vFileContent)
 {
 	fstream MyFile;
 
@@ -14,23 +15,27 @@ void PrintFileContenetWithStudentCounter(string FileName)
 	if (MyFile.is_open())
 	{
 		string Line;
-		short Counter = 0;
 
 		while (getline(MyFile, Line))
 		{
-			Counter++;
-			cout << "Student #" << Counter << ": " << Line << endl;
+			vFileContent.push_back(Line);
 		}
-
-		cout << "\nTotal number of students is: " << Counter << endl;
 
 		MyFile.close();
 	}
 }
 
+
 int main()
 {
-	PrintFileContenetWithStudentCounter("Names.txt");
+	vector <string> vFileContenet;
+
+	LoadDataFromFileToVector("MyFile.txt", vFileContenet);
+
+	for (string& Line : vFileContenet)
+	{
+		cout << Line << endl;
+	}
 
 
 	return 0;
