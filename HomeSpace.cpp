@@ -1,44 +1,46 @@
 #include <iostream>
+#include <string>
+#include <iomanip>
 #include "MyUtilityLib.h"
 using namespace std;
 
-// [C07] Problem #01: 3x3 Random Matrix (My Solution)
-void Fill2DArrayWithRandomNumber(int arr[3][3])
+// [C07] Problem #01: 3x3 Random Matrix [Optimized Code]
+void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
 {
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < Rows; i++)
 	{
-		for (int j = 0; j < 3; j++)
+		for (int j = 0; j < Cols; j++)
 		{
 			arr[i][j] = MyUtilityLib::RandomNumber(1, 100);
 		}
 	}
 }
 
-void Print2DArrayWithRandomNumber(int arr[3][3])
+void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < Rows; i++)
 	{
-		for (int j = 0; j < 3; j++)
+		for (int j = 0; j < Cols; j++)
 		{
-			cout << arr[i][j] << "\t";
+			cout << setw(3) << arr[i][j] << "     ";
 		}
 
 		cout << endl;
 	}
 }
 
-
 int main()
 {
 	MyUtilityLib::SeedRand();
 
 	int arr[3][3];
-	cout << "The following is a 3x3 random matrix:" << endl;
 
-	Fill2DArrayWithRandomNumber(arr);
+	FillMatrixWithRandomNumbers(arr, 3, 3);
 
-	Print2DArrayWithRandomNumber(arr);
-	
+	cout << "\n The following is a 3x3 random matrix:\n";
+
+	PrintMatrix(arr, 3, 3);
+
 
 	return 0;
 }
