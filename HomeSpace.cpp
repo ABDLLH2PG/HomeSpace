@@ -4,7 +4,7 @@
 #include "MyUtilityLib.h"
 using namespace std;
 
-// [C07] Problem #04: Sum Each Cols in Matrix [My Solution]
+// [C07] Problem #04: Sum Each Cols in Matrix [Optimized Code]
 void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -29,25 +29,25 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-int ColsSum(int arr[3][3], short Rows, short NumberOfCols)
+int ColSum(int arr[3][3], short Rows, short ColNumber)
 {
 	int Sum = 0;
 
 	for (short i = 0; i < Rows; i++)
 	{
-		Sum += arr[i][NumberOfCols];
+		Sum += arr[i][ColNumber];
 	}
 
 	return Sum;
 }
 
-void PrintSumColsInMatrix(int arr[3][3], short Rows, short Cols)
+void PrintEachColSum(int arr[3][3], short Rows, short Cols)
 {
 	cout << "\n The following are the sum of each col in the matrix:\n";
 	
-	for (int i = 0; i < Cols; i++)
+	for (int j = 0; j < Cols; j++)
 	{
-		cout << " Col " << (i + 1) << " Sum = " << ColsSum(arr, Rows, i) << "\n";
+		cout << " Col " << (j + 1) << " Sum = " << ColSum(arr, Rows, j) << "\n";
 	}
 
 	cout << endl;
@@ -66,7 +66,7 @@ int main()
 
 	PrintMatrix(arr, 3, 3);
 
-	PrintSumColsInMatrix(arr, 3, 3);
+	PrintEachColSum(arr, 3, 3);
 
 
 	return 0;
