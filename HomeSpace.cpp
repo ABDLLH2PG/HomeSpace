@@ -4,7 +4,7 @@
 #include "MyUtilityLib.h"
 using namespace std;
 
-//[C07] Problem #02: Sum Each Row in Matrix [My Solution]
+//[C07] Problem #02: Sum Each Row in Matrix [Optimized Code]
 void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -29,22 +29,25 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-void SumEachRowInMatrix(int arr[3][3], short Rows, short Cols)
+int RowSum(int arr[3][3], short RowNumber, short Cols)
 {
-	for (int i = 0; i < Rows; i++)
+	int Sum = 0;
+	for (short j = 0; j < Cols; j++)
 	{
-		int Sum = 0;
-		for (int j = 0; j < Cols; j++)
-		{
-			Sum += arr[i][j];
-		}
-
-		cout << " Row " << (i + 1) << " Sum = " << Sum << "\n";
+		Sum += arr[RowNumber][j];
 	}
-	cout << endl;
 
+	return Sum;
 }
 
+void PrintEachRowSum(int arr[3][3], short Rows, short Cols)
+{
+	cout << "\n The following are the sum of each row in the matrix:\n";
+	for (short i = 0; i < Rows; i++)
+	{
+		cout << " Row " << i + 1 << " Sum = " << RowSum(arr, i, Cols) << "\n";
+	}
+}
 
 int main()
 {
@@ -58,8 +61,7 @@ int main()
 
 	PrintMatrix(arr, 3, 3);
 
-	cout << "\n The following are the sum of each row in the matrix:\n";
-	SumEachRowInMatrix(arr, 3, 3);
+	PrintEachRowSum(arr, 3, 3);
 
 
 	return 0;
