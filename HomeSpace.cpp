@@ -1,18 +1,18 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include "MyUtilityLib.h"
+
 using namespace std;
 
-// [C07] Problem #07: Traspose Matrix [Optimized Code]
-void FillMatrixWithOrderedNumbers(int arr[3][3], short Rows, short Cols)
+// [C07] Problem #08: Multiply Two Matrices [My Solution]
+void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
 {
-	short Counter = 0;
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++)
 		{
-			Counter++;
-			arr[i][j] = Counter;
+			arr[i][j] = MyUtilityLib::RandomNumber(1, 10);
 		}
 	}
 }
@@ -23,42 +23,41 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	{
 		for (int j = 0; j < Cols; j++)
 		{
-			cout << setw(3) << arr[i][j] << "     ";
+			printf(" %0*d     ", 2, arr[i][j]);
 		}
 
-		cout << endl;
+		cout << "\n";
 	}
 }
 
-void TransposeMatrix(int arr[3][3], int arrTransposed[3][3], short Rows, short Cols)
+void MultiplyTwoMatrices(int arr1[3][3], int arr2[3][3], int arrMultiply[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++)
 		{
-			arrTransposed[i][j] = arr[j][i];
+			arrMultiply[i][j] = (arr1[i][j] * arr2[i][j]);
 		}
 	}
 }
 
-
 int main()
 {
-	int arr[3][3];
+	int arr1[3][3], arr2[3][3], arrMultiply[3][3];
 
-	FillMatrixWithOrderedNumbers(arr, 3, 3);
+	FillMatrixWithRandomNumbers(arr1, 3, 3);
+	FillMatrixWithRandomNumbers(arr2, 3, 3);
 
-	cout << "\nThe following is a 3x3 ordered matrix:\n";
-	PrintMatrix(arr, 3, 3);
+	cout << "Matrix1:\n";
+	PrintMatrix(arr1, 3, 3);
 
-	int arrTransposed[3][3];
+	cout << "\nMatrix2:\n";
+	PrintMatrix(arr2, 3, 3);
 
-	TransposeMatrix(arr, arrTransposed, 3, 3);
+	MultiplyTwoMatrices(arr1, arr2, arrMultiply, 3, 3);
 
-	cout << "\nThe following is the transposed matrix:\n";
-	PrintMatrix(arrTransposed, 3, 3);
-	
-	system("pause>0");
+	cout << "\nResults:\n";
+	PrintMatrix(arrMultiply, 3, 3);
 
 
 	return 0;
