@@ -3,15 +3,16 @@
 #include <iomanip>
 using namespace std;
 
-// [C07] Problem #06: 3x3 Ordered Matrix [My Solution]
-void FillArrayWithOrderedNumbers(int arr[3][3])
+// [C07] Problem #06: 3x3 Ordered Matrix [Optimized Code]
+void FillMatrixWithOrderedNumbers(int arr[3][3], short Rows, short Cols)
 {
-	int Counter = 0;
-	for (int i = 0; i < 3; i++)
+	short Counter = 0;
+	for (int i = 0; i < Rows; i++)
 	{
-		for (int j = 0; j < 3; j++)
+		for (int j = 0; j < Cols; j++)
 		{
-			arr[i][j] = ++Counter;
+			Counter++;
+			arr[i][j] = Counter;
 		}
 	}
 }
@@ -34,7 +35,7 @@ int main()
 {
 	int arr[3][3];
 
-	FillArrayWithOrderedNumbers(arr);
+	FillMatrixWithOrderedNumbers(arr, 3, 3);
 
 	cout << "\nThe following is a 3x3 ordered matrix:\n";
 	PrintMatrix(arr, 3, 3);
