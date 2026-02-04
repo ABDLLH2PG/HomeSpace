@@ -1,17 +1,17 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include "MyUtilityLib.h"
 using namespace std;
 
-// [C07] Problem #05 Sum Each Cols in Matrix In Another Array [Optimized Code]
-void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
+// [C07] Problem #06: 3x3 Ordered Matrix [My Solution]
+void FillArrayWithOrderedNumbers(int arr[3][3])
 {
-	for (int i = 0; i < Rows; i++)
+	int Counter = 0;
+	for (int i = 0; i < 3; i++)
 	{
-		for (int j = 0; j < Cols; j++)
+		for (int j = 0; j < 3; j++)
 		{
-			arr[i][j] = MyUtilityLib::RandomNumber(1, 100);
+			arr[i][j] = ++Counter;
 		}
 	}
 }
@@ -29,58 +29,17 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-int ColSum(int arr[3][3], short Rows, short ColNumber)
-{
-	int Sum = 0;
-
-	for (short i = 0; i < Rows; i++)
-	{
-		Sum += arr[i][ColNumber];
-	}
-
-	return Sum;
-}
-
-void SumMatrixColsInArray(int arr[3][3], int arrSum[3], short Rows, short Cols)
-{
-	for (int i = 0; i < Cols; i++)
-	{
-		arrSum[i] = ColSum(arr, Rows, i);
-	}
-}
-
-void PrintColSumArray(int arrSum[3], short Cols)
-{
-	cout << "\n The following are the sum of each col in the matrix:\n";
-
-	for (int j = 0; j < Cols; j++)
-	{
-		cout << " Col " << (j + 1) << " Sum = " << arrSum[j] << "\n";
-	}
-
-	cout << endl;
-}
-
 
 int main()
 {
-	MyUtilityLib::SeedRand();
-
 	int arr[3][3];
 
-	FillMatrixWithRandomNumbers(arr, 3, 3);
+	FillArrayWithOrderedNumbers(arr);
 
-	cout << "\n The following is a 3x3 random matrix:\n";
-
+	cout << "\nThe following is a 3x3 ordered matrix:\n";
 	PrintMatrix(arr, 3, 3);
 
-	int arrSum[3];
-
-	SumMatrixColsInArray(arr, arrSum, 3, 3);
-
-	PrintColSumArray(arrSum, 3);
-
-
+	system("pause>0");
 
 	return 0;
 }
