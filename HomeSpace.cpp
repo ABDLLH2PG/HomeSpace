@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// [C07] Problem #08: Multiply Two Matrices [My Solution]
+// [C07] Problem #08 Multiply Two Matrices [Optimized Code]
 void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -30,35 +30,37 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-void MultiplyTwoMatrices(int arr1[3][3], int arr2[3][3], int arrMultiply[3][3], short Rows, short Cols)
+void MultiplyTwoMatrices(int Matrix1[3][3], int Matrix2[3][3], int MatrixResults[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++)
 		{
-			arrMultiply[i][j] = (arr1[i][j] * arr2[i][j]);
+			MatrixResults[i][j] = (Matrix1[i][j] * Matrix2[i][j]);
 		}
 	}
 }
 
 int main()
 {
-	int arr1[3][3], arr2[3][3], arrMultiply[3][3];
+	MyUtilityLib::SeedRand();
 
-	FillMatrixWithRandomNumbers(arr1, 3, 3);
-	FillMatrixWithRandomNumbers(arr2, 3, 3);
+	int Matrix1[3][3], Matrix2[3][3], MatrixResults[3][3];
 
+	FillMatrixWithRandomNumbers(Matrix1, 3, 3);
 	cout << "Matrix1:\n";
-	PrintMatrix(arr1, 3, 3);
+	PrintMatrix(Matrix1, 3, 3);
 
+	FillMatrixWithRandomNumbers(Matrix2, 3, 3);
 	cout << "\nMatrix2:\n";
-	PrintMatrix(arr2, 3, 3);
+	PrintMatrix(Matrix2, 3, 3);
 
-	MultiplyTwoMatrices(arr1, arr2, arrMultiply, 3, 3);
+	MultiplyTwoMatrices(Matrix1, Matrix2, MatrixResults, 3, 3);
 
 	cout << "\nResults:\n";
-	PrintMatrix(arrMultiply, 3, 3);
+	PrintMatrix(MatrixResults, 3, 3);
 
+	system("pause>0");
 
 	return 0;
 }
