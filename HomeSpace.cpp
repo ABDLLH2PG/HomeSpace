@@ -1,11 +1,9 @@
 #include <iostream>
 #include <string>
-#include <iomanip>
 #include "MyUtilityLib.h"
-
 using namespace std;
 
-// [C07] Problem #08 Multiply Two Matrices [Optimized Code]
+// [C07] Problem #09: Print Middle Row and Col of Matrix [My Solution]
 void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -30,37 +28,47 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-void MultiplyTwoMatrices(int Matrix1[3][3], int Matrix2[3][3], int MatrixResults[3][3], short Rows, short Cols)
+void PrintMiddleRowInMatrix(int arr[3][3], short Rows, short Cols)
 {
+	short MidRow = floor(Rows/ 2.0);
+
+	for (int i = 0; i < Cols; i++)
+	{
+		printf(" %0*d     ", 2, arr[MidRow][i]);
+	}
+
+	cout << "\n";
+}
+
+void PrintMiddleColInMatrix(int arr[3][3], short Rows, short Cols)
+{
+	short MidCol = floor((Rows / 2.0));
+
 	for (int i = 0; i < Rows; i++)
 	{
-		for (int j = 0; j < Cols; j++)
-		{
-			MatrixResults[i][j] = (Matrix1[i][j] * Matrix2[i][j]);
-		}
+		printf(" %0*d     ", 2, arr[i][MidCol]);
 	}
+
+	cout << "\n";
 }
 
 int main()
 {
 	MyUtilityLib::SeedRand();
 
-	int Matrix1[3][3], Matrix2[3][3], MatrixResults[3][3];
+	int arr[3][3];
 
-	FillMatrixWithRandomNumbers(Matrix1, 3, 3);
-	cout << "Matrix1:\n";
-	PrintMatrix(Matrix1, 3, 3);
+	FillMatrixWithRandomNumbers(arr, 3, 3);
 
-	FillMatrixWithRandomNumbers(Matrix2, 3, 3);
-	cout << "\nMatrix2:\n";
-	PrintMatrix(Matrix2, 3, 3);
+	cout << "Matrix1:" << endl;
+	PrintMatrix(arr, 3, 3);
 
-	MultiplyTwoMatrices(Matrix1, Matrix2, MatrixResults, 3, 3);
+	cout << "\nMiddle Row of Matrix1 is:\n";
+	PrintMiddleRowInMatrix(arr, 3, 3);
 
-	cout << "\nResults:\n";
-	PrintMatrix(MatrixResults, 3, 3);
+	cout << "\nMiddle Col of Matrix1 is:\n";
+	PrintMiddleColInMatrix(arr, 3, 3);
 
-	system("pause>0");
 
 	return 0;
 }
