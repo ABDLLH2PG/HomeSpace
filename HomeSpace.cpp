@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// [C07] Problem #10: Sum of Matrix [My Solution]
+// [C07] Problem #10: Sum of Matrix [Optimized Code]
 void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -30,7 +30,7 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-int SumMatrix(int arr[3][3], short Rows, short Cols)
+int SumOfMatrix(int Matrix1[3][3], short Rows, short Cols)
 {
 	int Sum = 0;
 
@@ -38,7 +38,7 @@ int SumMatrix(int arr[3][3], short Rows, short Cols)
 	{
 		for (int j = 0; j < Cols; j++)
 		{
-			Sum += arr[i][j];
+			Sum += Matrix1[i][j];
 		}
 	}
 
@@ -57,8 +57,9 @@ int main()
 	cout << "\nMatrix1:\n";
 	PrintMatrix(Matrix1, 3, 3);
 
-	cout << "\nSum of Matrix1 is: " << SumMatrix(Matrix1, 3, 3) << endl;
+	cout << "\nSum of Matrix1 is: " << SumOfMatrix(Matrix1, 3, 3) << endl;
 
+	system("pause>0");
 
 	return 0;
 }
