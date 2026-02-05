@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// [C07] Problem #11: Check Matrices Equality [Optimized Code]
+// [C07] Problem #12: Check Typical Matrices [My Solution]
 void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -45,9 +45,18 @@ int SumOfMatrix(int Matrix1[3][3], short Rows, short Cols)
 	return Sum;
 }
 
-bool AreEqualMatrices(int Matrix1[3][3], int Matrix2[3][3], short Rows, short Cols)
+bool AreTypicalMatrices(int Matrix1[3][3], int Matrix2[3][3], short Rows, short Cols)
 {
-	return (SumOfMatrix(Matrix1, Rows, Cols) == SumOfMatrix(Matrix2, Rows, Cols));
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++)
+		{
+			if (Matrix1[i][j] != Matrix2[i][j])
+				return false;
+		}
+	}
+
+	return true;
 }
 
 
@@ -56,7 +65,6 @@ int main()
 	MyUtilityLib::SeedRand();
 
 	int Matrix1[3][3], Matrix2[3][3];
-	int SumOfMatrix1 = 0, SumOfMatrix2 = 0;
 
 	FillMatrixWithRandomNumbers(Matrix1, 3, 3);
 	cout << "\nMatrix1:\n";
@@ -66,7 +74,7 @@ int main()
 	cout << "\nMatrix2:\n";
 	PrintMatrix(Matrix2, 3, 3);
 
-	if (AreEqualMatrices(Matrix1, Matrix2, 3, 3))
+	if (AreTypicalMatrices(Matrix1, Matrix2, 3, 3))
 		cout << "\nYES: both matrices are equal.";
 	else
 		cout << "\nNo: matrices are NOT equal.";
