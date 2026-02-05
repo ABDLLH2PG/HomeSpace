@@ -1,9 +1,11 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "MyUtilityLib.h"
+
 using namespace std;
 
-// [C07] Problem #09: Print Middle Row and Col of Matrix [Optimized Code]
+// [C07] Problem #10: Sum of Matrix [My Solution]
 void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -21,36 +23,28 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	{
 		for (int j = 0; j < Cols; j++)
 		{
-			printf(" %0*d   ", 2, arr[i][j]);
+			printf(" %0*d    ", 2, arr[i][j]);
 		}
 
 		cout << "\n";
 	}
 }
 
-void PrintMiddleRowOfMatrix(int arr[3][3], short Rows, short Cols)
+int SumMatrix(int arr[3][3], short Rows, short Cols)
 {
-	short MiddleRow = Rows / 2;
+	int Sum = 0;
 
-	for (int j = 0; j < Cols; j++)
+	for (int i = 0; i < Rows; i++)
 	{
-		printf(" %0*d   ", 2, arr[MiddleRow][j]);
+		for (int j = 0; j < Cols; j++)
+		{
+			Sum += arr[i][j];
+		}
 	}
 
-	cout << "\n";
+	return Sum;
 }
 
-void PrintMiddleColOfMatrix(int arr[3][3], short Rows, short Cols)
-{
-	short MiddleCol = Cols / 2;
-
-	for (int j = 0; j < Rows; j++)
-	{
-		printf(" %0*d   ", 2, arr[j][MiddleCol]);
-	}
-
-	cout << "\n";
-}
 
 int main()
 {
@@ -63,13 +57,8 @@ int main()
 	cout << "\nMatrix1:\n";
 	PrintMatrix(Matrix1, 3, 3);
 
-	cout << "\nMiddle Row of Matrix1 is:\n";
-	PrintMiddleRowOfMatrix(Matrix1, 3, 3);
+	cout << "\nSum of Matrix1 is: " << SumMatrix(Matrix1, 3, 3) << endl;
 
-	cout << "\nMiddle Col of Matrix1 is:\n";
-	PrintMiddleColOfMatrix(Matrix1, 3, 3);
-
-	system("pause>0");
 
 	return 0;
 }
