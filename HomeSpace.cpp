@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// [C07] Problem #11: Check Matrices Equality [My Solution]
+// [C07] Problem #11: Check Matrices Equality [Optimized Code]
 void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -45,6 +45,11 @@ int SumOfMatrix(int Matrix1[3][3], short Rows, short Cols)
 	return Sum;
 }
 
+bool AreEqualMatrices(int Matrix1[3][3], int Matrix2[3][3], short Rows, short Cols)
+{
+	return (SumOfMatrix(Matrix1, Rows, Cols) == SumOfMatrix(Matrix2, Rows, Cols));
+}
+
 
 int main()
 {
@@ -61,14 +66,10 @@ int main()
 	cout << "\nMatrix2:\n";
 	PrintMatrix(Matrix2, 3, 3);
 
-	SumOfMatrix1 = SumOfMatrix(Matrix1, 3, 3);
-	SumOfMatrix2 = SumOfMatrix(Matrix2, 3, 3);
-
-	if (SumOfMatrix1 == SumOfMatrix2)
-		cout << "\nYes: matrices are equal.\n";
+	if (AreEqualMatrices(Matrix1, Matrix2, 3, 3))
+		cout << "\nYES: both matrices are equal.";
 	else
-		cout << "\nNo: matrices are NOT equal.\n";
-
+		cout << "\nNo: matrices are NOT equal.";
 
 	system("pause>0");
 
