@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// [C07] Problem #10: Sum of Matrix [Optimized Code]
+// [C07] Problem #11: Check Matrices Equality [My Solution]
 void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -50,14 +50,25 @@ int main()
 {
 	MyUtilityLib::SeedRand();
 
-	int Matrix1[3][3];
+	int Matrix1[3][3], Matrix2[3][3];
+	int SumOfMatrix1 = 0, SumOfMatrix2 = 0;
 
 	FillMatrixWithRandomNumbers(Matrix1, 3, 3);
-
 	cout << "\nMatrix1:\n";
 	PrintMatrix(Matrix1, 3, 3);
 
-	cout << "\nSum of Matrix1 is: " << SumOfMatrix(Matrix1, 3, 3) << endl;
+	FillMatrixWithRandomNumbers(Matrix2, 3, 3);
+	cout << "\nMatrix2:\n";
+	PrintMatrix(Matrix2, 3, 3);
+
+	SumOfMatrix1 = SumOfMatrix(Matrix1, 3, 3);
+	SumOfMatrix2 = SumOfMatrix(Matrix2, 3, 3);
+
+	if (SumOfMatrix1 == SumOfMatrix2)
+		cout << "\nYes: matrices are equal.\n";
+	else
+		cout << "\nNo: matrices are NOT equal.\n";
+
 
 	system("pause>0");
 
