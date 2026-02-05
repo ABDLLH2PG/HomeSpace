@@ -3,7 +3,7 @@
 #include "MyUtilityLib.h"
 using namespace std;
 
-// [C07] Problem #09: Print Middle Row and Col of Matrix [My Solution]
+// [C07] Problem #09: Print Middle Row and Col of Matrix [Optimized Code]
 void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -21,32 +21,32 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	{
 		for (int j = 0; j < Cols; j++)
 		{
-			printf(" %0*d     ", 2, arr[i][j]);
+			printf(" %0*d   ", 2, arr[i][j]);
 		}
 
 		cout << "\n";
 	}
 }
 
-void PrintMiddleRowInMatrix(int arr[3][3], short Rows, short Cols)
+void PrintMiddleRowOfMatrix(int arr[3][3], short Rows, short Cols)
 {
-	short MidRow = floor(Rows/ 2.0);
+	short MiddleRow = Rows / 2;
 
-	for (int i = 0; i < Cols; i++)
+	for (int j = 0; j < Cols; j++)
 	{
-		printf(" %0*d     ", 2, arr[MidRow][i]);
+		printf(" %0*d   ", 2, arr[MiddleRow][j]);
 	}
 
 	cout << "\n";
 }
 
-void PrintMiddleColInMatrix(int arr[3][3], short Rows, short Cols)
+void PrintMiddleColOfMatrix(int arr[3][3], short Rows, short Cols)
 {
-	short MidCol = floor((Rows / 2.0));
+	short MiddleCol = Cols / 2;
 
-	for (int i = 0; i < Rows; i++)
+	for (int j = 0; j < Rows; j++)
 	{
-		printf(" %0*d     ", 2, arr[i][MidCol]);
+		printf(" %0*d   ", 2, arr[j][MiddleCol]);
 	}
 
 	cout << "\n";
@@ -56,19 +56,20 @@ int main()
 {
 	MyUtilityLib::SeedRand();
 
-	int arr[3][3];
+	int Matrix1[3][3];
 
-	FillMatrixWithRandomNumbers(arr, 3, 3);
+	FillMatrixWithRandomNumbers(Matrix1, 3, 3);
 
-	cout << "Matrix1:" << endl;
-	PrintMatrix(arr, 3, 3);
+	cout << "\nMatrix1:\n";
+	PrintMatrix(Matrix1, 3, 3);
 
 	cout << "\nMiddle Row of Matrix1 is:\n";
-	PrintMiddleRowInMatrix(arr, 3, 3);
+	PrintMiddleRowOfMatrix(Matrix1, 3, 3);
 
 	cout << "\nMiddle Col of Matrix1 is:\n";
-	PrintMiddleColInMatrix(arr, 3, 3);
+	PrintMiddleColOfMatrix(Matrix1, 3, 3);
 
+	system("pause>0");
 
 	return 0;
 }
