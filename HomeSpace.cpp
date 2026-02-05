@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// [C07] Problem #12: Check Typical Matrices [My Solution]
+// [C07] Problem #12: Check Typical Matrices [Optimized Code]
 void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -75,9 +75,9 @@ int main()
 	PrintMatrix(Matrix2, 3, 3);
 
 	if (AreTypicalMatrices(Matrix1, Matrix2, 3, 3))
-		cout << "\nYES: both matrices are equal.";
+		cout << "\nYES: both matrices are typical.";
 	else
-		cout << "\nNo: matrices are NOT equal.";
+		cout << "\nNo: matrices are NOT typical.";
 
 	system("pause>0");
 
