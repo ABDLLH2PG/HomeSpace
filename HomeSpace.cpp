@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// [C07] Problem #13: Check Identity Matrix [Optimized Code]
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -18,18 +19,23 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-bool AreIdentityMatrices(int Matrix[3][3], short Rows, short Cols)
+bool IsIdentityMatrices(int Matrix[3][3], short Rows, short Cols)
 {
+	//check Diagonal elements are 1 and rest elements are 0
+
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++)
 		{
-			if (Matrix[i][j] == 1)
+			//check for diagonals element
+			if (i == j && Matrix[i][j] != 1)
 			{
-				if (Matrix[i][j + 1] == 0)
-				{
-					// I Can not think what I can do!!
-				}
+				return false;
+			}
+			//check for rest elements
+			else if (i != j && Matrix[i][j] != 0)
+			{
+				return false;
 			}
 		}
 	}
@@ -50,7 +56,7 @@ int main()
 	cout << "\nMatrix1:\n";
 	PrintMatrix(Matrix1, 3, 3);
 
-	if (AreIdentityMatrices(Matrix1, 3, 3))
+	if (IsIdentityMatrices(Matrix1, 3, 3))
 		cout << "\nYES: Matrix is identity.\n";
 	else
 		cout << "\nNO: Matrix is NOT identity.\n";
