@@ -5,54 +5,32 @@
 
 using namespace std;
 
-// [C07] Problem #12: Check Typical Matrices [Optimized Code]
-void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols)
-{
-	for (int i = 0; i < Rows; i++)
-	{
-		for (int j = 0; j < Cols; j++)
-		{
-			arr[i][j] = MyUtilityLib::RandomNumber(1, 10);
-		}
-	}
-}
-
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++)
 		{
-			printf(" %0*d    ", 2, arr[i][j]);
+			cout << setw(3) << arr[i][j] << "     ";
 		}
 
 		cout << "\n";
 	}
 }
 
-int SumOfMatrix(int Matrix1[3][3], short Rows, short Cols)
-{
-	int Sum = 0;
-
-	for (int i = 0; i < Rows; i++)
-	{
-		for (int j = 0; j < Cols; j++)
-		{
-			Sum += Matrix1[i][j];
-		}
-	}
-
-	return Sum;
-}
-
-bool AreTypicalMatrices(int Matrix1[3][3], int Matrix2[3][3], short Rows, short Cols)
+bool AreIdentityMatrices(int Matrix[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++)
 		{
-			if (Matrix1[i][j] != Matrix2[i][j])
-				return false;
+			if (Matrix[i][j] == 1)
+			{
+				if (Matrix[i][j + 1] == 0)
+				{
+					// I Can not think what I can do!!
+				}
+			}
 		}
 	}
 
@@ -62,24 +40,21 @@ bool AreTypicalMatrices(int Matrix1[3][3], int Matrix2[3][3], short Rows, short 
 
 int main()
 {
-	MyUtilityLib::SeedRand();
+	int Matrix1[3][3] =
+	{
+		{1, 0, 0},
+		{0, 1, 0},
+		{0, 0, 1}
+	};
 
-	int Matrix1[3][3], Matrix2[3][3];
-
-	FillMatrixWithRandomNumbers(Matrix1, 3, 3);
 	cout << "\nMatrix1:\n";
 	PrintMatrix(Matrix1, 3, 3);
 
-	FillMatrixWithRandomNumbers(Matrix2, 3, 3);
-	cout << "\nMatrix2:\n";
-	PrintMatrix(Matrix2, 3, 3);
-
-	if (AreTypicalMatrices(Matrix1, Matrix2, 3, 3))
-		cout << "\nYES: both matrices are typical.";
+	if (AreIdentityMatrices(Matrix1, 3, 3))
+		cout << "\nYES: Matrix is identity.\n";
 	else
-		cout << "\nNo: matrices are NOT typical.";
+		cout << "\nNO: Matrix is NOT identity.\n";
 
-	system("pause>0");
 
 	return 0;
 }
