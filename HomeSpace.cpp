@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// [C07] Problem #14: Check Scalar Matrix [My Solution]
+// [C07] Problem #14: Check Scalar Matrix [Optimized Code]
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -21,13 +21,13 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 
 bool IsScalarMatrix(int Matrix[3][3], short Rows, short Cols)
 {
-	int Num = Matrix[0][0];
+	int FirstDiagElement = Matrix[0][0];
 
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++)
 		{
-			if (i == j && Matrix[i][j] != Num)
+			if (i == j && Matrix[i][j] != FirstDiagElement)
 			{
 				return false;
 			}
@@ -47,9 +47,9 @@ int main()
 {
 	int Matrix1[3][3] =
 	{
-		{4, 0, 0},
-		{0, 4, 0},
-		{0, 0, 4}
+		{9, 0, 0},
+		{0, 9, 0},
+		{0, 0, 9}
 	};
 
 	cout << "\nMatrix1:\n";
