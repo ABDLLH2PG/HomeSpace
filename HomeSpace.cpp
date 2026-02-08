@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// [C07] Problem #14: Check Scalar Matrix [Optimized Code]
+// [C07] Problem #15: Count Number in Matrix [My Solution]
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -19,27 +19,32 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-bool IsScalarMatrix(int Matrix[3][3], short Rows, short Cols)
+int ReadNumber()
 {
-	int FirstDiagElement = Matrix[0][0];
+	int Number = 0;
+
+	cout << "\nEnter the number to count in matrix? ";
+	cin >> Number;
+
+	return Number;
+}
+
+void CheckNumberInMatrix(int Matrix1[3][3], short Rows, short Cols, int Number)
+{
+	int Counter = 0;
 
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++)
 		{
-			if (i == j && Matrix[i][j] != FirstDiagElement)
+			if (Matrix1[i][j] == Number)
 			{
-				return false;
-			}
-
-			else if (i != j && Matrix[i][j] != 0)
-			{
-				return false;
+				Counter++;
 			}
 		}
 	}
 
-	return true;
+	cout << "\nNumber " << Number << " count in matrix is " << Counter << endl;
 }
 
 
@@ -47,18 +52,17 @@ int main()
 {
 	int Matrix1[3][3] =
 	{
-		{9, 0, 0},
-		{0, 9, 0},
-		{0, 0, 9}
+		{9, 1, 12},
+		{0, 9, 1},
+		{0, 9, 9}
 	};
 
 	cout << "\nMatrix1:\n";
 	PrintMatrix(Matrix1, 3, 3);
 
-	if (IsScalarMatrix(Matrix1, 3, 3))
-		cout << "\nYES: Matrix is scalar.\n";
-	else
-		cout << "\nNO: Matrix is NOT scalar.\n";
+	int Number = ReadNumber();
+
+	CheckNumberInMatrix(Matrix1, 3, 3, Number);
 
 
 	return 0;
