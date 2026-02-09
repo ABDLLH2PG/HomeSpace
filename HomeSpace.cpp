@@ -1,11 +1,10 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include "MyUtilityLib.h"
 
 using namespace std;
 
-// [C07] Problem #15: Count Number in Matrix [My Solution]
+// [C07] Problem #15: Count Number in Matrix [Optimized Code]
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -19,19 +18,9 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-int ReadNumber()
+short CountNumberInMatrix(int Matrix1[3][3], int Number, short Rows, short Cols)
 {
-	int Number = 0;
-
-	cout << "\nEnter the number to count in matrix? ";
-	cin >> Number;
-
-	return Number;
-}
-
-void CheckNumberInMatrix(int Matrix1[3][3], short Rows, short Cols, int Number)
-{
-	int Counter = 0;
+	short NumberCount = 0;
 
 	for (int i = 0; i < Rows; i++)
 	{
@@ -39,12 +28,12 @@ void CheckNumberInMatrix(int Matrix1[3][3], short Rows, short Cols, int Number)
 		{
 			if (Matrix1[i][j] == Number)
 			{
-				Counter++;
+				NumberCount++;
 			}
 		}
 	}
 
-	cout << "\nNumber " << Number << " count in matrix is " << Counter << endl;
+	return NumberCount;
 }
 
 
@@ -60,9 +49,11 @@ int main()
 	cout << "\nMatrix1:\n";
 	PrintMatrix(Matrix1, 3, 3);
 
-	int Number = ReadNumber();
+	int Number;
+	cout << "\nEnter the number to count in matrix? ";
+	cin >> Number;
 
-	CheckNumberInMatrix(Matrix1, 3, 3, Number);
+	cout << "\nNumber " << Number << " count in matrix is " << CountNumberInMatrix(Matrix1, Number, 3, 3) << endl;
 
 
 	return 0;
