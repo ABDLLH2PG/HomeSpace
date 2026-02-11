@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// [C07] Problem #17: Number Exists In Matrix [My Solution]
+// [C07] Problem #17: Number Exists In Matrix [Optimized Code]
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -18,27 +18,20 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-short CountNumberInMatrix(int Matrix1[3][3], int Number, short Rows, short Cols)
+bool IsNumberInMatrix(int Matrix1[3][3], int Number, short Rows, short Cols)
 {
-	short NumberCount = 0;
-
-	for (int i = 0; i < Rows; i++)
+	for (short i = 0; i < Rows; i++)
 	{
-		for (int j = 0; j < Cols; j++)
+		for (short j = 0; j < Cols; j++)
 		{
 			if (Matrix1[i][j] == Number)
 			{
-				NumberCount++;
+				return true;
 			}
 		}
 	}
+	return false;
 
-	return NumberCount;
-}
-
-bool IsExistsInMatrix(int Matrix1[3][3], short Number, short Rows, short Cols)
-{
-	return (CountNumberInMatrix(Matrix1, Number, Rows, Cols) > 0);
 }
 
 
@@ -60,13 +53,13 @@ int main()
 	cin >> Number;
 
 
-	if (IsExistsInMatrix(Matrix1, Number, 3, 3))
+	if (IsNumberInMatrix(Matrix1, Number, 3, 3))
 	{
-		cout << "\nYes: It is there\n";
+		cout << "\nYes: It is there.\n";
 	}
 	else
 	{
-		cout << "\nNo: It's Not there\n";
+		cout << "\nNo: It's Not there.\n";
 	}
 
 	system("pause>0");
