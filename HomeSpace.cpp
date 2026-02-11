@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// [C07] Problem #16: Check Sparse Matrix [Optimized Code]
+// [C07] Problem #17: Number Exists In Matrix [My Solution]
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -36,11 +36,9 @@ short CountNumberInMatrix(int Matrix1[3][3], int Number, short Rows, short Cols)
 	return NumberCount;
 }
 
-bool IsSparseMatrix(int Matrix1[3][3], short Rows, short Cols)
+bool IsExistsInMatrix(int Matrix1[3][3], short Number, short Rows, short Cols)
 {
-	short MatrixSize = Rows * Cols;
-
-	return (CountNumberInMatrix(Matrix1, 0, 3, 3) >= (MatrixSize / 2));
+	return (CountNumberInMatrix(Matrix1, Number, Rows, Cols) > 0);
 }
 
 
@@ -48,21 +46,27 @@ int main()
 {
 	int Matrix1[3][3] =
 	{
-		{0, 0, 12},
-		{0, 0, 1},
-		{0, 0, 9}
+		{77, 5, 12},
+		{22, 20, 1},
+		{1, 0, 9}
 	};
 
 	cout << "\nMatrix1:\n";
 	PrintMatrix(Matrix1, 3, 3);
 
-	if (IsSparseMatrix(Matrix1, 3, 3))
+	int Number;
+
+	cout << "\nPlease Enter the number to look for in matrix? ";
+	cin >> Number;
+
+
+	if (IsExistsInMatrix(Matrix1, Number, 3, 3))
 	{
-		cout << "\nYes: It is Sparse\n";
+		cout << "\nYes: It is there\n";
 	}
 	else
 	{
-		cout << "\nNo: It's Not Sparse\n";
+		cout << "\nNo: It's Not there\n";
 	}
 
 	system("pause>0");
