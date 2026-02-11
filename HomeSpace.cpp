@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// [C07] Problem #16: Check Sparse Matrix [My Solution]
+// [C07] Problem #16: Check Sparse Matrix [Optimized Code]
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -18,25 +18,29 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-bool SparceMatric(int Matrix1[3][3], short Rows, short Cols)
+short CountNumberInMatrix(int Matrix1[3][3], int Number, short Rows, short Cols)
 {
-	short Counter = 0;
+	short NumberCount = 0;
 
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++)
 		{
-			if (Matrix1[i][j] == 0)
+			if (Matrix1[i][j] == Number)
 			{
-				Counter++;
+				NumberCount++;
 			}
 		}
 	}
 
-	if (Counter > ((Rows * Cols) / 2) )
-		return true;
-	else
-		return false;
+	return NumberCount;
+}
+
+bool IsSparseMatrix(int Matrix1[3][3], short Rows, short Cols)
+{
+	short MatrixSize = Rows * Cols;
+
+	return (CountNumberInMatrix(Matrix1, 0, 3, 3) >= (MatrixSize / 2));
 }
 
 
@@ -52,15 +56,16 @@ int main()
 	cout << "\nMatrix1:\n";
 	PrintMatrix(Matrix1, 3, 3);
 
-	if (SparceMatric(Matrix1, 3, 3))
+	if (IsSparseMatrix(Matrix1, 3, 3))
 	{
 		cout << "\nYes: It is Sparse\n";
 	}
 	else
 	{
-		cout << "\nNo: It's Not Sparce\n";
+		cout << "\nNo: It's Not Sparse\n";
 	}
 
+	system("pause>0");
 
 	return 0;
 }
