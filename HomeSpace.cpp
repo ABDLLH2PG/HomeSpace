@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// [C07] Problem #18: Intersected Numbers in Matrices [My Solution]
+// [C07] Problem #18: Intersected Numbers in Matrices [Optimized Code]
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -34,27 +34,21 @@ bool IsNumberInMatrix(int Matrix1[3][3], int Number, short Rows, short Cols)
 
 }
 
-void PrintIntersectedNumberInTwoMatrix(int Matrix1[3][3], int Matrix2[3][3], short Rows, short Cols)
+void PrintIntersectedNumbers(int Matrix1[3][3], int Matrix2[3][3], short Rows, short Cols)
 {
-	int arr3[10];
-	short Num = 0;
+	int Number;
 
 	for (short i = 0; i < Rows; i++)
 	{
 		for (short j = 0; j < Cols; j++)
 		{
-			if (IsNumberInMatrix(Matrix2, Matrix1[i][j], 3, 3))
+			Number = Matrix1[i][j];
+
+			if (IsNumberInMatrix(Matrix2, Number, Rows, Cols))
 			{
-				arr3[Num] = Matrix1[i][j];
-				Num++;
+				cout << setw(3) << Number << "     ";
 			}
 		}
-	}
-
-	cout << "\nIntersected Numbers are:\n\n";
-	for (short k = 0; k < Num; k++)
-	{
-		cout << left << setw(3) << arr3[k] << "    ";
 	}
 }
 
@@ -81,7 +75,8 @@ int main()
 	cout << "\nMatrix2:\n";
 	PrintMatrix(Matrix2, 3, 3);
 
-	PrintIntersectedNumberInTwoMatrix(Matrix1, Matrix2, 3, 3);
+	cout << "\nIntersected Numbers are: \n\n";
+	PrintIntersectedNumbers(Matrix1, Matrix2, 3, 3);
 
 	system("pause>0");
 
