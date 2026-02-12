@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// [C07] Problem #20: Palindrome Matrix [My Solution]
+// [C07] Problem #20: Palindrome Matrix [Optimized Code]
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -22,9 +22,9 @@ bool IsPalindromeMatrix(int Matrix1[3][3], short Rows, short Cols)
 {
 	for (short i = 0; i < Rows; i++)
 	{
-		for (short j = 0; j < Cols - 2; j++)
+		for (short j = 0; j < Cols / 2; j++)
 		{
-			if (Matrix1[i][j] != Matrix1[i][j + 2])
+			if (Matrix1[i][j] != Matrix1[i][Cols - 1 - j])
 			{
 				return false;
 			}
