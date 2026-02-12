@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// [C07] Problem #19: Min/Max Number in Matrix [Optimized Code]
+// [C07] Problem #20: Palindrome Matrix [My Solution]
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -18,40 +18,20 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-int MinNumberInMatrix(int Matrix1[3][3], short Rows, short Cols)
+bool IsPalindromeMatrix(int Matrix1[3][3], short Rows, short Cols)
 {
-	int Min = Matrix1[0][0];
-
 	for (short i = 0; i < Rows; i++)
 	{
-		for (short j = 0; j < Cols; j++)
+		for (short j = 0; j < Cols - 2; j++)
 		{
-			if (Matrix1[i][j] < Min)
+			if (Matrix1[i][j] != Matrix1[i][j + 2])
 			{
-				Min = Matrix1[i][j];
+				return false;
 			}
 		}
 	}
 
-	return Min;
-}
-
-int MaxNumberInMatrix(int Matrix1[3][3], short Rows, short Cols)
-{
-	int Max = Matrix1[0][0];
-
-	for (short i = 0; i < Rows; i++)
-	{
-		for (short j = 0; j < Cols; j++)
-		{
-			if (Matrix1[i][j] > Max)
-			{
-				Max = Matrix1[i][j];
-			}
-		}
-	}
-
-	return Max;
+	return true;
 }
 
 
@@ -59,21 +39,23 @@ int main()
 {
 	int Matrix1[3][3] =
 	{
-		{77,  5, 12},
-		{22, 20,  6},
-		{14,  3,  9}
+		{ 1,  2,  1},
+		{ 5,  5,  5},
+		{ 7,  3,  7}
 	};
-
 
 	cout << "\nMatrix1:\n";
 	PrintMatrix(Matrix1, 3, 3);
 
-	cout << "\nMinimum Number is: ";
-	cout << MinNumberInMatrix(Matrix1, 3, 3);
-	
-	cout << "\n\nMax Number is: ";
-	cout << MaxNumberInMatrix(Matrix1, 3, 3);
-	
+	if (IsPalindromeMatrix(Matrix1, 3, 3))
+	{
+		cout << "\nYes: Matrix is Palindrome.\n";
+	}
+	else
+	{
+		cout << "\nNo: Matrix is NOT Palindrome.\n";
+	}
+
 
 	system("pause>0");
 
