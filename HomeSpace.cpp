@@ -5,22 +5,20 @@
 
 using namespace std;
 
-// [C07] Problem #21: Fibonacci Series [My Solution]
-void PrintFibonacciSeries(int Lentgh)
+// [C07] Problem #21: Fibonacci Series [Optimized Code]
+void PrintFibonacciUsingLoop(int Lentgh)
 {
-	int Number ,Prev1 = 1, Prev2 = 1;
-
+	int FebNumber = 0, Prev1 = 1, Prev2 = 0;
 	cout << setw(3) << Prev1 << "   ";
-	cout << setw(3) << Prev2 << "   ";
 
-	for (short i = 0; i < Lentgh - 2; i++)
+	for (short i = 1; i < Lentgh; i++)
 	{
-		Number = Prev1 + Prev2;
+		FebNumber = Prev1 + Prev2;
 
-		cout << setw(3) << Number << "   ";
+		cout << setw(3) << FebNumber << "   ";
 
 		Prev2 = Prev1;
-		Prev1 = Number;
+		Prev1 = FebNumber;
 	}
 }
 
@@ -31,7 +29,7 @@ int main()
 
 	cout << "\n";
 
-	PrintFibonacciSeries(Number);
+	PrintFibonacciUsingLoop(Number);
 
 	system("pause>0");
 
