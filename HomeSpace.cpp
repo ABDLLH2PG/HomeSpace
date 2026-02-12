@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// [C07] Problem #18: Intersected Numbers in Matrices [Optimized Code]
+// [C07] Problem #19: Min/Max Number in Matrix [My Solution]
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -18,38 +18,40 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-bool IsNumberInMatrix(int Matrix1[3][3], int Number, short Rows, short Cols)
+int MaxNumberInMatrix(int Matrix1[3][3], short Rows, short Cols)
 {
+	int MaxNumber = Matrix1[0][0];
+
 	for (short i = 0; i < Rows; i++)
 	{
 		for (short j = 0; j < Cols; j++)
 		{
-			if (Matrix1[i][j] == Number)
+			if (Matrix1[i][j] > MaxNumber)
 			{
-				return true;
+				MaxNumber = Matrix1[i][j];
 			}
 		}
 	}
-	return false;
 
+	return MaxNumber;
 }
 
-void PrintIntersectedNumbers(int Matrix1[3][3], int Matrix2[3][3], short Rows, short Cols)
+int MinNumberInMatrix(int Matrix1[3][3], short Rows, short Cols)
 {
-	int Number;
+	int MinNumber = Matrix1[0][0];
 
 	for (short i = 0; i < Rows; i++)
 	{
 		for (short j = 0; j < Cols; j++)
 		{
-			Number = Matrix1[i][j];
-
-			if (IsNumberInMatrix(Matrix2, Number, Rows, Cols))
+			if (Matrix1[i][j] < MinNumber)
 			{
-				cout << setw(3) << Number << "     ";
+				MinNumber = Matrix1[i][j];
 			}
 		}
 	}
+
+	return MinNumber;
 }
 
 
@@ -58,25 +60,18 @@ int main()
 	int Matrix1[3][3] =
 	{
 		{77,  5, 12},
-		{22, 20,  1},
-		{1 ,  0,  9}
+		{22, 20,  6},
+		{14,  3,  9}
 	};
 
-	int Matrix2[3][3] =
-	{
-		{5 , 80, 90},
-		{22, 77,  1},
-		{10,  8, 33}
-	};
 
 	cout << "\nMatrix1:\n";
 	PrintMatrix(Matrix1, 3, 3);
 
-	cout << "\nMatrix2:\n";
-	PrintMatrix(Matrix2, 3, 3);
-
-	cout << "\nIntersected Numbers are: \n\n";
-	PrintIntersectedNumbers(Matrix1, Matrix2, 3, 3);
+	cout << "\nMinimum Number is: " << MinNumberInMatrix(Matrix1, 3, 3) << endl;
+	
+	cout << "\nMax Number is: " << MaxNumberInMatrix(Matrix1, 3, 3) << endl;
+	
 
 	system("pause>0");
 
