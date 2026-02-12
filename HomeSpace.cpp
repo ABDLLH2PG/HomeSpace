@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// [C07] Problem #19: Min/Max Number in Matrix [My Solution]
+// [C07] Problem #19: Min/Max Number in Matrix [Optimized Code]
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (int i = 0; i < Rows; i++)
@@ -18,40 +18,40 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-int MaxNumberInMatrix(int Matrix1[3][3], short Rows, short Cols)
-{
-	int MaxNumber = Matrix1[0][0];
-
-	for (short i = 0; i < Rows; i++)
-	{
-		for (short j = 0; j < Cols; j++)
-		{
-			if (Matrix1[i][j] > MaxNumber)
-			{
-				MaxNumber = Matrix1[i][j];
-			}
-		}
-	}
-
-	return MaxNumber;
-}
-
 int MinNumberInMatrix(int Matrix1[3][3], short Rows, short Cols)
 {
-	int MinNumber = Matrix1[0][0];
+	int Min = Matrix1[0][0];
 
 	for (short i = 0; i < Rows; i++)
 	{
 		for (short j = 0; j < Cols; j++)
 		{
-			if (Matrix1[i][j] < MinNumber)
+			if (Matrix1[i][j] < Min)
 			{
-				MinNumber = Matrix1[i][j];
+				Min = Matrix1[i][j];
 			}
 		}
 	}
 
-	return MinNumber;
+	return Min;
+}
+
+int MaxNumberInMatrix(int Matrix1[3][3], short Rows, short Cols)
+{
+	int Max = Matrix1[0][0];
+
+	for (short i = 0; i < Rows; i++)
+	{
+		for (short j = 0; j < Cols; j++)
+		{
+			if (Matrix1[i][j] > Max)
+			{
+				Max = Matrix1[i][j];
+			}
+		}
+	}
+
+	return Max;
 }
 
 
@@ -68,9 +68,11 @@ int main()
 	cout << "\nMatrix1:\n";
 	PrintMatrix(Matrix1, 3, 3);
 
-	cout << "\nMinimum Number is: " << MinNumberInMatrix(Matrix1, 3, 3) << endl;
+	cout << "\nMinimum Number is: ";
+	cout << MinNumberInMatrix(Matrix1, 3, 3);
 	
-	cout << "\nMax Number is: " << MaxNumberInMatrix(Matrix1, 3, 3) << endl;
+	cout << "\n\nMax Number is: ";
+	cout << MaxNumberInMatrix(Matrix1, 3, 3);
 	
 
 	system("pause>0");
