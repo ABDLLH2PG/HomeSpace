@@ -1,61 +1,37 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include "MyInputLib.h";
 
 using namespace std;
 
-// [C07] Problem #20: Palindrome Matrix [Optimized Code]
-void PrintMatrix(int arr[3][3], short Rows, short Cols)
+// [C07] Problem #21: Fibonacci Series [My Solution]
+void PrintFibonacciSeries(int Lentgh)
 {
-	for (int i = 0; i < Rows; i++)
+	int Number ,Prev1 = 1, Prev2 = 1;
+
+	cout << setw(3) << Prev1 << "   ";
+	cout << setw(3) << Prev2 << "   ";
+
+	for (short i = 0; i < Lentgh - 2; i++)
 	{
-		for (int j = 0; j < Cols; j++)
-		{
-			cout << setw(3) << arr[i][j] << "     ";
-		}
+		Number = Prev1 + Prev2;
 
-		cout << "\n";
+		cout << setw(3) << Number << "   ";
+
+		Prev2 = Prev1;
+		Prev1 = Number;
 	}
-}
-
-bool IsPalindromeMatrix(int Matrix1[3][3], short Rows, short Cols)
-{
-	for (short i = 0; i < Rows; i++)
-	{
-		for (short j = 0; j < Cols / 2; j++)
-		{
-			if (Matrix1[i][j] != Matrix1[i][Cols - 1 - j])
-			{
-				return false;
-			}
-		}
-	}
-
-	return true;
 }
 
 
 int main()
 {
-	int Matrix1[3][3] =
-	{
-		{ 1,  2,  1},
-		{ 5,  5,  5},
-		{ 7,  3,  7}
-	};
+	int Number = MyInputLib::ReadNumber("Please enter Number ? ");
 
-	cout << "\nMatrix1:\n";
-	PrintMatrix(Matrix1, 3, 3);
+	cout << "\n";
 
-	if (IsPalindromeMatrix(Matrix1, 3, 3))
-	{
-		cout << "\nYes: Matrix is Palindrome.\n";
-	}
-	else
-	{
-		cout << "\nNo: Matrix is NOT Palindrome.\n";
-	}
-
+	PrintFibonacciSeries(Number);
 
 	system("pause>0");
 
