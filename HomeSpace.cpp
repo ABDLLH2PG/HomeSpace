@@ -5,23 +5,21 @@
 
 using namespace std;
 
-// [C07] Problem #22: Fibonacci Series With Recursion [My Solution]
-void PrintFibonacciUsingRecursion(int Length,int N = 1, int Prev1 = 1, int Prev2 = 0)
+// [C07] Problem #22: Fibonacci Series With Recursion [Optimized Code]
+void PrintFibonacciUsingRecursion(short Number, int Prev1, int Prev2)
 {
-	if (N < Length)
+	int FebNumber = 0;
+
+	if (Number > 0)
 	{
-		if (N == 1)
-			cout << setw(3) << Prev1 << "   ";
-
-		int FebNumber = Prev1 + Prev2;
-
-		cout << setw(3) << FebNumber << "   ";
-
+		FebNumber = Prev2 + Prev1;
 
 		Prev2 = Prev1;
 		Prev1 = FebNumber;
 
-		PrintFibonacciUsingRecursion(Length, N + 1, Prev1, Prev2);
+		cout << FebNumber << "    ";
+
+		PrintFibonacciUsingRecursion(Number - 1, Prev1, Prev2);
 	}
 }
 
@@ -32,7 +30,7 @@ int main()
 
 	cout << "\n";
 
-	PrintFibonacciUsingRecursion(Number);
+	PrintFibonacciUsingRecursion(Number, 0, 1);
 
 	system("pause>0");
 
