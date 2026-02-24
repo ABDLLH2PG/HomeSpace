@@ -2,19 +2,21 @@
 #include <string>
 #include "MyInputLib.h"
 
-// [C07] Problem #23: Print First Letter of Each Word [My Solution]
+// [C07] Problem #23: Print First Letter of Each Word [Optimized Code]
 using namespace std;
 
 void PrintFirstLetterOfEachWord(string S1)
 {
-	cout << S1[0] << endl;
+	bool isFirstLetter = true;
 
-	for (int i = 0; i < S1.length() - 1; i++)
+	for (int i = 0; i < S1.length(); i++)
 	{
-		if (S1[i + 1] == ' ')
+		if (S1[i] != ' ' && isFirstLetter)
 		{
-			cout << S1[i + 1 + 1] << endl;
+			cout << S1[i] << endl;
 		}
+
+		isFirstLetter = (S1[i] == ' ' ? true : false);
 	}
 }
 
