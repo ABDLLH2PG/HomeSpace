@@ -1,36 +1,29 @@
 #include <iostream>
 #include <string>
-#include <iomanip>
-#include "MyInputLib.h";
+#include "MyInputLib.h"
 
+// [C07] Problem #23: Print First Letter of Each Word [My Solution]
 using namespace std;
 
-// [C07] Problem #22: Fibonacci Series With Recursion [Optimized Code]
-void PrintFibonacciUsingRecursion(short Number, int Prev1, int Prev2)
+void PrintFirstLetterOfEachWord(string S1)
 {
-	int FebNumber = 0;
+	cout << S1[0] << endl;
 
-	if (Number > 0)
+	for (int i = 0; i < S1.length() - 1; i++)
 	{
-		FebNumber = Prev2 + Prev1;
-
-		Prev2 = Prev1;
-		Prev1 = FebNumber;
-
-		cout << FebNumber << "    ";
-
-		PrintFibonacciUsingRecursion(Number - 1, Prev1, Prev2);
+		if (S1[i + 1] == ' ')
+		{
+			cout << S1[i + 1 + 1] << endl;
+		}
 	}
 }
 
 
 int main()
 {
-	int Number = MyInputLib::ReadNumber("Please enter Number ? ");
+	string S1 = MyInputLib::ReadString("Please Enter Your String ?");
 
-	cout << "\n";
-
-	PrintFibonacciUsingRecursion(Number, 0, 1);
+	PrintFirstLetterOfEachWord(S1);
 
 	system("pause>0");
 
