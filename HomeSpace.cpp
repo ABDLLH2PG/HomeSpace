@@ -2,21 +2,30 @@
 #include <string>
 #include "MyInputLib.h"
 
-// [C07] Problem #25: Lower First Letter of Each Word [Optimized Code]
+// [C07] Problem #26: Upper/Lower All Letters of a String [My Solution]
 using namespace std;
 
-string LowerFirstLetterOfEachWord(string S1)
+string UpperAllLettersOfString(string S1)
 {
-	bool isFirstLetter = true;
-
 	for (int i = 0; i < S1.length(); i++)
 	{
-		if (S1[i] != ' ' && isFirstLetter)
+		if (isupper(S1[i]) || islower(S1[i]))
+		{
+			S1[i] = toupper(S1[i]);
+		}
+	}
+
+	return S1;
+}
+
+string LowerAllLettersOfString(string S1)
+{
+	for (int i = 0; i < S1.length(); i++)
+	{
+		if (isupper(S1[i]) || islower(S1[i]))
 		{
 			S1[i] = tolower(S1[i]);
 		}
-
-		isFirstLetter = (S1[i] == ' ' ? true : false);
 	}
 
 	return S1;
@@ -27,9 +36,12 @@ int main()
 {
 	string S1 = MyInputLib::ReadString("Please Enter Your String ?");
 
-	cout << "\nString after conversion:\n";
-	S1 = LowerFirstLetterOfEachWord(S1);
-	cout << S1 << endl;
+	cout << "\nString after Upper:\n";
+	cout << UpperAllLettersOfString(S1) << endl;
+
+	cout << "\nString after Lower:\n";
+	cout << LowerAllLettersOfString(S1) << endl;
+
 
 	system("pause>0");
 
