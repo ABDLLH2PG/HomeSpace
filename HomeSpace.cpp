@@ -1,31 +1,25 @@
 #include <iostream>
-#include <string>
-#include "MyInputLib.h"
+#include <string> 
+#include "MyInputLib.h" 
 
-// [C07] Problem #26: Upper/Lower All Letters of a String [My Solution]
+// [C07] Problem #26: Upper/Lower All Letters of a String [Optimized Code]
 using namespace std;
 
-string UpperAllLettersOfString(string S1)
+string UpperAllString(string S1)
 {
 	for (int i = 0; i < S1.length(); i++)
 	{
-		if (isupper(S1[i]) || islower(S1[i]))
-		{
-			S1[i] = toupper(S1[i]);
-		}
+		S1[i] = toupper(S1[i]);
 	}
 
 	return S1;
 }
 
-string LowerAllLettersOfString(string S1)
+string LowerAllString(string S1)
 {
 	for (int i = 0; i < S1.length(); i++)
 	{
-		if (isupper(S1[i]) || islower(S1[i]))
-		{
-			S1[i] = tolower(S1[i]);
-		}
+		S1[i] = tolower(S1[i]);
 	}
 
 	return S1;
@@ -37,11 +31,12 @@ int main()
 	string S1 = MyInputLib::ReadString("Please Enter Your String ?");
 
 	cout << "\nString after Upper:\n";
-	cout << UpperAllLettersOfString(S1) << endl;
+	S1 = UpperAllString(S1);
+	cout << S1 << endl;
 
 	cout << "\nString after Lower:\n";
-	cout << LowerAllLettersOfString(S1) << endl;
-
+	S1 = LowerAllString(S1);
+	cout << S1 << endl;
 
 	system("pause>0");
 
