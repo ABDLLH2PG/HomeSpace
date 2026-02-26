@@ -2,7 +2,7 @@
 #include <string>
 #include "MyInputLib.h"
 
-// [C07] Problem #25: Lower First Letter of Each Word [My Solution]
+// [C07] Problem #25: Lower First Letter of Each Word [Optimized Code]
 using namespace std;
 
 string LowerFirstLetterOfEachWord(string S1)
