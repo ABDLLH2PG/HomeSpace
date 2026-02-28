@@ -2,25 +2,22 @@
 #include <string> 
 #include "MyInputLib.h" 
 
-// [C07] Problem #27: Invert Charcter Case [My Solution]
+// [C07] Problem #27: Invert Charcter Case [Optimized Code]
 using namespace std;
 
-char InvertingCharacterCase(char ch)
+char InvertLetterCase(char char1)
 {
-	if (ch >= 65 && ch <= 97)
-		return (ch = tolower(ch));
-	else
-		return (ch = toupper(ch));
+	return isupper(char1) ? tolower(char1) : toupper(char1);
 }
 
 
 int main()
 {
-	char character = MyInputLib::ReadChar("Please Enter a Character ?");
+	char Ch1 = MyInputLib::ReadChar("Please Enter a Character ?");
 
-	cout << "\nChar after inverting case:\n";
-	character = InvertingCharacterCase(character);
-	cout << character;
+	cout << "\nChar after Inverting case:\n";
+	Ch1 = InvertLetterCase(Ch1);
+	cout << Ch1 << endl;
 
 	system("pause>0");
 
