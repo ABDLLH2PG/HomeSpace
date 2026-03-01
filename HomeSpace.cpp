@@ -2,16 +2,16 @@
 #include <string>
 #include "MyInputLib.h"
 
-// [C07] Problem #30: Count Letters [My Solution]
+// [C07] Problem #30: Count Letters [Optimized Code]
 using namespace std;
 
-short CountLetters(string S1, char Ch1)
+short CountLetters(string S1, char Letter)
 {
 	short Counter = 0;
 
 	for (int i = 0; i < S1.length(); i++)
 	{
-		if (S1[i] == Ch1)
+		if (S1[i] == Letter)
 		{
 			Counter++;
 		}
