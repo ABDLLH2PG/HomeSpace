@@ -2,7 +2,7 @@
 #include <string>
 #include "MyInputLib.h"
 
-// [C07] Problem #33: Count Vowel[My Solution]
+// [C07] Problem #33: Count Vowel [Optimized Code]
 using namespace std;
 
 bool IsVowel(char Letter)
@@ -18,10 +18,8 @@ short CountVowel(string S1)
 
 	for (short i = 0; i < S1.length(); i++)
 	{
-		if (IsVowel(tolower(S1[i])))
-		{
+		if (IsVowel(S1[i]))
 			Counter++;
-		}
 	}
 
 	return Counter;
