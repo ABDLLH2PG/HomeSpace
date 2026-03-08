@@ -2,24 +2,20 @@
 #include <string>
 #include "MyInputLib.h"
 
-// [C07] Problem #34: Print All Vowels In String [Optimized Code]
+// [C07] Problem #35: Print Each Word In String [MySolution]
 using namespace std;
 
-bool IsVowel(char Letter)
+void PrintEachWord(string S1)
 {
-	Letter = tolower(Letter);
-
-	return ((Letter == 'a') || (Letter == 'e') || (Letter == 'i') || (Letter == 'o') || (Letter == 'u'));
-}
-
-void PrintVowels(string S1)
-{
-	cout << "\nVowels in string are: ";
-
-	for (short i = 0; i < S1.length(); i++)
+	for (int i = 0; i < S1.length(); i++)
 	{
-		if (IsVowel(S1[i]))
-			cout << S1[i] << "   ";
+		if (S1[i] == ' ')
+		{
+			cout << endl;
+			continue;
+		}
+
+		cout << S1[i];
 	}
 }
 
@@ -28,8 +24,9 @@ int main()
 {
 	string S1 = MyInputLib::ReadString("Please Enter Your String?");
 
-	PrintVowels(S1);
+	cout << "\nYour String Words are:\n";
 
+	PrintEachWord(S1);
 
 	system("pause>0");
 
