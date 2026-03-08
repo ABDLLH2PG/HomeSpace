@@ -2,7 +2,7 @@
 #include <string>
 #include "MyInputLib.h"
 
-// [C07] Problem #33: Count Vowel [Optimized Code]
+// [C07] Problem #34: Print All Vowels In String [My Solution]
 using namespace std;
 
 bool IsVowel(char Letter)
@@ -12,25 +12,24 @@ bool IsVowel(char Letter)
 	return ((Letter == 'a') || (Letter == 'e') || (Letter == 'i') || (Letter == 'o') || (Letter == 'u'));
 }
 
-short CountVowel(string S1)
+void PrintAllVowels(string S1)
 {
-	short Counter = 0;
-
 	for (short i = 0; i < S1.length(); i++)
 	{
 		if (IsVowel(S1[i]))
-			Counter++;
+		{
+			cout << S1[i] << "   ";
+		}
 	}
-
-	return Counter;
 }
 
 
 int main()
 {
-	string S1 = MyInputLib::ReadString("Please Enter Your String ?");
+	string S1 = MyInputLib::ReadString("Please Enter Your String?");
 
-	cout << "\nNumber of vowels is: " << CountVowel(S1) << endl;
+	cout << "\nVowels in string are: ";
+	PrintAllVowels(S1);
 
 
 	system("pause>0");
