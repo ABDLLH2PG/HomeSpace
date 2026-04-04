@@ -3,52 +3,52 @@
 #include <vector>
 #include "MyInputLib.h"
 
-// [C07] Problem #37: Count Each Word In String [My Solution]
+// [C07] Problem #37: Count Each Word In String [Optimized code]
 using namespace std;
 
-void SplitWord(string S1, string delim = " ")
+vector <string> SplitString(string S1, string Delim = " ")
 {
-	short Tokens = 0;
+	vector <string> vString;
+
 	short pos = 0;
 	string sWord;
-	vector <string> vWords;
-
-	while ((pos = S1.find(delim)) != string::npos)
+	
+	while ((pos = S1.find(Delim)) != string::npos)
 	{
 		sWord = S1.substr(0, pos);
 
 		if (sWord != "")
 		{
-			vWords.push_back(sWord);
-			Tokens++;
+			vString.push_back(sWord);
 		}
 
-		S1.erase(0, pos + delim.length());
+		S1.erase(0, pos + Delim.length());
 	}
 
 	if (S1 != "")
 	{
-		vWords.push_back(S1);
-		Tokens++;
+		vString.push_back(S1);
 	}
 
-	cout << "Tokens = " << Tokens << "\n";
-
-	for (string &vWord : vWords)
-	{
-		cout << vWord << "\n";
-	}
+	return vString;
 }
 
 
 int main()
 {
 	string S1 = MyInputLib::ReadString("Please Enter Your String ?");
-	
-	SplitWord(S1);
 
+	vector <string> vString = SplitString(S1, " ");
+
+	cout << "Tokens = " << vString.size() << endl;
+
+	for (string &s : vString)
+	{
+		cout << s << endl;
+	}
 
 	system("pause>0");
+
 
 	return 0;
 }
