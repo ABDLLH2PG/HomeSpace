@@ -1,54 +1,38 @@
 #include <iostream>
 #include <string>
 
-// [C07] Problem #38: Trim Left / Trim Right / Trim [My Solution]
+// [C07] Problem #38: Trim Left / Trim Right / Trim [Optimized Code]
 using namespace std;
 
 string TrimLeft(string S1)
 {
-	short pos = 0;
-	char delim = ' ';
-
-	for (short i = 0; i < S1.length(); i++)
+	for (short i = 0; i < S1.length() - 1; i++)
 	{
-		if (S1[i] != delim)
+		if (S1[i] != ' ')
 		{
-			pos = i;
-			break;
+			return S1.substr(i, S1.length() - 1);
 		}
 	}
 
-	S1.erase(0, pos);
-
-	return S1;
+	return "";
 }
 
 string TrimRight(string S1)
 {
-	short pos = 0;
-	short LastChar = S1.length() - 1;
-	char delim = ' ';
-
-	for (short i = LastChar; i > 0; i--)
+	for (short i = S1.length() -1 ; i >= 0 ; i--)
 	{
-		if (S1[i] != delim)
+		if (S1[i] != ' ')
 		{
-			pos = i;
-			break;
+			return S1.substr(0, i + 1);
 		}
 	}
 
-	S1.erase(pos + 1, LastChar);
-
-	return S1;
+	return "";
 }
 
 string Trim(string S1)
 {
-	S1 = TrimLeft(S1);
-	S1 = TrimRight(S1);
-
-	return S1;
+	return (TrimLeft(TrimRight(S1)));
 }
 
 
