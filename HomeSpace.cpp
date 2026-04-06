@@ -1,54 +1,68 @@
 #include <iostream>
 #include <string>
-#include <vector>
-#include "MyInputLib.h"
 
-// [C07] Problem #37: Count Each Word In String [Optimized code]
+// [C07] Problem #38: Trim Left / Trim Right / Trim [My Solution]
 using namespace std;
 
-vector <string> SplitString(string S1, string Delim = " ")
+string TrimLeft(string S1)
 {
-	vector <string> vString;
-
 	short pos = 0;
-	string sWord;
-	
-	while ((pos = S1.find(Delim)) != string::npos)
-	{
-		sWord = S1.substr(0, pos);
+	char delim = ' ';
 
-		if (sWord != "")
+	for (short i = 0; i < S1.length(); i++)
+	{
+		if (S1[i] != delim)
 		{
-			vString.push_back(sWord);
+			pos = i;
+			break;
 		}
-
-		S1.erase(0, pos + Delim.length());
 	}
 
-	if (S1 != "")
+	S1.erase(0, pos);
+
+	return S1;
+}
+
+string TrimRight(string S1)
+{
+	short pos = 0;
+	short LastChar = S1.length() - 1;
+	char delim = ' ';
+
+	for (short i = LastChar; i > 0; i--)
 	{
-		vString.push_back(S1);
+		if (S1[i] != delim)
+		{
+			pos = i;
+			break;
+		}
 	}
 
-	return vString;
+	S1.erase(pos + 1, LastChar);
+
+	return S1;
+}
+
+string Trim(string S1)
+{
+	S1 = TrimLeft(S1);
+	S1 = TrimRight(S1);
+
+	return S1;
 }
 
 
 int main()
 {
-	string S1 = MyInputLib::ReadString("Please Enter Your String ?");
+	string S1 = "     Mohammed Abu-Hadhoud     ";
 
-	vector <string> vString = SplitString(S1, " ");
+	cout << "\nString     = " << S1 << endl;
+	cout << "\nTrim Left  = " << TrimLeft(S1);
+	cout << "\nTrim Right = " << TrimRight(S1);
+	cout << "\nTrim       = " << Trim(S1);
 
-	cout << "Tokens = " << vString.size() << endl;
-
-	for (string &s : vString)
-	{
-		cout << s << endl;
-	}
 
 	system("pause>0");
-
 
 	return 0;
 }
