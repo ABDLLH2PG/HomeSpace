@@ -2,21 +2,19 @@
 #include <string>
 #include <vector>
 
-// [C07] Problem #39:  Join String [My Solution]
+// [C07] Problem #39:  Join String [Optimized Code]
 using namespace std;
 
-string JoinString(vector <string> vString, string delim)
+string JoinString(vector <string> vString, string Delim)
 {
 	string S1 = "";
 
-	for (short i = 0; i < vString.size() - 1; i++)
+	for (string& s : vString)
 	{
-		S1 += vString[i] + delim;
+		S1 = S1 + s + Delim;
 	}
 
-	S1 += vString[vString.size() - 1];
-
-	return S1;
+	return S1.substr(0, S1.length() - Delim.length());
 }
 
 
@@ -24,7 +22,7 @@ int main()
 {
 	vector <string> vName = { "Mohammed", "Faid", "Ali", "Maher" };
 
-	cout << "Vector after join:\n";
+	cout << "\nVector after join:\n";
 	cout << JoinString(vName, " ");
 
 
