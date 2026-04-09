@@ -1,49 +1,31 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
-// [C07] Problem #38: Trim Left / Trim Right / Trim [Optimized Code]
+// [C07] Problem #39:  Join String [My Solution]
 using namespace std;
 
-string TrimLeft(string S1)
+string JoinString(vector <string> vString, string delim)
 {
-	for (short i = 0; i < S1.length() - 1; i++)
+	string S1 = "";
+
+	for (short i = 0; i < vString.size() - 1; i++)
 	{
-		if (S1[i] != ' ')
-		{
-			return S1.substr(i, S1.length() - 1);
-		}
+		S1 += vString[i] + delim;
 	}
 
-	return "";
-}
+	S1 += vString[vString.size() - 1];
 
-string TrimRight(string S1)
-{
-	for (short i = S1.length() -1 ; i >= 0 ; i--)
-	{
-		if (S1[i] != ' ')
-		{
-			return S1.substr(0, i + 1);
-		}
-	}
-
-	return "";
-}
-
-string Trim(string S1)
-{
-	return (TrimLeft(TrimRight(S1)));
+	return S1;
 }
 
 
 int main()
 {
-	string S1 = "     Mohammed Abu-Hadhoud     ";
+	vector <string> vName = { "Mohammed", "Faid", "Ali", "Maher" };
 
-	cout << "\nString     = " << S1 << endl;
-	cout << "\nTrim Left  = " << TrimLeft(S1);
-	cout << "\nTrim Right = " << TrimRight(S1);
-	cout << "\nTrim       = " << Trim(S1);
+	cout << "Vector after join:\n";
+	cout << JoinString(vName, " ");
 
 
 	system("pause>0");
