@@ -2,17 +2,17 @@
 #include <string>
 #include "MyInputLib.h"
 
-// [C07] Problem #42: Replace Words [My Solution]
+// [C07] Problem #42: Replace Words [Optimized Code]
 using namespace std;
 
-string ReplaceWords(string S1, string Originalword, string ReplaceWord)
+string ReplaceWordInStringUsingBuiltInFunction(string S1, string StringToReplace, string ReplaceTo)
 {
-	short pos = 0;
+	short pos = S1.find(StringToReplace);
 
-	while ((pos = S1.find(Originalword)) != string::npos)
+	while (pos != string::npos)
 	{
-		S1.erase(pos, Originalword.length());
-		S1.insert(pos, ReplaceWord);
+		S1.replace(pos, StringToReplace.length(), ReplaceTo);
+		pos = S1.find(StringToReplace); // find next
 	}
 
 	return S1;
@@ -25,7 +25,7 @@ int main()
 	cout << "\nOrigial String\n" << S1;
 
 	cout << "\n\nString After Replace:\n";
-	cout << ReplaceWords(S1, "Jordan", "USA");
+	cout << ReplaceWordInStringUsingBuiltInFunction(S1, "Jordan", "USA");
 
 
 
