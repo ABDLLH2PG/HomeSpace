@@ -1,46 +1,61 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "MyInputLib.h"
 
-// [C07] Problem #40: Join String (Overloading) [Optimized code]
+// [C07] Problem #41: Reverse Words [My Solution]
 using namespace std;
 
-string JoinString(vector <string> vString, string Delim)
+vector <string> SplitString(string S1, string Delim = " ")
 {
-	string S1 = "";
+	vector <string> vString;
 
-	for (string& s : vString)
+	short pos = 0;
+	string sWord;
+
+	while ((pos = S1.find(Delim)) != string::npos)
 	{
-		S1 = S1 + s + Delim;
+		sWord = S1.substr(0, pos);
+
+		if (sWord != "")
+		{
+			vString.push_back(sWord);
+		}
+
+		S1.erase(0, pos + Delim.length());
 	}
 
-	return S1.substr(0, S1.length() - Delim.length());
+	if (S1 != "")
+	{
+		vString.push_back(S1);
+	}
+
+	return vString;
 }
 
-string JoinString(string arrString[], short Length, string Delim)
+string ReverseWords(string S1, string Delim = " ")
 {
-	string S1 = "";
+	vector <string> vString = SplitString(S1, Delim);
 
-	for (short i = 0; i < Length; i++)
+	S1 = "";
+
+	for (int i = vString.size() - 1; i >= 0; i--)
 	{
-		S1 = S1 + arrString[i] + Delim;
+		S1 = S1 + vString[i] + Delim;
 	}
 
 	return S1.substr(0, S1.length() - Delim.length());
+
 }
 
 
 int main()
 {
-	vector <string> vString = { "Mohammed", "Faid", "Ali", "Maher" };
+	string S1 = MyInputLib::ReadString("Please Enter Your String?");
 
-	string arrString[] = { "Mohammed", "Faid", "Ali", "Maher" };
+	cout << "\n\nStrign after reversing words:\n" << ReverseWords(S1);
 
-	cout << "\nVector after join:\n";
-	cout << JoinString(vString, " ");
 
-	cout << "\nArray after join:\n";
-	cout << JoinString(arrString, 4, " ");
 
 	system("pause>0");
 
