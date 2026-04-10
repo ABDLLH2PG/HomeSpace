@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-// [C07] Problem #40: Join String (Overloading) [My Solution]
+// [C07] Problem #40: Join String (Overloading) [Optimized code]
 using namespace std;
 
 string JoinString(vector <string> vString, string Delim)
@@ -17,11 +17,11 @@ string JoinString(vector <string> vString, string Delim)
 	return S1.substr(0, S1.length() - Delim.length());
 }
 
-string JoinString(string arrString[], short arrLength, string Delim)
+string JoinString(string arrString[], short Length, string Delim)
 {
 	string S1 = "";
 
-	for (short i = 0; i < arrLength; i++)
+	for (short i = 0; i < Length; i++)
 	{
 		S1 = S1 + arrString[i] + Delim;
 	}
@@ -29,17 +29,18 @@ string JoinString(string arrString[], short arrLength, string Delim)
 	return S1.substr(0, S1.length() - Delim.length());
 }
 
+
 int main()
 {
-	vector <string> vName = { "Mohammed", "Faid", "Ali", "Maher" };
-	string arrString[4] = { "Mohammed", "Faid", "Ali", "Maher" };
-	short arrLength = 4;
+	vector <string> vString = { "Mohammed", "Faid", "Ali", "Maher" };
+
+	string arrString[] = { "Mohammed", "Faid", "Ali", "Maher" };
 
 	cout << "\nVector after join:\n";
-	cout << JoinString(vName, " ");
+	cout << JoinString(vString, " ");
 
-	cout << "\nVector after join:\n";
-	cout << JoinString(arrString, arrLength, " ");
+	cout << "\nArray after join:\n";
+	cout << JoinString(arrString, 4, " ");
 
 	system("pause>0");
 
