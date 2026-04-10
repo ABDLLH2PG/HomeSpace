@@ -3,7 +3,7 @@
 #include <vector>
 #include "MyInputLib.h"
 
-// [C07] Problem #41: Reverse Words [My Solution]
+// [C07] Problem #41: Reverse Words [Optimized Code]
 using namespace std;
 
 vector <string> SplitString(string S1, string Delim = " ")
@@ -33,19 +33,22 @@ vector <string> SplitString(string S1, string Delim = " ")
 	return vString;
 }
 
-string ReverseWords(string S1, string Delim = " ")
+string ReverseWordsInString(string S1)
 {
-	vector <string> vString = SplitString(S1, Delim);
-
+	vector <string> vString = SplitString(S1, " ");
 	S1 = "";
 
-	for (int i = vString.size() - 1; i >= 0; i--)
+	// declare iterator
+	vector <string>::iterator iter = vString.end();
+
+	while (iter != vString.begin())
 	{
-		S1 = S1 + vString[i] + Delim;
+		--iter;
+
+		S1 += *iter + " ";
 	}
 
-	return S1.substr(0, S1.length() - Delim.length());
-
+	return S1.substr(0, S1.length() - 1); // remove last space.
 }
 
 
@@ -53,7 +56,8 @@ int main()
 {
 	string S1 = MyInputLib::ReadString("Please Enter Your String?");
 
-	cout << "\n\nStrign after reversing words:\n" << ReverseWords(S1);
+	cout << "\n\nStrign after reversing words:";
+	cout << "\n" << ReverseWordsInString(S1);
 
 
 
