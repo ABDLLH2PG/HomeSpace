@@ -1,63 +1,31 @@
 #include <iostream>
 #include <string>
-#include <vector>
 #include "MyInputLib.h"
 
-// [C07] Problem #41: Reverse Words [Optimized Code]
+// [C07] Problem #42: Replace Words [My Solution]
 using namespace std;
 
-vector <string> SplitString(string S1, string Delim = " ")
+string ReplaceWords(string S1, string Originalword, string ReplaceWord)
 {
-	vector <string> vString;
-
 	short pos = 0;
-	string sWord;
 
-	while ((pos = S1.find(Delim)) != string::npos)
+	while ((pos = S1.find(Originalword)) != string::npos)
 	{
-		sWord = S1.substr(0, pos);
-
-		if (sWord != "")
-		{
-			vString.push_back(sWord);
-		}
-
-		S1.erase(0, pos + Delim.length());
+		S1.erase(pos, Originalword.length());
+		S1.insert(pos, ReplaceWord);
 	}
 
-	if (S1 != "")
-	{
-		vString.push_back(S1);
-	}
-
-	return vString;
-}
-
-string ReverseWordsInString(string S1)
-{
-	vector <string> vString = SplitString(S1, " ");
-	S1 = "";
-
-	// declare iterator
-	vector <string>::iterator iter = vString.end();
-
-	while (iter != vString.begin())
-	{
-		--iter;
-
-		S1 += *iter + " ";
-	}
-
-	return S1.substr(0, S1.length() - 1); // remove last space.
+	return S1;
 }
 
 
 int main()
 {
-	string S1 = MyInputLib::ReadString("Please Enter Your String?");
+	string S1 = "Welcome to Jordan , Jordan is a nice country";
+	cout << "\nOrigial String\n" << S1;
 
-	cout << "\n\nStrign after reversing words:";
-	cout << "\n" << ReverseWordsInString(S1);
+	cout << "\n\nString After Replace:\n";
+	cout << ReplaceWords(S1, "Jordan", "USA");
 
 
 
