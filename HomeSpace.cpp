@@ -1,20 +1,22 @@
 #include <iostream>
 #include <string>
 
-// [C07] Problem #44: Remove Punctuations [My Solution]
+// [C07] Problem #44: Remove Punctuations [Optimized Code]
 using namespace std;
 
-string RemovedPauncuationsInString(string S1)
+string RemovedPauncuationsFromString(string S1)
 {
+	string S2 = "";
+
 	for (int i = 0; i < S1.length(); i++)
 	{
-		if (ispunct(S1[i]) > 0)
+		if (!ispunct(S1[i]))
 		{
-			S1.erase(i, 1);
+			S2 += S1[i];
 		}
 	}
 
-	return S1;
+	return S2;
 }
 
 
@@ -24,7 +26,7 @@ int main()
 	cout << "\nOriginal String:\n" << S1;
 
 	cout << "\n\nPauncuations Removed:";
-	cout << "\n" << RemovedPauncuationsInString(S1);
+	cout << "\n" << RemovedPauncuationsFromString(S1);
 
 
 	system("pause>0");
