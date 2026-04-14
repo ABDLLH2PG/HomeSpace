@@ -13,7 +13,7 @@ namespace MyInputLib
 	{
 		string S1 = "";
 
-		cout << Message << endl;
+		cout << Message;
 		getline(cin >> ws, S1);
 
 		return S1;
@@ -93,7 +93,7 @@ namespace MyInputLib
 	double ReadDoubleNumber(string Message)
 	{
 		double Number;
-		cout << Message << endl;
+		cout << Message;
 		cin >> Number;
 		return Number;
 	}

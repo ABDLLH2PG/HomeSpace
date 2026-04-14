@@ -1,32 +1,46 @@
 #include <iostream>
 #include <string>
+#include "MyInputLib.h"
 
-// [C07] Problem #44: Remove Punctuations [Optimized Code]
+// [C07] Problem #44: Convert Record to Line [My Solution]
 using namespace std;
 
-string RemovedPauncuationsFromString(string S1)
+struct stClientData
 {
-	string S2 = "";
+	string AccountNumber = "";
+	int PinCode = 0;
+	string Name = "";
+	long int Phone = 0;
+	float AccountBalance = 0.0;
+};
 
-	for (int i = 0; i < S1.length(); i++)
-	{
-		if (!ispunct(S1[i]))
-		{
-			S2 += S1[i];
-		}
-	}
+string JoinDataByStruct(stClientData& ClientData, string Delim)
+{
+	string S1 = "";
 
-	return S2;
+	S1 += ClientData.AccountNumber + Delim;
+	S1 += to_string(ClientData.PinCode) + Delim;
+	S1 += ClientData.Name + Delim;
+	S1 += to_string(ClientData.Phone) + Delim;
+	S1 += to_string(ClientData.AccountBalance) + Delim;
+
+	return S1.substr(0, S1.length() - Delim.length());
 }
-
 
 int main()
 {
-	string S1 = "Welcome to Jordan, Jordan is a nice country; it's amazing.";
-	cout << "\nOriginal String:\n" << S1;
+	stClientData ClientData;
 
-	cout << "\n\nPauncuations Removed:";
-	cout << "\n" << RemovedPauncuationsFromString(S1);
+	cout << "Please Enter Client Data:\n\n";
+
+	ClientData.AccountNumber = MyInputLib::ReadString("Enter Account Number? ");
+	ClientData.PinCode = MyInputLib::ReadNumber("Enter PinCode? ");
+	ClientData.Name = MyInputLib::ReadString("Enter Name? ");
+	ClientData.Phone = MyInputLib::ReadNumber("Enter Phone? ");
+	ClientData.AccountBalance = MyInputLib::ReadDoubleNumber("Enter AccountBalance? ");
+
+	cout << "\n\nClient Record for Saving is:\n";
+	cout << JoinDataByStruct(ClientData, "#//#");
 
 
 	system("pause>0");
