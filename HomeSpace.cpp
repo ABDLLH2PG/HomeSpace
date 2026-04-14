@@ -2,45 +2,63 @@
 #include <string>
 #include "MyInputLib.h"
 
-// [C07] Problem #44: Convert Record to Line [My Solution]
+// [C07] Problem #45: Convert Record to Line [Optimized Code]
 using namespace std;
 
-struct stClientData
+struct stClient
 {
 	string AccountNumber = "";
-	int PinCode = 0;
+	string PinCode = "";
 	string Name = "";
-	long int Phone = 0;
-	float AccountBalance = 0.0;
+	string Phone = "";
+	double AccountBalance = 0.0;
 };
 
-string JoinDataByStruct(stClientData& ClientData, string Delim)
+stClient ReadNewClient()
 {
-	string S1 = "";
+	stClient Client;
 
-	S1 += ClientData.AccountNumber + Delim;
-	S1 += to_string(ClientData.PinCode) + Delim;
-	S1 += ClientData.Name + Delim;
-	S1 += to_string(ClientData.Phone) + Delim;
-	S1 += to_string(ClientData.AccountBalance) + Delim;
+	cout << "Enter Account Number? ";
+	getline(cin, Client.AccountNumber);
 
-	return S1.substr(0, S1.length() - Delim.length());
+	cout << "Enter PinCode? ";
+	getline(cin, Client.PinCode);
+
+	cout << "Enter Name? ";
+	getline(cin, Client.Name);
+
+	cout << "Enter Phone? ";
+	getline(cin, Client.Phone);
+
+	cout << "Enter AccountBalance? ";
+	cin >> Client.AccountBalance;
+
+	return Client;
 }
+
+string ConvertRecordToLine(stClient Client, string Seperator = "#//#")
+{
+	string stClientRecord = "";
+
+	stClientRecord += Client.AccountNumber + Seperator;
+	stClientRecord += Client.PinCode + Seperator;
+	stClientRecord += Client.Name + Seperator;
+	stClientRecord += Client.Phone + Seperator;
+	stClientRecord += to_string(Client.AccountBalance);
+
+	return stClientRecord;
+}
+
 
 int main()
 {
-	stClientData ClientData;
+	cout << "\nPlease Enter Client Data: \n\n";
 
-	cout << "Please Enter Client Data:\n\n";
+	stClient Client;
+	Client = ReadNewClient();
 
-	ClientData.AccountNumber = MyInputLib::ReadString("Enter Account Number? ");
-	ClientData.PinCode = MyInputLib::ReadNumber("Enter PinCode? ");
-	ClientData.Name = MyInputLib::ReadString("Enter Name? ");
-	ClientData.Phone = MyInputLib::ReadNumber("Enter Phone? ");
-	ClientData.AccountBalance = MyInputLib::ReadDoubleNumber("Enter AccountBalance? ");
-
-	cout << "\n\nClient Record for Saving is:\n";
-	cout << JoinDataByStruct(ClientData, "#//#");
+	cout << "\n\nClient Record for Saving is: \n";
+	cout << ConvertRecordToLine(Client);
 
 
 	system("pause>0");
