@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-// [C07] Problem #46: Convert Line Data to Record [My Solution]
+// [C07] Problem #46: Convert Line Data to Record [Optimized Code]
 using namespace std;
 
 struct stClient
@@ -41,45 +41,43 @@ vector <string> SplitString(string S1, string Delim = " ")
 	return vString;
 }
 
-stClient ConvertvRecordLineToStruct(vector <string> &vRecordLine)
+stClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
 {
 	stClient Client;
 
-	Client.AccountNumber = vRecordLine[0];
-	Client.PinCode = vRecordLine[1];
-	Client.Name = vRecordLine[2];
-	Client.Phone = vRecordLine[3];
-	Client.AccountBalance = stod(vRecordLine[4]);
+	vector <string> vClientData;
+	vClientData = SplitString(Line, Seperator);
+
+	Client.AccountNumber = vClientData[0];
+	Client.PinCode = vClientData[1];
+	Client.Name = vClientData[2];
+	Client.Phone = vClientData[3];
+	Client.AccountBalance = stod(vClientData[4]); //cast string to double
 
 	return Client;
 }
 
-void PrintClientData(stClient Client)
+void PrintClientRecord(stClient Client)
 {
-	cout << "Account Number : " << Client.AccountNumber << "\n";
-	cout << "Pin Code       : " << Client.PinCode << "\n";
-	cout << "Name           : " << Client.Name << "\n";
-	cout << "Phone          : " << Client.Phone << "\n";
-	cout << "Account Balance: " << Client.AccountBalance;
+	cout << "\n\nThe following is the extracted client record:\n";
+	cout << "\nAccount Number : " << Client.AccountNumber;
+	cout << "\nPin Code       : " << Client.PinCode;
+	cout << "\nName           : " << Client.Name;
+	cout << "\nPhone          : " << Client.Phone;
+	cout << "\nAccount Balance: " << Client.AccountBalance;
 }
 
 
 int main()
 {
-	stClient Client;
-
-	string S1 = "A150#//#1234#//#Mohammed Abu-Hadhoud#//#079999#//#5270.000000";
+	string stLine = "A150#//#1234#//#Mohammed Abu-Hadhoud#//#079999#//#5270.000000";
 
 	cout << "\nLine Record is:\n";
-	cout << S1;
+	cout << stLine;
 
-	vector <string> vRecordLine = SplitString(S1, "#//#");
+	stClient Client = ConvertLinetoRecord(stLine);
 
-	Client = ConvertvRecordLineToStruct(vRecordLine);
-
-	cout << "\n\nThe following is teh extracted client record:\n\n";
-
-	PrintClientData(Client);
+	PrintClientRecord(Client);
 	
 
 	system("pause>0");
