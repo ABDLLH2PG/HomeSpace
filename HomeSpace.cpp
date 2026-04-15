@@ -5,7 +5,7 @@
 #include <iomanip>
 #include "MyInputLib.h"
 
-// [C07] Problem #49: Find Client By Account Number [My Solution]
+// [C07] Problem #49: Find Client By Account Number [Optimized Code]
 using namespace std;
 
 const string ClientsFileName = "Clients.txt";
@@ -87,7 +87,7 @@ vector <stClient> LoadClientsDataFromFile(string FileName)
 	return vClients;
 }
 
-void PrintClientDetails(stClient Client)
+void PrintClientCard(stClient Client)
 {
 	cout << "\nThe following are the Client details:\n";
 
@@ -95,11 +95,13 @@ void PrintClientDetails(stClient Client)
 	cout << "\nPin Code      : " << Client.PinCode;
 	cout << "\nName          : " << Client.Name;
 	cout << "\nPhone         : " << Client.Phone;
-	cout << "\nAccount Balance: " << Client.AccountBalance << endl;
+	cout << "\nAccount Balance: " << Client.AccountBalance;
 }
 
-bool FindClientByAccountNumber(string AccountNumber, vector <stClient>& vClients, stClient& Client)
+bool FindClientByAccountNumber(string AccountNumber, stClient& Client)
 {
+	vector <stClient> vClients = LoadClientsDataFromFile(ClientsFileName);
+
 	for (stClient& C : vClients)
 	{
 		if (C.AccountNumber == AccountNumber)
@@ -111,29 +113,22 @@ bool FindClientByAccountNumber(string AccountNumber, vector <stClient>& vClients
 	return false;
 }
 
-void ShowFindClientScreen(vector<stClient>& vClients)
-{
-	string AccountNumber = MyInputLib::ReadString("Please enter Account Number? ");
-	stClient Client;
-
-	if (FindClientByAccountNumber(AccountNumber, vClients, Client))
-	{
-		PrintClientDetails(Client);
-	}
-	else
-	{
-		cout << "\nClient with Account Number (" << AccountNumber << ") Not Found!\n";
-	}
-}
-
 
 int main()
 {
-	vector <stClient> vClient = LoadClientsDataFromFile(ClientsFileName);
+	stClient Client;
+	string AccountNumber = MyInputLib::ReadString("Please enter Account Number? ");
 
-	ShowFindClientScreen(vClient);
+	if (FindClientByAccountNumber(AccountNumber, Client))
+	{
+		PrintClientCard(Client);
+	}
+	else
+	{
+		cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
+	}
 	
-
+	
 	system("pause>0");
 
 	return 0;
