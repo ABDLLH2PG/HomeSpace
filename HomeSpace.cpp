@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
-#include <vector>
+#include <fstream>
 
-// [C07] Problem #46: Convert Line Data to Record [Optimized Code]
+// [C07] Problem #47: Add Clients to File [My Solution]
 using namespace std;
 
 struct stClient
@@ -14,71 +14,83 @@ struct stClient
 	double AccountBalance = 0.0;
 };
 
-vector <string> SplitString(string S1, string Delim = " ")
-{
-	vector <string> vString;
-
-	short pos = 0;
-	string sWord;
-
-	while ((pos = S1.find(Delim)) != string::npos)
-	{
-		sWord = S1.substr(0, pos);
-
-		if (sWord != "")
-		{
-			vString.push_back(sWord);
-		}
-
-		S1.erase(0, pos + Delim.length());
-	}
-
-	if (S1 != "")
-	{
-		vString.push_back(S1);
-	}
-
-	return vString;
-}
-
-stClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
+stClient ReadNewClient()
 {
 	stClient Client;
 
-	vector <string> vClientData;
-	vClientData = SplitString(Line, Seperator);
+	cout << "Enter Account Number? ";
+	getline(cin >> ws, Client.AccountNumber);
+	cout << "Enter PinCode? ";
+	getline(cin >> ws, Client.PinCode);
 
-	Client.AccountNumber = vClientData[0];
-	Client.PinCode = vClientData[1];
-	Client.Name = vClientData[2];
-	Client.Phone = vClientData[3];
-	Client.AccountBalance = stod(vClientData[4]); //cast string to double
+	cout << "Enter Name? ";
+	getline(cin >> ws, Client.Name);
+
+	cout << "Enter Phone? ";
+	getline(cin >> ws, Client.Phone);
+
+	cout << "Enter AccountBalance? ";
+	cin >> Client.AccountBalance;
 
 	return Client;
 }
 
-void PrintClientRecord(stClient Client)
+string ConvertRecordToLine(stClient Client, string Seperator = "#//#")
 {
-	cout << "\n\nThe following is the extracted client record:\n";
-	cout << "\nAccount Number : " << Client.AccountNumber;
-	cout << "\nPin Code       : " << Client.PinCode;
-	cout << "\nName           : " << Client.Name;
-	cout << "\nPhone          : " << Client.Phone;
-	cout << "\nAccount Balance: " << Client.AccountBalance;
+	string stClientRecord = "";
+
+	stClientRecord += Client.AccountNumber + Seperator;
+	stClientRecord += Client.PinCode + Seperator;
+	stClientRecord += Client.Name + Seperator;
+	stClientRecord += Client.Phone + Seperator;
+	stClientRecord += to_string(Client.AccountBalance);
+
+	return stClientRecord;
+}
+
+void AddRecordToFile(string stClient, string FileName)
+{
+	fstream MyFile;
+
+	MyFile.open(FileName, ios::out | ios::app);
+
+	if (MyFile.is_open())
+	{
+		MyFile << stClient << endl;
+	}
+
+	MyFile.close();
+
+	cout << "\nClient Added Successfully, ";
+}
+
+void AddClientToFile()
+{
+	char AddClientAgain = 'Y';
+
+	do
+	{
+		system("cls");
+		cout << "Adding New Client:\n\n";
+
+		stClient Client = ReadNewClient();
+
+		string stClientRecord = ConvertRecordToLine(Client, "#//#");
+
+		AddRecordToFile(stClientRecord, "ClientRecord.txt");
+		
+		cout << "do you want to add more clients? ";
+		cin >> AddClientAgain;
+
+
+	} while (AddClientAgain == 'Y' || AddClientAgain == 'y');
 }
 
 
 int main()
 {
-	string stLine = "A150#//#1234#//#Mohammed Abu-Hadhoud#//#079999#//#5270.000000";
+	AddClientToFile();
 
-	cout << "\nLine Record is:\n";
-	cout << stLine;
-
-	stClient Client = ConvertLinetoRecord(stLine);
-
-	PrintClientRecord(Client);
-	
 
 	system("pause>0");
 
