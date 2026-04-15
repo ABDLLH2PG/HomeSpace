@@ -3,8 +3,9 @@
 #include <vector>
 #include <fstream>
 #include <iomanip>
+#include "MyInputLib.h"
 
-// [C07] Problem #48: Show All Clients [Optimized Code]
+// [C07] Problem #49: Find Client By Account Number [My Solution]
 using namespace std;
 
 const string ClientsFileName = "Clients.txt";
@@ -86,35 +87,43 @@ vector <stClient> LoadClientsDataFromFile(string FileName)
 	return vClients;
 }
 
-void PrintClientRecord(stClient &Client)
+void PrintClientDetails(stClient Client)
 {
-	cout << "| " << left << setw(15) << Client.AccountNumber;
-	cout << "| " << left << setw(10) << Client.PinCode;
-	cout << "| " << left << setw(40) << Client.Name;
-	cout << "| " << left << setw(12) << Client.Phone;
-	cout << "| " << left << setw(12) << Client.AccountBalance;
+	cout << "\nThe following are the Client details:\n";
+
+	cout << "\nAccount Number: " << Client.AccountNumber;
+	cout << "\nPin Code      : " << Client.PinCode;
+	cout << "\nName          : " << Client.Name;
+	cout << "\nPhone         : " << Client.Phone;
+	cout << "\nAccount Balance: " << Client.AccountBalance << endl;
 }
 
-void PrintAllClientsData(vector <stClient> &vClients)
+bool FindClientByAccountNumber(string AccountNumber, vector <stClient>& vClients, stClient& Client)
 {
-	cout << "\n\t\t\t\t\tClient List (" << vClients.size() << ") Client(s).";
-
-	cout <<"\n________________________________________________________________________________________________\n" << endl;
-	
-	cout << "| " << left << setw(15) << "Accout Number";
-	cout << "| " << left << setw(10) << "Pin Code";
-	cout << "| " << left << setw(40) << "Client Name";
-	cout << "| " << left << setw(12) << "Phone";
-	cout << "| " << left << setw(12) << "Balance";
-	cout << "\n________________________________________________________________________________________________\n" << endl;
-	
-	for (stClient &Client : vClients)
+	for (stClient& C : vClients)
 	{
-		PrintClientRecord(Client);
-		cout << endl;
+		if (C.AccountNumber == AccountNumber)
+		{
+			Client = C;
+			return true;
+		}
 	}
+	return false;
+}
 
-	cout << "\n________________________________________________________________________________________________\n" << endl;
+void ShowFindClientScreen(vector<stClient>& vClients)
+{
+	string AccountNumber = MyInputLib::ReadString("Please enter Account Number? ");
+	stClient Client;
+
+	if (FindClientByAccountNumber(AccountNumber, vClients, Client))
+	{
+		PrintClientDetails(Client);
+	}
+	else
+	{
+		cout << "\nClient with Account Number (" << AccountNumber << ") Not Found!\n";
+	}
 }
 
 
@@ -122,7 +131,7 @@ int main()
 {
 	vector <stClient> vClient = LoadClientsDataFromFile(ClientsFileName);
 
-	PrintAllClientsData(vClient);
+	ShowFindClientScreen(vClient);
 	
 
 	system("pause>0");
