@@ -2,8 +2,10 @@
 #include <string>
 #include <fstream>
 
-// [C07] Problem #47: Add Clients to File [My Solution]
+// [C07] Problem #47: Add Clients to File [Optimized Code]
 using namespace std;
+
+const string ClientsFileName = "Clients.txt";
 
 struct stClient
 {
@@ -19,15 +21,18 @@ stClient ReadNewClient()
 	stClient Client;
 
 	cout << "Enter Account Number? ";
+
+	// Usage of std::we will extract all the witespace character
 	getline(cin >> ws, Client.AccountNumber);
+
 	cout << "Enter PinCode? ";
-	getline(cin >> ws, Client.PinCode);
+	getline(cin, Client.PinCode);
 
 	cout << "Enter Name? ";
-	getline(cin >> ws, Client.Name);
+	getline(cin, Client.Name);
 
 	cout << "Enter Phone? ";
-	getline(cin >> ws, Client.Phone);
+	getline(cin, Client.Phone);
 
 	cout << "Enter AccountBalance? ";
 	cin >> Client.AccountBalance;
@@ -48,48 +53,45 @@ string ConvertRecordToLine(stClient Client, string Seperator = "#//#")
 	return stClientRecord;
 }
 
-void AddRecordToFile(string stClient, string FileName)
+void AddDataLineToFile(string FileName, string stDataLine)
 {
 	fstream MyFile;
-
 	MyFile.open(FileName, ios::out | ios::app);
 
 	if (MyFile.is_open())
 	{
-		MyFile << stClient << endl;
+		MyFile << stDataLine << endl;
+
+		MyFile.close();
 	}
-
-	MyFile.close();
-
-	cout << "\nClient Added Successfully, ";
 }
 
-void AddClientToFile()
+void AddNewClient()
 {
-	char AddClientAgain = 'Y';
+	stClient Client;
+	Client = ReadNewClient();
+	AddDataLineToFile(ClientsFileName, ConvertRecordToLine(Client));
+}
 
+void AddClients()
+{
+	char AddMore = 'Y';
 	do
 	{
 		system("cls");
 		cout << "Adding New Client:\n\n";
 
-		stClient Client = ReadNewClient();
+		AddNewClient();
+		cout << "\nClient Added Successfully, do you want to add more Client? Y/N? ";
+		cin >> AddMore;
 
-		string stClientRecord = ConvertRecordToLine(Client, "#//#");
-
-		AddRecordToFile(stClientRecord, "ClientRecord.txt");
-		
-		cout << "do you want to add more clients? ";
-		cin >> AddClientAgain;
-
-
-	} while (AddClientAgain == 'Y' || AddClientAgain == 'y');
+	} while (toupper(AddMore) == 'Y');
 }
 
 
 int main()
 {
-	AddClientToFile();
+	AddClients();
 
 
 	system("pause>0");

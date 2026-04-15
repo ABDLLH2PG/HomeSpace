@@ -138,7 +138,7 @@
     <ClInclude Include="MyUtilityLib.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ClientRecord.txt" />
+    <Text Include="Clients.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
