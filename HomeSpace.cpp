@@ -4,7 +4,7 @@
 #include <fstream>
 #include <iomanip>
 
-// [C07] Problem #48: Show All Clients [My Solution]
+// [C07] Problem #48: Show All Clients [Optimized Code]
 using namespace std;
 
 const string ClientsFileName = "Clients.txt";
@@ -61,96 +61,69 @@ stClient ConvertLineToRecord(string Line, string Seperator = "#//#")
 	return Client;
 }
 
-vector <string> ExtractLinesFromFile(const string &ClientsFileName)
+vector <stClient> LoadClientsDataFromFile(string FileName)
 {
-	vector <string> vLines;
+	vector <stClient> vClients;
 
 	fstream MyFile;
-	MyFile.open(ClientsFileName, ios::in);
-	
+	MyFile.open(FileName, ios::in); //read Mode
+
 	if (MyFile.is_open())
 	{
-		string Line = "";
+		string Line;
+		stClient Client;
 
 		while (getline(MyFile, Line))
 		{
-			vLines.push_back(Line);
+			Client = ConvertLineToRecord(Line);
+
+			vClients.push_back(Client);
 		}
 
 		MyFile.close();
 	}
 
-	return vLines;
-}
-
-vector <stClient> ConvertLinesToRecords(vector <string>& vLines)
-{
-	vector <stClient> vClients;
-
-	for (string &Line : vLines)
-	{
-		vClients.push_back(ConvertLineToRecord(Line));
-	}
-
 	return vClients;
 }
 
-string Tabs(short NumberOfTabs)
+void PrintClientRecord(stClient &Client)
 {
-	string t = "";
+	cout << "| " << left << setw(15) << Client.AccountNumber;
+	cout << "| " << left << setw(10) << Client.PinCode;
+	cout << "| " << left << setw(40) << Client.Name;
+	cout << "| " << left << setw(12) << Client.Phone;
+	cout << "| " << left << setw(12) << Client.AccountBalance;
+}
 
-	for (int i = 0; i < NumberOfTabs; i++)
+void PrintAllClientsData(vector <stClient> &vClients)
+{
+	cout << "\n\t\t\t\t\tClient List (" << vClients.size() << ") Client(s).";
+
+	cout <<"\n________________________________________________________________________________________________\n" << endl;
+	
+	cout << "| " << left << setw(15) << "Accout Number";
+	cout << "| " << left << setw(10) << "Pin Code";
+	cout << "| " << left << setw(40) << "Client Name";
+	cout << "| " << left << setw(12) << "Phone";
+	cout << "| " << left << setw(12) << "Balance";
+	cout << "\n________________________________________________________________________________________________\n" << endl;
+	
+	for (stClient &Client : vClients)
 	{
-		t += "\t";
-	}
-
-	return t;
-}
-
-void ShowClientListScreen(short ClientNumber)
-{
-	cout << "\n" << Tabs(4) << "Client List (" << ClientNumber << ") Client(s).\n";
-	cout << "____________________________________________________________________________________________\n\n";
-	cout << "| Account Number  | Pin Code  | Client Name                       | Phone       | Balance\n";
-	cout << "____________________________________________________________________________________________\n\n";
-}
-
-void PrintClinetLine(stClient &Client)
-{
-	cout << "| " << left <<  setw(16) << Client.AccountNumber
-		 << "| " << left <<  setw(10) << Client.PinCode
-		 << "| " << left <<  setw(34) << Client.Name
-		 << "| " << left <<  setw(12) << Client.Phone
-		 << "| " << left <<  setw(10) << Client.AccountBalance;
-}
-
-void ShowFinalClientScreen(vector <stClient> vClient)
-{
-	ShowClientListScreen(vClient.size());
-
-	for (stClient& Client : vClient)
-	{
-		PrintClinetLine(Client);
+		PrintClientRecord(Client);
 		cout << endl;
 	}
 
-	cout << "____________________________________________________________________________________________\n";
-}
-
-void ReadClientsFile(string ClientsFileName)
-{
-	vector <string> stClientLine = ExtractLinesFromFile(ClientsFileName);
-
-	vector <stClient> stClient = ConvertLinesToRecords(stClientLine);
-
-	ShowFinalClientScreen(stClient);
+	cout << "\n________________________________________________________________________________________________\n" << endl;
 }
 
 
 int main()
 {
-	ReadClientsFile(ClientsFileName);
+	vector <stClient> vClient = LoadClientsDataFromFile(ClientsFileName);
 
+	PrintAllClientsData(vClient);
+	
 
 	system("pause>0");
 
