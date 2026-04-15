@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include <fstream>
+#include <iomanip>
 
-// [C07] Problem #47: Add Clients to File [Optimized Code]
+// [C07] Problem #48: Show All Clients [My Solution]
 using namespace std;
 
 const string ClientsFileName = "Clients.txt";
@@ -16,82 +18,138 @@ struct stClient
 	double AccountBalance = 0.0;
 };
 
-stClient ReadNewClient()
+vector <string> SplitString(string S1, string Delim = " ")
+{
+	vector <string> vString;
+
+	short pos = 0;
+	string sWord;
+
+	while ((pos = S1.find(Delim)) != string::npos)
+	{
+		sWord = S1.substr(0, pos);
+
+		if (sWord != "")
+		{
+			vString.push_back(sWord);
+		}
+
+		S1.erase(0, pos + Delim.length());
+	}
+
+	if (S1 != "")
+	{
+		vString.push_back(S1);
+	}
+
+	return vString;
+}
+
+stClient ConvertLineToRecord(string Line, string Seperator = "#//#")
 {
 	stClient Client;
 
-	cout << "Enter Account Number? ";
+	vector <string> vClientData;
+	vClientData = SplitString(Line, Seperator);
 
-	// Usage of std::we will extract all the witespace character
-	getline(cin >> ws, Client.AccountNumber);
-
-	cout << "Enter PinCode? ";
-	getline(cin, Client.PinCode);
-
-	cout << "Enter Name? ";
-	getline(cin, Client.Name);
-
-	cout << "Enter Phone? ";
-	getline(cin, Client.Phone);
-
-	cout << "Enter AccountBalance? ";
-	cin >> Client.AccountBalance;
+	Client.AccountNumber = vClientData[0];
+	Client.PinCode = vClientData[1];
+	Client.Name = vClientData[2];
+	Client.Phone = vClientData[3];
+	Client.AccountBalance = stod(vClientData[4]); //cast string to double
 
 	return Client;
 }
 
-string ConvertRecordToLine(stClient Client, string Seperator = "#//#")
+vector <string> ExtractLinesFromFile(const string &ClientsFileName)
 {
-	string stClientRecord = "";
+	vector <string> vLines;
 
-	stClientRecord += Client.AccountNumber + Seperator;
-	stClientRecord += Client.PinCode + Seperator;
-	stClientRecord += Client.Name + Seperator;
-	stClientRecord += Client.Phone + Seperator;
-	stClientRecord += to_string(Client.AccountBalance);
-
-	return stClientRecord;
-}
-
-void AddDataLineToFile(string FileName, string stDataLine)
-{
 	fstream MyFile;
-	MyFile.open(FileName, ios::out | ios::app);
-
+	MyFile.open(ClientsFileName, ios::in);
+	
 	if (MyFile.is_open())
 	{
-		MyFile << stDataLine << endl;
+		string Line = "";
+
+		while (getline(MyFile, Line))
+		{
+			vLines.push_back(Line);
+		}
 
 		MyFile.close();
 	}
+
+	return vLines;
 }
 
-void AddNewClient()
+vector <stClient> ConvertLinesToRecords(vector <string>& vLines)
 {
-	stClient Client;
-	Client = ReadNewClient();
-	AddDataLineToFile(ClientsFileName, ConvertRecordToLine(Client));
-}
+	vector <stClient> vClients;
 
-void AddClients()
-{
-	char AddMore = 'Y';
-	do
+	for (string &Line : vLines)
 	{
-		system("cls");
-		cout << "Adding New Client:\n\n";
+		vClients.push_back(ConvertLineToRecord(Line));
+	}
 
-		AddNewClient();
-		cout << "\nClient Added Successfully, do you want to add more Client? Y/N? ";
-		cin >> AddMore;
+	return vClients;
+}
 
-	} while (toupper(AddMore) == 'Y');
+string Tabs(short NumberOfTabs)
+{
+	string t = "";
+
+	for (int i = 0; i < NumberOfTabs; i++)
+	{
+		t += "\t";
+	}
+
+	return t;
+}
+
+void ShowClientListScreen(short ClientNumber)
+{
+	cout << "\n" << Tabs(4) << "Client List (" << ClientNumber << ") Client(s).\n";
+	cout << "____________________________________________________________________________________________\n\n";
+	cout << "| Account Number  | Pin Code  | Client Name                       | Phone       | Balance\n";
+	cout << "____________________________________________________________________________________________\n\n";
+}
+
+void PrintClinetLine(stClient &Client)
+{
+	cout << "| " << left <<  setw(16) << Client.AccountNumber
+		 << "| " << left <<  setw(10) << Client.PinCode
+		 << "| " << left <<  setw(34) << Client.Name
+		 << "| " << left <<  setw(12) << Client.Phone
+		 << "| " << left <<  setw(10) << Client.AccountBalance;
+}
+
+void ShowFinalClientScreen(vector <stClient> vClient)
+{
+	ShowClientListScreen(vClient.size());
+
+	for (stClient& Client : vClient)
+	{
+		PrintClinetLine(Client);
+		cout << endl;
+	}
+
+	cout << "____________________________________________________________________________________________\n";
+}
+
+void ReadClientsFile(string ClientsFileName)
+{
+	vector <string> stClientLine = ExtractLinesFromFile(ClientsFileName);
+
+	vector <stClient> stClient = ConvertLinesToRecords(stClientLine);
+
+	ShowFinalClientScreen(stClient);
 }
 
 
 int main()
 {
-	AddClients();
+	ReadClientsFile(ClientsFileName);
 
 
 	system("pause>0");
