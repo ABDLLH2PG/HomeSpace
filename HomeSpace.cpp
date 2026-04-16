@@ -5,7 +5,7 @@
 #include <iomanip>
 #include "MyInputLib.h"
 
-// [C07] Problem #50: Delete Client By Account Number [My Solution]
+// [C07] Problem #50: Delete Client By Account Number [Optimized Code]
 using namespace std;
 
 const string ClientsFileName = "Clients.txt";
@@ -17,6 +17,7 @@ struct stClient
 	string Name = "";
 	string Phone = "";
 	double AccountBalance = 0.0;
+	bool MarkForDelete = false;
 };
 
 vector <string> SplitString(string S1, string Delim = " ")
@@ -62,6 +63,19 @@ stClient ConvertLineToRecord(string Line, string Seperator = "#//#")
 	return Client;
 }
 
+string ConvertRecordToLine(stClient Client, string Seperator = "#//#")
+{
+	string stClientRecord = "";
+
+	stClientRecord += Client.AccountNumber + Seperator;
+	stClientRecord += Client.PinCode + Seperator;
+	stClientRecord += Client.Name + Seperator;
+	stClientRecord += Client.Phone + Seperator;
+	stClientRecord += to_string(Client.AccountBalance);
+
+	return stClientRecord;
+}
+
 vector <stClient> LoadClientsDataFromFile(string FileName)
 {
 	vector <stClient> vClients;
@@ -98,10 +112,8 @@ void PrintClientCard(stClient Client)
 	cout << "\nAccount Balance: " << Client.AccountBalance;
 }
 
-bool FindClientByAccountNumber(string AccountNumber, stClient& Client)
+bool FindClientByAccountNumber(string AccountNumber, vector <stClient> vClients, stClient& Client)
 {
-	vector <stClient> vClients = LoadClientsDataFromFile(ClientsFileName);
-
 	for (stClient& C : vClients)
 	{
 		if (C.AccountNumber == AccountNumber)
@@ -113,50 +125,83 @@ bool FindClientByAccountNumber(string AccountNumber, stClient& Client)
 	return false;
 }
 
-void DeleteClientFromFile(stClient& Client)
+bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector <stClient>& vClients)
 {
-	vector <stClient> vClients = LoadClientsDataFromFile(ClientsFileName);
-
 	for (stClient& C : vClients)
 	{
-		if (C.AccountNumber == Client.AccountNumber)
+		if (C.AccountNumber == AccountNumber)
 		{
-			C.AccountNumber = "";
-			C.PinCode = "";
-			C.Name = "";
-			C.Phone = "";
-			C.AccountBalance = 0.0;
+			C.MarkForDelete = true;
+			return true;
 		}
 	}
+	return false;
 }
 
-void AskToDeleteClientFromFile(stClient& Client)
+vector <stClient> SaveClientsDataToFile(string FileName, vector <stClient> vClients)
 {
-	char DeleteClient = MyInputLib::ReadChar("\nAre you sure you want delete this client? y/n ? ");
+	fstream MyFile;
+	MyFile.open(FileName, ios::out); //overWrite
 
-	if (tolower(DeleteClient) == 'y')
+	string DataLine;
+
+	if (MyFile.is_open())
 	{
-		DeleteClientFromFile(Client);
-		cout << "\n\nClient Deleted Successfully.";
+		for (stClient C : vClients)
+		{
+			if (C.MarkForDelete == false)
+			{
+				// we only write records that are not marked for delete.
+				DataLine = ConvertRecordToLine(C);
+				MyFile << DataLine << endl;
+			}
+		}
+
+		MyFile.close();
 	}
+	return vClients;
 }
 
-int main()
+bool DeleteClientByAccountNumber(string AccountNumber, vector <stClient>& vClients)
 {
 	stClient Client;
-	string AccountNumber = MyInputLib::ReadString("Please enter Account Number? ");
+	char Answer = 'n';
 
-	if (FindClientByAccountNumber(AccountNumber, Client))
+	if (FindClientByAccountNumber(AccountNumber, vClients, Client))
 	{
 		PrintClientCard(Client);
-		AskToDeleteClientFromFile(Client);
+
+		cout << "\n\nAre you sure you want delete this client? y/n ? ";
+		cin >> Answer;
+
+		if (tolower(Answer) == 'y')
+		{
+			MarkClientForDeleteByAccountNumber(AccountNumber, vClients);
+			SaveClientsDataToFile(ClientsFileName, vClients);
+
+			//Refresh Clients
+			vClients = LoadClientsDataFromFile(ClientsFileName);
+
+			cout << "\n\nClient Deleted Successfully.";
+			return true;
+		}
 	}
 	else
 	{
 		cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
+		return false;
 	}
+}
+
+
+int main()
+{
+	vector <stClient> vClients = LoadClientsDataFromFile(ClientsFileName);
+	string AccountNumber = MyInputLib::ReadString("Please enter Account Number? ");
+
+	DeleteClientByAccountNumber(AccountNumber, vClients);
 	
-	
+
 	system("pause>0");
 
 	return 0;
