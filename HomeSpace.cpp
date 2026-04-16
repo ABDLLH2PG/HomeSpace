@@ -5,7 +5,7 @@
 #include <iomanip>
 #include "MyInputLib.h"
 
-// [C07] Problem #49: Find Client By Account Number [Optimized Code]
+// [C07] Problem #50: Delete Client By Account Number [My Solution]
 using namespace std;
 
 const string ClientsFileName = "Clients.txt";
@@ -113,6 +113,33 @@ bool FindClientByAccountNumber(string AccountNumber, stClient& Client)
 	return false;
 }
 
+void DeleteClientFromFile(stClient& Client)
+{
+	vector <stClient> vClients = LoadClientsDataFromFile(ClientsFileName);
+
+	for (stClient& C : vClients)
+	{
+		if (C.AccountNumber == Client.AccountNumber)
+		{
+			C.AccountNumber = "";
+			C.PinCode = "";
+			C.Name = "";
+			C.Phone = "";
+			C.AccountBalance = 0.0;
+		}
+	}
+}
+
+void AskToDeleteClientFromFile(stClient& Client)
+{
+	char DeleteClient = MyInputLib::ReadChar("\nAre you sure you want delete this client? y/n ? ");
+
+	if (tolower(DeleteClient) == 'y')
+	{
+		DeleteClientFromFile(Client);
+		cout << "\n\nClient Deleted Successfully.";
+	}
+}
 
 int main()
 {
@@ -122,6 +149,7 @@ int main()
 	if (FindClientByAccountNumber(AccountNumber, Client))
 	{
 		PrintClientCard(Client);
+		AskToDeleteClientFromFile(Client);
 	}
 	else
 	{
