@@ -5,7 +5,7 @@
 #include <iomanip>
 #include "MyInputLib.h"
 
-// [C07] Problem #50: Delete Client By Account Number [Optimized Code]
+// [C07] Problem #51: Updata Client By Account Number [My Solution]
 using namespace std;
 
 const string ClientsFileName = "Clients.txt";
@@ -193,14 +193,84 @@ bool DeleteClientByAccountNumber(string AccountNumber, vector <stClient>& vClien
 	}
 }
 
+stClient UpdateClient()
+{
+	stClient Client;
+
+	// Usage of std::we will extract all the witespace character
+	cout << "Enter PinCode? ";
+	getline(cin >> ws, Client.PinCode);
+
+	cout << "Enter Name? ";
+	getline(cin, Client.Name);
+
+	cout << "Enter Phone? ";
+	getline(cin, Client.Phone);
+
+	cout << "Enter AccountBalance? ";
+	cin >> Client.AccountBalance;
+
+	return Client;
+}
+
+bool AskClientForUpdateByAccountNumber(string AccountNumber, vector <stClient> &vClients)
+{
+	stClient Client;
+	Client = UpdateClient();
+
+	for (stClient &C : vClients)
+	{
+		if (C.AccountNumber == AccountNumber)
+		{
+			C.PinCode = Client.PinCode;
+			C.Name = Client.Name;
+			C.Phone = Client.Phone;
+			C.AccountBalance = Client.AccountBalance;
+			return true;
+		}
+	}
+	return false;
+}
+
+bool UpdateClientByAccountNumber(string AccountNumber, vector <stClient>& vClients)
+{
+	stClient Client;
+	char Answer = 'n';
+
+	if (FindClientByAccountNumber(AccountNumber, vClients, Client))
+	{
+		PrintClientCard(Client);
+
+		cout << "\n\nAre you sure you want update this client? y/n ? ";
+		cin >> Answer;
+
+		if (tolower(Answer) == 'y')
+		{
+			cout << "\n\n";
+			AskClientForUpdateByAccountNumber(AccountNumber, vClients);
+			SaveClientsDataToFile(ClientsFileName, vClients);
+
+			//Refresh Clients
+			vClients = LoadClientsDataFromFile(ClientsFileName);
+
+			cout << "\n\nClient Update Successfully.";
+			return true;
+		}
+	}
+	else
+	{
+		cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
+		return false;
+	}
+}
 
 int main()
 {
 	vector <stClient> vClients = LoadClientsDataFromFile(ClientsFileName);
 	string AccountNumber = MyInputLib::ReadString("Please enter Account Number? ");
-
-	DeleteClientByAccountNumber(AccountNumber, vClients);
 	
+	UpdateClientByAccountNumber(AccountNumber, vClients);
+
 
 	system("pause>0");
 
