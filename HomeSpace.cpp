@@ -5,7 +5,7 @@
 #include <iomanip>
 #include "MyInputLib.h"
 
-// [C07] Problem #51: Updata Client By Account Number [My Solution]
+// [C07] Problem #51: Updata Client By Account Number [Optimized Code]
 using namespace std;
 
 const string ClientsFileName = "Clients.txt";
@@ -193,12 +193,13 @@ bool DeleteClientByAccountNumber(string AccountNumber, vector <stClient>& vClien
 	}
 }
 
-stClient UpdateClient()
+stClient ChangeClientRecord(string AccountNumber)
 {
 	stClient Client;
 
-	// Usage of std::we will extract all the witespace character
-	cout << "Enter PinCode? ";
+	Client.AccountNumber = AccountNumber;
+
+	cout << "\n\nEnter PinCode? ";
 	getline(cin >> ws, Client.PinCode);
 
 	cout << "Enter Name? ";
@@ -211,25 +212,6 @@ stClient UpdateClient()
 	cin >> Client.AccountBalance;
 
 	return Client;
-}
-
-bool AskClientForUpdateByAccountNumber(string AccountNumber, vector <stClient> &vClients)
-{
-	stClient Client;
-	Client = UpdateClient();
-
-	for (stClient &C : vClients)
-	{
-		if (C.AccountNumber == AccountNumber)
-		{
-			C.PinCode = Client.PinCode;
-			C.Name = Client.Name;
-			C.Phone = Client.Phone;
-			C.AccountBalance = Client.AccountBalance;
-			return true;
-		}
-	}
-	return false;
 }
 
 bool UpdateClientByAccountNumber(string AccountNumber, vector <stClient>& vClients)
@@ -246,12 +228,16 @@ bool UpdateClientByAccountNumber(string AccountNumber, vector <stClient>& vClien
 
 		if (tolower(Answer) == 'y')
 		{
-			cout << "\n\n";
-			AskClientForUpdateByAccountNumber(AccountNumber, vClients);
-			SaveClientsDataToFile(ClientsFileName, vClients);
+			for (stClient& C : vClients)
+			{
+				if (C.AccountNumber == AccountNumber)
+				{
+					C = ChangeClientRecord(AccountNumber);
+					break;
+				}
+			}
 
-			//Refresh Clients
-			vClients = LoadClientsDataFromFile(ClientsFileName);
+			SaveClientsDataToFile(ClientsFileName, vClients);
 
 			cout << "\n\nClient Update Successfully.";
 			return true;
@@ -263,6 +249,7 @@ bool UpdateClientByAccountNumber(string AccountNumber, vector <stClient>& vClien
 		return false;
 	}
 }
+
 
 int main()
 {
