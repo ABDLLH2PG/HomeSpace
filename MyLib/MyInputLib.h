@@ -1,3 +1,4 @@
+//My GitHub account: github.com/ABDLLH2PG
 #pragma once
 #include <iostream>
 #include <string>
@@ -13,7 +14,7 @@ namespace MyInputLib
 	{
 		string S1 = "";
 
-		cout << Message;
+		cout << Message << endl;
 		getline(cin >> ws, S1);
 
 		return S1;
@@ -35,7 +36,7 @@ namespace MyInputLib
 	int ReadNumber(string Message)
 	{
 		int Number;
-		cout << Message;
+		cout << Message << endl;
 		cin >> Number;
 
 		return Number;
@@ -58,7 +59,7 @@ namespace MyInputLib
 
 			cin >> Number;
 		}
-	}  
+	}
 
 	int ReadPositiveNumber(string Message)
 	{
@@ -93,7 +94,7 @@ namespace MyInputLib
 	double ReadDoubleNumber(string Message)
 	{
 		double Number;
-		cout << Message;
+		cout << Message << endl;
 		cin >> Number;
 		return Number;
 	}
