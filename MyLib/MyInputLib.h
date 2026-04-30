@@ -14,7 +14,7 @@ namespace MyInputLib
 	{
 		string S1 = "";
 
-		cout << Message << endl;
+		cout << Message;
 		getline(cin >> ws, S1);
 
 		return S1;
@@ -23,7 +23,7 @@ namespace MyInputLib
 	char ReadChar(string Message)
 	{
 		char Character = 'a';
-		cout << Message << endl;
+		cout << Message;
 		cin >> Character;
 
 		return Character;
@@ -36,7 +36,7 @@ namespace MyInputLib
 	int ReadNumber(string Message)
 	{
 		int Number;
-		cout << Message << endl;
+		cout << Message;
 		cin >> Number;
 
 		return Number;
