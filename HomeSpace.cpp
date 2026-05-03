@@ -3,10 +3,14 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #03: Leap Year (One Line Of Code) [My Solution]
+// [C08] Problem #03: Leap Year (One Line Of Code) [Optimized Code]
 
 bool IsLeapYear(short Year)
 {
+	// if year is divisible by 4 AND bot divisible by 100
+	// OR if year is divisible by 400
+	// them it is a leap year
+
 	return ((Year % 400 == 0) || (Year % 100 != 0 && Year % 4 == 0));
 }
 
