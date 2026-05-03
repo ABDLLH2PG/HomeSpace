@@ -3,35 +3,11 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #02: Leap Year [Optimized Code]
+// [C08] Problem #03: Leap Year (One Line Of Code) [My Solution]
 
 bool IsLeapYear(short Year)
 {
-	// leap year if perfectly divisible by 400
-	if (Year % 400 == 0)
-	{
-		return true;
-	}
-
-	// not a leap year if divisible by 100
-	// but not divisible by 400
-	else if (Year % 100 == 0)
-	{
-		return false;
-	}
-
-	// leap year if not divisible by 100
-	// but divisible by 4
-	else if (Year % 4 == 0)
-	{
-		return true;
-	}
-
-	// all other years are not leap years
-	else
-	{
-		return false;
-	}
+	return ((Year % 400 == 0) || (Year % 100 != 0 && Year % 4 == 0));
 }
 
 
