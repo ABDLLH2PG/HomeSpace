@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #04: Number of Days-Hours-Minutes-Seconds In a Year [My Solution]
+// [C08] Problem #04: Number of Days-Hours-Minutes-Seconds In a Year [Optimized Code]
 
 bool IsLeapYear(short Year)
 {
@@ -14,24 +14,24 @@ bool IsLeapYear(short Year)
 	return ((Year % 400 == 0) || (Year % 100 != 0 && Year % 4 == 0));
 }
 
-int NumberOfDaysInYear(short Year)
+short NumberOfDaysInAYear(short Year)
 {
 	return IsLeapYear(Year) ? 366 : 365;
 }
 
-int NumberOfHoursInYear(short Year)
+short NumberOfHoursInAYear(short Year)
 {
-	return NumberOfDaysInYear(Year) * 24;
+	return NumberOfDaysInAYear(Year) * 24;
 }
 
-int NumberOfMinutesInYear(short Year)
+int NumberOfMinutesInAYear(short Year)
 {
-	return NumberOfHoursInYear(Year) * 60;
+	return NumberOfHoursInAYear(Year) * 60;
 }
 
-int NumberOfSecondsInYear(short Year)
+int NumberOfSecondsInAYear(short Year)
 {
-	return NumberOfMinutesInYear(Year) * 60;
+	return NumberOfMinutesInAYear(Year) * 60;
 }
 
 
@@ -39,10 +39,10 @@ int main()
 {
 	short Year = MyInputLib::ReadNumber("\nPlease enter a year to check? ");
 
-	cout << "\nNumber of Days    in Year [" << Year << "] is " << NumberOfDaysInYear(Year);
-	cout << "\nNumber of Hours   in Year [" << Year << "] is " << NumberOfHoursInYear(Year);
-	cout << "\nNumber of Minutes in Year [" << Year << "] is " << NumberOfMinutesInYear(Year);
-	cout << "\nNumber of Seconds in Year [" << Year << "] is " << NumberOfSecondsInYear(Year);
+	cout << "\nNumber of Days    in Year [" << Year << "] is " << NumberOfDaysInAYear(Year);
+	cout << "\nNumber of Hours   in Year [" << Year << "] is " << NumberOfHoursInAYear(Year);
+	cout << "\nNumber of Minutes in Year [" << Year << "] is " << NumberOfMinutesInAYear(Year);
+	cout << "\nNumber of Seconds in Year [" << Year << "] is " << NumberOfSecondsInAYear(Year);
 
 
 	system("pause>0");
