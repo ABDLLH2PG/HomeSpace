@@ -3,81 +3,46 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #01: Number to Text [Optimized Code]
+// [C08] Problem #02: Leap Year [My Solution]
 
-string NumberToText(int Number)
+bool CheckLeapYear(int Year)
 {
-	if (Number == 0)
+	if (Year % 400 == 0)
 	{
-		return "";
+		return true;
 	}
-
-	if (Number >= 1 && Number <= 19)
-	{
-		string arr[] = { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven",
-		"Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen",
-		"Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
-
-		return arr[Number] + " ";
-	}
-
-	if (Number >= 20 && Number <= 99)
-	{
-		string arr[] = { "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty",
-		"Seventy", "Eighty", "Ninety" };
-
-		return arr[Number / 10] + " " + NumberToText(Number % 10);
-	}
-
-	if (Number >= 100 && Number <= 199)
-	{
-		return "One Hundred " + NumberToText(Number % 100);
-	}
-
-	if (Number >= 200 && Number <= 999)
-	{
-		return NumberToText(Number / 100) + "Hundreds " + NumberToText(Number % 100);
-	}
-
-	if (Number >= 1000 && Number <= 1999)
-	{
-		return "One Thousand " + NumberToText(Number % 1000);
-	}
-
-	if (Number >= 2000 && Number <= 999999)
-	{
-		return NumberToText(Number / 1000) + "Thousands " + NumberToText(Number % 1000);
-	}
-
-	if (Number >= 1000000 && Number <= 1999999)
-	{
-		return "One Million " + NumberToText(Number % 1000000);
-	}
-
-	if (Number >= 2000000 && Number <= 999999999)
-	{
-		return NumberToText(Number / 1000000) + "Millions " + NumberToText(Number % 1000000);
-	}
-
-	if (Number >= 1000000000 && Number <= 1999999999)
-	{
-		return "One Billion " + NumberToText(Number % 1000000000);
-	}
-	
 	else
 	{
-		return NumberToText(Number / 1000000000) + "Billions " + NumberToText(Number % 1000000000);
+		if (Year % 4 == 0 && Year % 100 != 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
 
+bool CheckLeapYear2(int Year)
+{
+	return ((Year % 400 == 0) || (Year % 4 == 0 && Year % 100 != 0));
+}
 
 int main()
 {
-	int Number = MyInputLib::ReadNumber("Enter a Number ? ");
+	int Year = MyInputLib::ReadNumber("Enter a Year? ");
 
-	cout << NumberToText(Number);
+	if (CheckLeapYear(Year))
+	{
+		cout << Year << " is Leap Year.";
+	}
+	else
+	{
+		cout << Year << " is Not Leap Year.";
+	}
 
-	
+
 	system("pause>0");
 
 	return 0;
