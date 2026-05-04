@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #06: Number of Days In a Month Short Logic [My Solution]
+// [C08] Problem #06: Number of Days In a Month Short Logic [Optimized Code]
 
 bool IsLeapYear(short Year)
 {
@@ -19,25 +19,9 @@ short NumberOfDaysInAMonth(short Year, short Month)
 	if (Month < 1 || Month > 12)
 		return 0;
 
-	if (Month == 2)
-	{
-		return IsLeapYear(Year) ? 29 : 28;
-	}
+	int NumberOfDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-	short arr31Days[7] = { 1, 3, 5, 7, 8, 10, 12 };
-
-	for (short i = 1; i <= 7; i++)
-	{
-		if (arr31Days[i - 1] == Month)
-			return 31;
-	}
-
-	// if you reach here then its 30 days.
-	return 30;
-
-	return (Month < 1 || Month > 12) ? 0 : (Month == 2) ? (IsLeapYear(Year) ? 29 : 28)
-		: 
-
+	return (Month == 2) ? IsLeapYear(Year) ? 29 : 28 : NumberOfDays[Month - 1];
 }
 
 short NumberOfHoursInAMonth(short Year, short Month)
