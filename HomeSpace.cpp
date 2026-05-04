@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #05: Number of Days-Hours-Minutes-Seconds In a Month [My Solution]
+// [C08] Problem #05: Number of Days-Hours-Minutes-Seconds In a Month [Optimized Code]
 
 bool IsLeapYear(short Year)
 {
@@ -16,7 +16,24 @@ bool IsLeapYear(short Year)
 
 short NumberOfDaysInAMonth(short Year, short Month)
 {
-	return IsLeapYear(Year) ? (Month == 2 ? 29 : 28) : 28;
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1, 3, 5, 7, 8, 10, 12 };
+
+	for (short i = 1; i <= 7; i++)
+	{
+		if (arr31Days[i - 1] == Month)
+			return 31;
+	}
+
+	// if you reach here then its 30 days.
+	return 30;
 }
 
 short NumberOfHoursInAMonth(short Year, short Month)
