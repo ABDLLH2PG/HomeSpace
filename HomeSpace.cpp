@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #04: Number of Days-Hours-Minutes-Seconds In a Year [Optimized Code]
+// [C08] Problem #05: Number of Days-Hours-Minutes-Seconds In a Month [My Solution]
 
 bool IsLeapYear(short Year)
 {
@@ -14,24 +14,24 @@ bool IsLeapYear(short Year)
 	return ((Year % 400 == 0) || (Year % 100 != 0 && Year % 4 == 0));
 }
 
-short NumberOfDaysInAYear(short Year)
+short NumberOfDaysInAMonth(short Year, short Month)
 {
-	return IsLeapYear(Year) ? 366 : 365;
+	return IsLeapYear(Year) ? (Month == 2 ? 29 : 28) : 28;
 }
 
-short NumberOfHoursInAYear(short Year)
+short NumberOfHoursInAMonth(short Year, short Month)
 {
-	return NumberOfDaysInAYear(Year) * 24;
+	return NumberOfDaysInAMonth(Year, Month) * 24;
 }
 
-int NumberOfMinutesInAYear(short Year)
+int NumberOfMinutesInAMonth(short Year, short Month)
 {
-	return NumberOfHoursInAYear(Year) * 60;
+	return NumberOfHoursInAMonth(Year, Month) * 60;
 }
 
-int NumberOfSecondsInAYear(short Year)
+int NumberOfSecondsInAMonth(short Year, short Month)
 {
-	return NumberOfMinutesInAYear(Year) * 60;
+	return NumberOfMinutesInAMonth(Year, Month) * 60;
 }
 
 
@@ -39,10 +39,12 @@ int main()
 {
 	short Year = MyInputLib::ReadNumber("\nPlease enter a year to check? ");
 
-	cout << "\nNumber of Days    in Year [" << Year << "] is " << NumberOfDaysInAYear(Year);
-	cout << "\nNumber of Hours   in Year [" << Year << "] is " << NumberOfHoursInAYear(Year);
-	cout << "\nNumber of Minutes in Year [" << Year << "] is " << NumberOfMinutesInAYear(Year);
-	cout << "\nNumber of Seconds in Year [" << Year << "] is " << NumberOfSecondsInAYear(Year);
+	short Month = MyInputLib::ReadNumber("\nPlease enter a Month to check? ");
+
+	cout << "\nNumber of Days    in Month [" << Month << "] is " << NumberOfDaysInAMonth(Year, Month);
+	cout << "\nNumber of Hours   in Month [" << Month << "] is " << NumberOfHoursInAMonth(Year, Month);
+	cout << "\nNumber of Minutes in Month [" << Month << "] is " << NumberOfMinutesInAMonth(Year, Month);
+	cout << "\nNumber of Seconds in Month [" << Month << "] is " << NumberOfSecondsInAMonth(Year, Month);
 
 
 	system("pause>0");
