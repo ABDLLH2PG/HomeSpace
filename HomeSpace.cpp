@@ -3,53 +3,44 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #06: Number of Days In a Month Short Logic [Optimized Code]
+// [C08] Problem #07: Day Name [My Solution]
 
-bool IsLeapYear(short Year)
+void PrintDate(short Year, short Month, short Day)
 {
-	// if year is divisible by 4 AND bot divisible by 100
-	// OR if year is divisible by 400
-	// them it is a leap year
-
-	return ((Year % 400 == 0) || (Year % 100 != 0 && Year % 4 == 0));
+	cout << Day << "/" << Month << "/" << Year;
 }
 
-short NumberOfDaysInAMonth(short Year, short Month)
+short DayOrder(short Year, short Month, short Day)
 {
-	if (Month < 1 || Month > 12)
-		return 0;
+	int a = ((14 - Month) / 12);
+	int y = Year - a;
+	int m = Month + 12 * a - 2;
 
-	int NumberOfDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-	return (Month == 2) ? IsLeapYear(Year) ? 29 : 28 : NumberOfDays[Month - 1];
+	int d = (Day + y + (y / 4) - (y / 100) + (y / 400) + ((31 * m) / 12)) % 7;
+	
+	return d;
 }
 
-short NumberOfHoursInAMonth(short Year, short Month)
+string DayName(short DayOrder)
 {
-	return NumberOfDaysInAMonth(Year, Month) * 24;
-}
+	string DayName[7] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 
-int NumberOfMinutesInAMonth(short Year, short Month)
-{
-	return NumberOfHoursInAMonth(Year, Month) * 60;
-}
-
-int NumberOfSecondsInAMonth(short Year, short Month)
-{
-	return NumberOfMinutesInAMonth(Year, Month) * 60;
+	return DayName[DayOrder];
 }
 
 
 int main()
 {
-	short Year = MyInputLib::ReadNumber("\nPlease enter a year to check? ");
+	short Year = MyInputLib::ReadNumber("\nPlease enter a year? ");
 
-	short Month = MyInputLib::ReadNumber("\nPlease enter a Month to check? ");
+	short Month = MyInputLib::ReadNumber("\nPlease enter a Month? ");
 
-	cout << "\nNumber of Days    in Month [" << Month << "] is " << NumberOfDaysInAMonth(Year, Month);
-	cout << "\nNumber of Hours   in Month [" << Month << "] is " << NumberOfHoursInAMonth(Year, Month);
-	cout << "\nNumber of Minutes in Month [" << Month << "] is " << NumberOfMinutesInAMonth(Year, Month);
-	cout << "\nNumber of Seconds in Month [" << Month << "] is " << NumberOfSecondsInAMonth(Year, Month);
+	short Day = MyInputLib::ReadNumber("\nPlease enter a Day? ");
+
+	cout << "\nDate      :";    PrintDate(Year, Month, Day);
+	cout << "\nDay Order : " << DayOrder(Year, Month, Day);
+	cout << "\nDay Name  : " << DayName(DayOrder(Year, Month, Day));
+
 
 
 	system("pause>0");
