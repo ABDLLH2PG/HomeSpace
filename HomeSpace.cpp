@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #10: Days from the beginning of year [My Solution]
+// [C08] Problem #10: Days from the beginning of year [Optimized Code]
 
 bool IsLeapYear(short Year)
 {
@@ -36,11 +36,11 @@ short NumberOfDaysInAMonth(short Year, short Month)
 	return 30;
 }
 
-int TotalDaysFromTheBeginningOfYear(short Day, short Month, short Year)
+short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year)
 {
-	int TotalDays = 0;
+	short TotalDays = 0;
 
-	for (short i = 1; i < Month; i++)
+	for (short i = 1; i <= Month - 1; i++)
 	{
 		TotalDays += NumberOfDaysInAMonth(Year, i);
 	}
@@ -56,7 +56,7 @@ int main()
 	short Year = MyInputLib::ReadNumber("\nPlease enter a Year? ");
 
 	cout << "\nNumber of Days from the begining of the year is "
-		<< TotalDaysFromTheBeginningOfYear(Day, Month, Year);
+		<< NumberOfDaysFromTheBeginingOfTheYear(Day, Month, Year);
 
 	system("pause>0");
 
