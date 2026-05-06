@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #08: Month Calendar [Optimized Code]
+// [C08] Problem #09: Year Calendar [My Solution]
 
 bool IsLeapYear(short Year)
 {
@@ -91,15 +91,24 @@ void PrintMonthCalendar(short Year, short Month)
 	printf("\n  _________________________________\n");
 }
 
+void PrintYearCalendar(short Year)
+{
+	cout << "\n  _________________________________\n";
+	cout << "\n         Calendar - " <<  Year;
+	cout << "\n  _________________________________\n";
+
+	for (short i = 1; i <= 12; i++)
+	{
+		PrintMonthCalendar(Year, i);
+	}
+}
 
 
 int main()
 {
 	short Year = MyInputLib::ReadNumber("\nPlease enter a year? ");
 
-	short Month = MyInputLib::ReadNumber("\nPlease enter a Month? ");
-
-	PrintMonthCalendar(Year, Month);
+	PrintYearCalendar(Year);
 
 
 	system("pause>0");
