@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #09: Year Calendar [Optimized Code]
+// [C08] Problem #10: Days from the beginning of year [My Solution]
 
 bool IsLeapYear(short Year)
 {
@@ -36,80 +36,27 @@ short NumberOfDaysInAMonth(short Year, short Month)
 	return 30;
 }
 
-short DayOfWeekOrder(short Year, short Month, short Day)
+int TotalDaysFromTheBeginningOfYear(short Day, short Month, short Year)
 {
-	short a, y, m;
-	a = (14 - Month) / 12;
-	y = Year - a;
-	m = Month + (12 * a) - 2;
+	int TotalDays = 0;
 
-	return (Day + y + (y / 4) - (y / 100) + (y / 400) + ((31 * m) / 12)) % 7;
-}
-
-string MonthShortName(short MonthNumber)
-{
-	string Months[12] = { "Jan", "Feb", "Mar",
-						  "Apr", "May", "Jun",
-						  "Jul", "Aug", "Sep",
-						  "Oct", "Nov", "Dec" };
-
-	return (Months[MonthNumber - 1]);
-}
-
-void PrintMonthCalendar(short Year, short Month)
-{
-	// Index of the day from 0 to 6
-	int current = DayOfWeekOrder(Year, Month, 1);
-
-	int NumberOfDays = NumberOfDaysInAMonth(Year, Month);
-
-	// Print the current month name
-	printf("\n  _______________%s_______________\n\n",
-		MonthShortName(Month).c_str());
-
-	// Print the columns
-	printf("  Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");
-	
-	// Print appropriate spaces
-	int i;
-	for (i = 0; i < current; i++)
+	for (short i = 1; i < Month; i++)
 	{
-		printf("     ");
+		TotalDays += NumberOfDaysInAMonth(Year, i);
 	}
 
-	for (int j = 1; j <= NumberOfDays; j++)
-	{
-		printf("%5d", j);
-
-		if (++i == 7)
-		{
-			i = 0;
-			printf("\n");
-		}
-	}
-
-	printf("\n  _________________________________\n");
-}
-
-void PrintYearCalendar(short Year)
-{
-	printf("\n  _________________________________\n");
-	printf("\n         Calendar - %d", Year);
-	printf("\n  _________________________________\n");
-
-	for (short i = 1; i <= 12; i++)
-	{
-		PrintMonthCalendar(Year, i);
-	}
+	return (TotalDays + Day);
 }
 
 
 int main()
 {
-	short Year = MyInputLib::ReadNumber("\nPlease enter a year? ");
+	short Day = MyInputLib::ReadNumber("\nPlease enter a Day? ");
+	short Month = MyInputLib::ReadNumber("\nPlease enter a Month? ");
+	short Year = MyInputLib::ReadNumber("\nPlease enter a Year? ");
 
-	PrintYearCalendar(Year);
-
+	cout << "\nNumber of Days from the begining of the year is "
+		<< TotalDaysFromTheBeginningOfYear(Day, Month, Year);
 
 	system("pause>0");
 
