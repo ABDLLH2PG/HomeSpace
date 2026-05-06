@@ -1,9 +1,41 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #07: Day Name [Optimized Code]
+// [C08] Problem #08: Month Calendar [My Solution]
+
+bool IsLeapYear(short Year)
+{
+	// if year is divisible by 4 AND bot divisible by 100
+	// OR if year is divisible by 400
+	// them it is a leap year
+
+	return ((Year % 400 == 0) || (Year % 100 != 0 && Year % 4 == 0));
+}
+
+short NumberOfDaysInAMonth(short Year, short Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1, 3, 5, 7, 8, 10, 12 };
+
+	for (short i = 1; i <= 7; i++)
+	{
+		if (arr31Days[i - 1] == Month)
+			return 31;
+	}
+
+	// if you reach here then its 30 days.
+	return 30;
+}
 
 short DayOfWeekOrder(short Year, short Month, short Day)
 {
@@ -15,24 +47,52 @@ short DayOfWeekOrder(short Year, short Month, short Day)
 	return (Day + y + (y / 4) - (y / 100) + (y / 400) + ((31 * m) / 12)) % 7;
 }
 
-string DayShortName(short DayOfWeekOrder)
+void PrintTopMonthCalender(short Month)
 {
-	string arrDayNames[] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+	string MonthName[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
-	return arrDayNames[DayOfWeekOrder];
+	cout << "\n  _______________" << MonthName[Month - 1] << "_______________\n";
+	cout << "\n  Sun  Mon  Tue  Wed  Thu  Fri  Sat";
+}
+
+void PrintMonthCalendar(short Year, short Month)
+{
+	PrintTopMonthCalender(Month);
+
+	short DaysInMonth = NumberOfDaysInAMonth(Year, Month);
+	short FirstDayInAMonth = DayOfWeekOrder(Year, Month, 1);
+
+	short DayWeekNumber = FirstDayInAMonth;
+	cout << "\n";
+
+	for (short i = 0; i < FirstDayInAMonth; i++)
+	{
+		cout << setw(5) << "";
+	}
+
+	for (short j = 0; j < DaysInMonth; j++)
+	{
+		if (DayWeekNumber == 7)
+		{
+			cout << endl;
+			DayWeekNumber = 0;
+		}
+			
+		cout << setw(5) << (j + 1);
+		DayWeekNumber++;
+	}
+
+	cout << "\n  _________________________________\n";
 }
 
 
 int main()
 {
 	short Year = MyInputLib::ReadNumber("\nPlease enter a year? ");
+
 	short Month = MyInputLib::ReadNumber("\nPlease enter a Month? ");
-	short Day = MyInputLib::ReadNumber("\nPlease enter a Day? ");
 
-	cout << "\nDate      :" << Day << "/" << Month << "/" << Year;
-	cout << "\nDay Order : " << DayOfWeekOrder(Year, Month, Day);
-	cout << "\nDay Name  : " << DayShortName(DayOfWeekOrder(Year, Month, Day));
-
+	PrintMonthCalendar(Year, Month);
 
 
 	system("pause>0");
