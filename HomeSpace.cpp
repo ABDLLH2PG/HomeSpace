@@ -1,10 +1,9 @@
 #include <iostream>
 #include <string>
-#include <iomanip>
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #08: Month Calendar [My Solution]
+// [C08] Problem #08: Month Calendar [Optimized Code]
 
 bool IsLeapYear(short Year)
 {
@@ -47,43 +46,51 @@ short DayOfWeekOrder(short Year, short Month, short Day)
 	return (Day + y + (y / 4) - (y / 100) + (y / 400) + ((31 * m) / 12)) % 7;
 }
 
-void PrintTopMonthCalender(short Month)
+string MonthShortName(short MonthNumber)
 {
-	string MonthName[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+	string Months[12] = { "Jan", "Feb", "Mar",
+						  "Apr", "May", "Jun",
+						  "Jul", "Aug", "Sep",
+						  "Oct", "Nov", "Dec" };
 
-	cout << "\n  _______________" << MonthName[Month - 1] << "_______________\n";
-	cout << "\n  Sun  Mon  Tue  Wed  Thu  Fri  Sat";
+	return (Months[MonthNumber - 1]);
 }
 
 void PrintMonthCalendar(short Year, short Month)
 {
-	PrintTopMonthCalender(Month);
+	// Index of the day from 0 to 6
+	int current = DayOfWeekOrder(Year, Month, 1);
 
-	short DaysInMonth = NumberOfDaysInAMonth(Year, Month);
-	short FirstDayInAMonth = DayOfWeekOrder(Year, Month, 1);
+	int NumberOfDays = NumberOfDaysInAMonth(Year, Month);
 
-	short DayWeekNumber = FirstDayInAMonth;
-	cout << "\n";
+	// Print the current month name
+	printf("\n  _______________%s_______________\n\n",
+		MonthShortName(Month).c_str());
 
-	for (short i = 0; i < FirstDayInAMonth; i++)
+	// Print the columns
+	printf("  Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");
+	
+	// Print appropriate spaces
+	int i;
+	for (i = 0; i < current; i++)
 	{
-		cout << setw(5) << "";
+		printf("     ");
 	}
 
-	for (short j = 0; j < DaysInMonth; j++)
+	for (int j = 1; j <= NumberOfDays; j++)
 	{
-		if (DayWeekNumber == 7)
+		printf("%5d", j);
+
+		if (++i == 7)
 		{
-			cout << endl;
-			DayWeekNumber = 0;
+			i = 0;
+			printf("\n");
 		}
-			
-		cout << setw(5) << (j + 1);
-		DayWeekNumber++;
 	}
 
-	cout << "\n  _________________________________\n";
+	printf("\n  _________________________________\n");
 }
+
 
 
 int main()
