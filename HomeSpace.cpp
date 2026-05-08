@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #10: Days from the beginning of year [Optimized Code]
+// [C08] Problem #11: Date from Day Order In a year [My Solution]
 
 bool IsLeapYear(short Year)
 {
@@ -48,6 +48,26 @@ short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year)
 	return (TotalDays + Day);
 }
 
+void DateFromDayOrderInAYear(short TotalDays, short Year)
+{
+	short DaysOfMonth = 0;
+
+	for (short i = 1; i <= 12; i++)
+	{
+		DaysOfMonth = NumberOfDaysInAMonth(Year, i);
+
+		if (TotalDays >= DaysOfMonth)
+		{
+			TotalDays -= DaysOfMonth;
+		}
+		else
+		{
+			cout << TotalDays << "/" << i << "/" << Year;
+			break;
+		}
+	}
+}
+
 
 int main()
 {
@@ -55,8 +75,13 @@ int main()
 	short Month = MyInputLib::ReadNumber("\nPlease enter a Month? ");
 	short Year = MyInputLib::ReadNumber("\nPlease enter a Year? ");
 
+	short NumberOfDays = NumberOfDaysFromTheBeginingOfTheYear(Day, Month, Year);
+
 	cout << "\nNumber of Days from the begining of the year is "
-		<< NumberOfDaysFromTheBeginingOfTheYear(Day, Month, Year);
+		<< NumberOfDays;
+
+	cout << "\n\nDate for [" << NumberOfDays << "] is: ";
+	DateFromDayOrderInAYear(NumberOfDays, Year);
 
 	system("pause>0");
 
