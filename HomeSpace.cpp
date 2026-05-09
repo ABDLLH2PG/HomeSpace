@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #11: Date from Day Order In a year [My Solution]
+// [C08] Problem #11: Date from Day Order In a year [Optimized Code]
 
 bool IsLeapYear(short Year)
 {
@@ -48,21 +48,34 @@ short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year)
 	return (TotalDays + Day);
 }
 
-void DateFromDayOrderInAYear(short TotalDays, short Year)
+struct sDate
 {
-	short DaysOfMonth = 0;
+	short Year;
+	short Month;
+	short Day;
+};
 
-	for (short i = 1; i <= 12; i++)
+sDate GetDateFromDayOrderInYear(short DateOrderInYear, short Year)
+{
+	sDate Date;
+	short RemainingDays = DateOrderInYear;
+	short MonthDays = 0;
+
+	Date.Year = Year;
+	Date.Month = 1;
+
+	while (true)
 	{
-		DaysOfMonth = NumberOfDaysInAMonth(Year, i);
+		MonthDays = NumberOfDaysInAMonth(Year, Date.Month);
 
-		if (TotalDays >= DaysOfMonth)
+		if (RemainingDays > MonthDays)
 		{
-			TotalDays -= DaysOfMonth;
+			RemainingDays -= MonthDays;
+			Date.Month++;
 		}
 		else
 		{
-			cout << TotalDays << "/" << i << "/" << Year;
+			Date.Day = RemainingDays;
 			break;
 		}
 	}
@@ -75,13 +88,15 @@ int main()
 	short Month = MyInputLib::ReadNumber("\nPlease enter a Month? ");
 	short Year = MyInputLib::ReadNumber("\nPlease enter a Year? ");
 
-	short NumberOfDays = NumberOfDaysFromTheBeginingOfTheYear(Day, Month, Year);
+	short DaysOrderInYear = NumberOfDaysFromTheBeginingOfTheYear(Day, Month, Year);
 
 	cout << "\nNumber of Days from the begining of the year is "
-		<< NumberOfDays;
+		<< DaysOrderInYear;
 
-	cout << "\n\nDate for [" << NumberOfDays << "] is: ";
-	DateFromDayOrderInAYear(NumberOfDays, Year);
+	sDate Date;
+	Date = GetDateFromDayOrderInYear(DaysOrderInYear, Year);
+	cout << "\n\nDate for [" << DaysOrderInYear << "] is: ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year;
 
 	system("pause>0");
 
