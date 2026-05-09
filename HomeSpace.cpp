@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #11: Date from Day Order In a year [Optimized Code]
+// [C08] Problem #12: Add Days to Date [My Solution]
 
 bool IsLeapYear(short Year)
 {
@@ -79,6 +79,30 @@ sDate GetDateFromDayOrderInYear(short DateOrderInYear, short Year)
 			break;
 		}
 	}
+
+	return Date;
+}
+
+sDate AddDaysToDate(sDate Date, short DaysAdd)
+{
+	short RemainingDays = NumberOfDaysFromTheBeginingOfTheYear(Date.Day, Date.Month, Date.Year) + DaysAdd;
+	short DaysInYear = 0;
+
+	while (true)
+	{
+		DaysInYear = IsLeapYear(Date.Year) ? 366 : 365;
+
+		if (RemainingDays > DaysInYear)
+		{
+			RemainingDays -= DaysInYear;
+			Date.Year++;
+		}
+		else
+		{
+			Date = GetDateFromDayOrderInYear(RemainingDays, Date.Year);
+			return Date;
+		}
+	}
 }
 
 
@@ -87,15 +111,15 @@ int main()
 	short Day = MyInputLib::ReadNumber("\nPlease enter a Day? ");
 	short Month = MyInputLib::ReadNumber("\nPlease enter a Month? ");
 	short Year = MyInputLib::ReadNumber("\nPlease enter a Year? ");
+	short DaysAdd = MyInputLib::ReadNumber("\nHow many days to add? ");
 
 	short DaysOrderInYear = NumberOfDaysFromTheBeginingOfTheYear(Day, Month, Year);
 
-	cout << "\nNumber of Days from the begining of the year is "
-		<< DaysOrderInYear;
-
 	sDate Date;
 	Date = GetDateFromDayOrderInYear(DaysOrderInYear, Year);
-	cout << "\n\nDate for [" << DaysOrderInYear << "] is: ";
+	Date = AddDaysToDate(Date, DaysAdd);
+
+	cout << "\nDate after adding [" << DaysAdd << "] days is: ";
 	cout << Date.Day << "/" << Date.Month << "/" << Date.Year;
 
 	system("pause>0");
