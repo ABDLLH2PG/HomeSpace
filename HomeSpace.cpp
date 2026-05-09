@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #12: Add Days to Date [My Solution]
+// [C08] Problem #12: Add Days to Date [Optimized Code]
 
 bool IsLeapYear(short Year)
 {
@@ -55,23 +55,37 @@ struct sDate
 	short Day;
 };
 
-sDate GetDateFromDayOrderInYear(short DateOrderInYear, short Year)
+sDate ReadFullDate()
 {
 	sDate Date;
-	short RemainingDays = DateOrderInYear;
-	short MonthDays = 0;
 
-	Date.Year = Year;
+	Date.Day = MyInputLib::ReadNumber("\nPlease enter a Day? ");
+	Date.Month = MyInputLib::ReadNumber("\nPlease enter a Month? ");
+	Date.Year = MyInputLib::ReadNumber("\nPlease enter a Year? ");
+
+	return Date;
+}
+
+sDate DateAddDays(sDate Date, short Days)
+{
+	short RemainingDays = Days + NumberOfDaysFromTheBeginingOfTheYear(Date.Day, Date.Month, Date.Year);
+	short MonthDays = 0;
 	Date.Month = 1;
 
 	while (true)
 	{
-		MonthDays = NumberOfDaysInAMonth(Year, Date.Month);
+		MonthDays = NumberOfDaysInAMonth(Date.Year, Date.Month);
 
 		if (RemainingDays > MonthDays)
 		{
 			RemainingDays -= MonthDays;
 			Date.Month++;
+
+			if (Date.Month > 12)
+			{
+				Date.Month = 1;
+				Date.Year++;
+			}
 		}
 		else
 		{
@@ -83,41 +97,13 @@ sDate GetDateFromDayOrderInYear(short DateOrderInYear, short Year)
 	return Date;
 }
 
-sDate AddDaysToDate(sDate Date, short DaysAdd)
-{
-	short RemainingDays = NumberOfDaysFromTheBeginingOfTheYear(Date.Day, Date.Month, Date.Year) + DaysAdd;
-	short DaysInYear = 0;
-
-	while (true)
-	{
-		DaysInYear = IsLeapYear(Date.Year) ? 366 : 365;
-
-		if (RemainingDays > DaysInYear)
-		{
-			RemainingDays -= DaysInYear;
-			Date.Year++;
-		}
-		else
-		{
-			Date = GetDateFromDayOrderInYear(RemainingDays, Date.Year);
-			return Date;
-		}
-	}
-}
-
 
 int main()
 {
-	short Day = MyInputLib::ReadNumber("\nPlease enter a Day? ");
-	short Month = MyInputLib::ReadNumber("\nPlease enter a Month? ");
-	short Year = MyInputLib::ReadNumber("\nPlease enter a Year? ");
+	sDate Date = ReadFullDate();
 	short DaysAdd = MyInputLib::ReadNumber("\nHow many days to add? ");
 
-	short DaysOrderInYear = NumberOfDaysFromTheBeginingOfTheYear(Day, Month, Year);
-
-	sDate Date;
-	Date = GetDateFromDayOrderInYear(DaysOrderInYear, Year);
-	Date = AddDaysToDate(Date, DaysAdd);
+	Date = DateAddDays(Date, DaysAdd);
 
 	cout << "\nDate after adding [" << DaysAdd << "] days is: ";
 	cout << Date.Day << "/" << Date.Month << "/" << Date.Year;
