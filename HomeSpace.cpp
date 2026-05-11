@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #12: Add Days to Date [Optimized Code]
+// [C08] Problem #13: Date 1 Less Than Date 2 [My Solution]
 
 bool IsLeapYear(short Year)
 {
@@ -60,53 +60,34 @@ sDate ReadFullDate()
 	sDate Date;
 
 	Date.Day = MyInputLib::ReadNumber("\nPlease enter a Day? ");
-	Date.Month = MyInputLib::ReadNumber("\nPlease enter a Month? ");
-	Date.Year = MyInputLib::ReadNumber("\nPlease enter a Year? ");
+	Date.Month = MyInputLib::ReadNumber("Please enter a Month? ");
+	Date.Year = MyInputLib::ReadNumber("Please enter a Year? ");
 
 	return Date;
 }
 
-sDate DateAddDays(sDate Date, short Days)
+bool Date1LessThanDate2(sDate Date1, sDate Date2)
 {
-	short RemainingDays = Days + NumberOfDaysFromTheBeginingOfTheYear(Date.Day, Date.Month, Date.Year);
-	short MonthDays = 0;
-	Date.Month = 1;
-
-	while (true)
-	{
-		MonthDays = NumberOfDaysInAMonth(Date.Year, Date.Month);
-
-		if (RemainingDays > MonthDays)
-		{
-			RemainingDays -= MonthDays;
-			Date.Month++;
-
-			if (Date.Month > 12)
-			{
-				Date.Month = 1;
-				Date.Year++;
-			}
-		}
-		else
-		{
-			Date.Day = RemainingDays;
-			break;
-		}
-	}
-
-	return Date;
+	return Date1.Year < Date2.Year ? true
+		: Date1.Month < Date2.Month ? true
+		: Date1.Day < Date2.Day ? true : false;
 }
 
 
 int main()
 {
-	sDate Date = ReadFullDate();
-	short DaysAdd = MyInputLib::ReadNumber("\nHow many days to add? ");
+	sDate Date1 = ReadFullDate();
+	sDate Date2 = ReadFullDate();
 
-	Date = DateAddDays(Date, DaysAdd);
+	if (Date1LessThanDate2(Date1, Date2))
+	{
+		cout << "\nYes, Date1 is Less than Date2.";
+	}
+	else
+	{
+		cout << "\nNo, Date1 is Not Less than Date2.";
+	}
 
-	cout << "\nDate after adding [" << DaysAdd << "] days is: ";
-	cout << Date.Day << "/" << Date.Month << "/" << Date.Year;
 
 	system("pause>0");
 
