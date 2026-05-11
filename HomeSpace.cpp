@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #15: Last Day, Last Month [My Solution]
+// [C08] Problem #15: Last Day, Last Month [Optimized Code]
 
 struct stDate
 {
@@ -47,9 +47,9 @@ bool IsLastDayInMonth(stDate Date)
 	return (Date.Day == NumberOfDaysInAMonth(Date.Year, Date.Month));
 }
 
-bool IsLastMonthInYear(stDate Date)
+bool IsLastMonthInYear(short Month)
 {
-	return (Date.Month == 12);
+	return (Month == 12);
 }
 
 
@@ -62,7 +62,7 @@ int main()
 	else
 		cout << "\nNo, Day is NOT Last Day in Month.";
 
-	if (IsLastMonthInYear(Date))
+	if (IsLastMonthInYear(Date.Month))
 		cout << "\nYes, Month is Last Month in Year.";
 	else
 		cout << "\nNo, Month is NOT Last Month in Year.";
