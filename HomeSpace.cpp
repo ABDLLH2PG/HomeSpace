@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #16: Increase Date By One Day [My Solution]
+// [C08] Problem #16: Increase Date By One Day [Optimized Code]
 
 struct stDate
 {
@@ -52,21 +52,25 @@ bool IsLastMonthInYear(short Month)
 	return (Month == 12);
 }
 
-stDate AddOneDayToDate(stDate Date)
+stDate IncreaseDateByOneDay(stDate Date)
 {
 	if (IsLastDayInMonth(Date))
 	{
-		Date.Day = 1;
-		Date.Month++;
+		if (IsLastMonthInYear(Date.Month))
+		{
+			Date.Month = 1;
+			Date.Day = 1;		
+			Date.Year++;
+		}
+		else
+		{
+			Date.Day = 1;
+			Date.Month++;
+		}
 	}
 	else
 	{
 		Date.Day++;
-	}
-	if (IsLastMonthInYear(Date.Month) || Date.Month == 13)
-	{
-		Date.Month = 1;
-		Date.Year++;
 	}
 
 	return Date;
@@ -76,7 +80,7 @@ stDate AddOneDayToDate(stDate Date)
 int main()
 {
 	stDate Date = ReadFullDate();
-	Date = AddOneDayToDate(Date);
+	Date = IncreaseDateByOneDay(Date);
 
 	cout << "\nDate after adding one day is: ";
 	cout << Date.Day << "/" << Date.Month << "/" << Date.Year;
