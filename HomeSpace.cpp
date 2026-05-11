@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #14: Date 1 Equals to Date 2 [My Solution]
+// [C08] Problem #14: Date 1 Equals to Date 2 [Optimized Code]
 
 struct sDate
 {
@@ -25,9 +25,10 @@ sDate ReadFullDate()
 
 bool IsDate1EqualDate2(sDate Date1, sDate Date2)
 {
-	return Date1.Year != Date2.Year ? false
-		: Date1.Month != Date2.Month ? false
-		: Date1.Day != Date2.Day ? false : true;
+	return (Date1.Year == Date2.Year) 
+		? ((Date1.Month == Date2.Month) 
+			? ((Date1.Day == Date2.Day) 
+				? true : false) : false) : false;
 }
 
 
@@ -39,7 +40,7 @@ int main()
 	if (IsDate1EqualDate2(Date1, Date2))
 		cout << "\nYes, Date1 is Equal To Date2.";
 	else
-		cout << "\nNo, Date1 is Not Equal To Date2.";
+		cout << "\nNo, Date1 is NOT Equal To Date2.";
 
 
 	system("pause>0");
