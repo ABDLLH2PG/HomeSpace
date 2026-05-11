@@ -3,18 +3,18 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #14: Date 1 Equals to Date 2 [Optimized Code]
+// [C08] Problem #15: Last Day, Last Month [My Solution]
 
-struct sDate
+struct stDate
 {
 	short Year;
 	short Month;
 	short Day;
 };
 
-sDate ReadFullDate()
+stDate ReadFullDate()
 {
-	sDate Date;
+	stDate Date;
 
 	Date.Day = MyInputLib::ReadNumber("\nPlease enter a Day? ");
 	Date.Month = MyInputLib::ReadNumber("Please enter a Month? ");
@@ -23,24 +23,49 @@ sDate ReadFullDate()
 	return Date;
 }
 
-bool IsDate1EqualDate2(sDate Date1, sDate Date2)
+bool IsLeapYear(short Year)
 {
-	return (Date1.Year == Date2.Year) 
-		? ((Date1.Month == Date2.Month) 
-			? ((Date1.Day == Date2.Day) 
-				? true : false) : false) : false;
+	// if year is divisible by 4 AND bot divisible by 100
+	// OR if year is divisible by 400
+	// them it is a leap year
+
+	return ((Year % 400 == 0) || (Year % 100 != 0 && Year % 4 == 0));
+}
+
+short NumberOfDaysInAMonth(short Year, short Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	int NumberOfDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+	return (Month == 2) ? IsLeapYear(Year) ? 29 : 28 : NumberOfDays[Month - 1];
+}
+
+bool IsLastDayInMonth(stDate Date)
+{
+	return (Date.Day == NumberOfDaysInAMonth(Date.Year, Date.Month));
+}
+
+bool IsLastMonthInYear(stDate Date)
+{
+	return (Date.Month == 12);
 }
 
 
 int main()
 {
-	sDate Date1 = ReadFullDate();
-	sDate Date2 = ReadFullDate();
+	stDate Date = ReadFullDate();
 
-	if (IsDate1EqualDate2(Date1, Date2))
-		cout << "\nYes, Date1 is Equal To Date2.";
+	if (IsLastDayInMonth(Date))
+		cout << "\nYes, Day is Last Day in Month.";
 	else
-		cout << "\nNo, Date1 is NOT Equal To Date2.";
+		cout << "\nNo, Day is NOT Last Day in Month.";
+
+	if (IsLastMonthInYear(Date))
+		cout << "\nYes, Month is Last Month in Year.";
+	else
+		cout << "\nNo, Month is NOT Last Month in Year.";
 
 
 	system("pause>0");
