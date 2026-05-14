@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #17: Diff In Days [My Solution]
+// [C08] Problem #17: Diff In Days [Optimized Code]
 
 struct stDate
 {
@@ -54,26 +54,58 @@ short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year)
 	return (TotalDays + Day);
 }
 
-short DiffDaysInTwoDate(stDate Date1, stDate Date2, bool EndDay = false)
+bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
 {
-	short TotalDays = 0;
+	return (Date1.Year < Date2.Year) ? true : ((Date1.Year == Date2.Year)
+		? (Date1.Month < Date2.Month ? true : (Date1.Month == Date2.Month
+			? Date1.Day < Date2.Day : false)) : false);
+}
 
-	if (Date1.Year != Date2.Year)
+bool IsLastDayInMonth(stDate Date)
+{
+	return (Date.Day == NumberOfDaysInAMonth(Date.Year, Date.Month));
+}
+
+bool IsLastMonthInYear(short Month)
+{
+	return (Month == 12);
+}
+
+stDate IncreaseDateByOneDay(stDate Date)
+{
+	if (IsLastDayInMonth(Date))
 	{
-		short NumberOfDiffYear = Date2.Year - Date1.Year;
-
-		for (short i = 0; i < NumberOfDiffYear; i++)
+		if (IsLastMonthInYear(Date.Month))
 		{
-			TotalDays += (IsLeapYear(Date1.Year + i) ? 366 : 365);
+			Date.Month = 1;
+			Date.Day = 1;
+			Date.Year++;
+		}
+		else
+		{
+			Date.Day = 1;
+			Date.Month++;
 		}
 	}
+	else
+	{
+		Date.Day++;
+	}
 
-	short Date1Days = NumberOfDaysFromTheBeginingOfTheYear(Date1.Day, Date1.Month, Date1.Year);
-	short Date2Days = NumberOfDaysFromTheBeginingOfTheYear(Date2.Day, Date2.Month, Date2.Year);
+	return Date;
+}
 
-	TotalDays += Date2Days - Date1Days;
+int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
+{
+	int Days = 0;
 
-	return TotalDays += (EndDay ? 1 : 0);
+	while (IsDate1BeforeDate2(Date1, Date2))
+	{
+		Days++;
+		Date1 = IncreaseDateByOneDay(Date1);
+	}
+
+	return IncludeEndDay ? ++Days : Days;
 }
 
 
@@ -82,8 +114,10 @@ int main()
 	stDate Date1 = ReadFullDate();
 	stDate Date2 = ReadFullDate();
 
-	cout << "\nDiffrence is: " << DiffDaysInTwoDate(Date1, Date2) << " Days(s).";
-	cout << "\nDiffrence (Including End Day) is: " << DiffDaysInTwoDate(Date1, Date2, true) << " Days(s).";
+	cout << "\nDiffrence is: "
+		<< GetDifferenceInDays(Date1, Date2) << " Days(s).";
+	cout << "\nDiffrence (Including End Day) is: "
+		<< GetDifferenceInDays(Date1, Date2, true) << " Days(s).";
 
 	system("pause>0");
 
