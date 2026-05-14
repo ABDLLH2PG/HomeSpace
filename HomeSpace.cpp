@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #19: Diff In Days (Negative Days) [My Solution]
+// [C08] Problem #19: Diff In Days (Negative Days) [Optimized Code]
 
 struct stDate
 {
@@ -83,18 +83,32 @@ stDate IncreaseDateByOneDay(stDate Date)
 	return Date;
 }
 
+void SwapDates(stDate& Date1, stDate& Date2)
+{
+	stDate TempDate;
+
+	TempDate.Year = Date1.Year;
+	TempDate.Month = Date1.Month;
+	TempDate.Day = Date1.Day;
+
+	Date1.Year = Date2.Year;
+	Date1.Month = Date2.Month;
+	Date1.Day = Date2.Day;
+
+	Date2.Year = TempDate.Year;
+	Date2.Month = TempDate.Month;
+	Date2.Day = TempDate.Day;
+}
+
 int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
 {
 	int Days = 0;
-	short NegativeDate = 1;
+	short SwapFlagValue = 1;
 
 	if (!IsDate1BeforeDate2(Date1, Date2))
 	{
-		stDate Temp = Date1;
-		Date1 = Date2;
-		Date2 = Temp;
-		NegativeDate = -1;
-
+		SwapDates(Date1, Date2);
+		SwapFlagValue = -1;
 	}
 
 	while (IsDate1BeforeDate2(Date1, Date2))
@@ -103,7 +117,7 @@ int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
 		Date1 = IncreaseDateByOneDay(Date1);
 	}
 
-	return (IncludeEndDay ? ++Days : Days) * NegativeDate;
+	return (IncludeEndDay ? ++Days : Days) * SwapFlagValue;
 }
 
 
