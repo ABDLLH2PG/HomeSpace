@@ -1,10 +1,12 @@
+#pragma warning(disable : 4996)
+
 #include <iostream>
 #include <string>
 #include <ctime>
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #18: Your Age In Days [My Solution]
+// [C08] Problem #18: Your Age In Days [Optimized]
 
 struct stDate
 {
@@ -41,18 +43,6 @@ short NumberOfDaysInAMonth(short Year, short Month)
 	int NumberOfDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 	return (Month == 2) ? IsLeapYear(Year) ? 29 : 28 : NumberOfDays[Month - 1];
-}
-
-short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year)
-{
-	short TotalDays = 0;
-
-	for (short i = 1; i <= Month - 1; i++)
-	{
-		TotalDays += NumberOfDaysInAMonth(Year, i);
-	}
-
-	return (TotalDays + Day);
 }
 
 bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
@@ -109,21 +99,29 @@ int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
 	return IncludeEndDay ? ++Days : Days;
 }
 
-int GetYourDateOfBirth(stDate Date)
+stDate GetSystemDate()
 {
+	stDate Date;
+
 	time_t t = time(0);
+	tm* now = localtime(&t);
 
+	Date.Year = now->tm_year + 1900;
+	Date.Month = now->tm_mon + 1;
+	Date.Day = now->tm_mday;
 
-
+	return Date;
 }
 
 
 int main()
 {
 	cout << "\nPlease Enter Your Date of Birth:\n";
-	stDate Date = ReadFullDate();
+	stDate Date1 = ReadFullDate();
+	stDate Date2 = GetSystemDate();
 
-	cout << "\nYour Age is : " << GetYourDateOfBirth(Date) << " Day(s).";
+	cout << "\nYour Age is : "
+		<< GetDifferenceInDays(Date1, Date2, true) << " Day(s).";
 
 
 	system("pause>0");
