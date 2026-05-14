@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
+#include <ctime>
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #17: Diff In Days [Optimized Code]
+// [C08] Problem #18: Your Age In Days [My Solution]
 
 struct stDate
 {
@@ -108,16 +109,22 @@ int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
 	return IncludeEndDay ? ++Days : Days;
 }
 
+int GetYourDateOfBirth(stDate Date)
+{
+	time_t t = time(0);
+
+
+
+}
+
 
 int main()
 {
-	stDate Date1 = ReadFullDate();
-	stDate Date2 = ReadFullDate();
+	cout << "\nPlease Enter Your Date of Birth:\n";
+	stDate Date = ReadFullDate();
 
-	cout << "\nDiffrence is: "
-		<< GetDifferenceInDays(Date1, Date2) << " Days(s).";
-	cout << "\nDiffrence (Including End Day) is: "
-		<< GetDifferenceInDays(Date1, Date2, true) << " Days(s).";
+	cout << "\nYour Age is : " << GetYourDateOfBirth(Date) << " Day(s).";
+
 
 	system("pause>0");
 
