@@ -1,12 +1,9 @@
-#pragma warning(disable : 4996)
-
 #include <iostream>
 #include <string>
-#include <ctime>
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #18: Your Age In Days [Optimized]
+// [C08] Problem #19: Diff In Days (Negative Days) [My Solution]
 
 struct stDate
 {
@@ -89,6 +86,16 @@ stDate IncreaseDateByOneDay(stDate Date)
 int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
 {
 	int Days = 0;
+	short NegativeDate = 1;
+
+	if (!IsDate1BeforeDate2(Date1, Date2))
+	{
+		stDate Temp = Date1;
+		Date1 = Date2;
+		Date2 = Temp;
+		NegativeDate = -1;
+
+	}
 
 	while (IsDate1BeforeDate2(Date1, Date2))
 	{
@@ -96,32 +103,19 @@ int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
 		Date1 = IncreaseDateByOneDay(Date1);
 	}
 
-	return IncludeEndDay ? ++Days : Days;
-}
-
-stDate GetSystemDate()
-{
-	stDate Date;
-
-	time_t t = time(0);
-	tm* now = localtime(&t);
-
-	Date.Year = now->tm_year + 1900;
-	Date.Month = now->tm_mon + 1;
-	Date.Day = now->tm_mday;
-
-	return Date;
+	return (IncludeEndDay ? ++Days : Days) * NegativeDate;
 }
 
 
 int main()
 {
-	cout << "\nPlease Enter Your Date of Birth:\n";
 	stDate Date1 = ReadFullDate();
-	stDate Date2 = GetSystemDate();
+	stDate Date2 = ReadFullDate();
 
-	cout << "\nYour Age is : "
-		<< GetDifferenceInDays(Date1, Date2, true) << " Day(s).";
+	cout << "\nDiffrence is: "
+		<< GetDifferenceInDays(Date1, Date2) << " Days(s).";
+	cout << "\nDiffrence (Including End Day) is: "
+		<< GetDifferenceInDays(Date1, Date2, true) << " Days(s).";
 
 
 	system("pause>0");
