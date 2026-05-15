@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #19: Diff In Days (Negative Days) [Optimized Code]
+// [C08] Problem #20-32: Increase Date Problems [My Solution]
 
 struct stDate
 {
@@ -42,13 +42,6 @@ short NumberOfDaysInAMonth(short Year, short Month)
 	return (Month == 2) ? IsLeapYear(Year) ? 29 : 28 : NumberOfDays[Month - 1];
 }
 
-bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
-{
-	return (Date1.Year < Date2.Year) ? true : ((Date1.Year == Date2.Year)
-		? (Date1.Month < Date2.Month ? true : (Date1.Month == Date2.Month
-			? Date1.Day < Date2.Day : false)) : false);
-}
-
 bool IsLastDayInMonth(stDate Date)
 {
 	return (Date.Day == NumberOfDaysInAMonth(Date.Year, Date.Month));
@@ -57,6 +50,11 @@ bool IsLastDayInMonth(stDate Date)
 bool IsLastMonthInYear(short Month)
 {
 	return (Month == 12);
+}
+
+void PrintDate(stDate Date)
+{
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year;
 }
 
 stDate IncreaseDateByOneDay(stDate Date)
@@ -83,53 +81,78 @@ stDate IncreaseDateByOneDay(stDate Date)
 	return Date;
 }
 
-void SwapDates(stDate& Date1, stDate& Date2)
+stDate IncreaseDateByXDays(stDate Date, int Days)
 {
-	stDate TempDate;
+	for (int i = 0; i < Days; i++)
+	{
+		Date = IncreaseDateByOneDay(Date);
+	}
 
-	TempDate.Year = Date1.Year;
-	TempDate.Month = Date1.Month;
-	TempDate.Day = Date1.Day;
-
-	Date1.Year = Date2.Year;
-	Date1.Month = Date2.Month;
-	Date1.Day = Date2.Day;
-
-	Date2.Year = TempDate.Year;
-	Date2.Month = TempDate.Month;
-	Date2.Day = TempDate.Day;
+	return Date;
 }
 
-int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
+stDate IncreaseDateByOneWeek(stDate Date)
 {
-	int Days = 0;
-	short SwapFlagValue = 1;
+	return Date = IncreaseDateByXDays(Date, 7);
+}
 
-	if (!IsDate1BeforeDate2(Date1, Date2))
+stDate IncreaseDateByXWeeks(stDate Date, int Weeks)
+{
+	for (int i = 0; i < Weeks; i++)
 	{
-		SwapDates(Date1, Date2);
-		SwapFlagValue = -1;
+		Date = IncreaseDateByOneWeek(Date);
 	}
 
-	while (IsDate1BeforeDate2(Date1, Date2))
+	return Date;
+}
+
+stDate IncreaseDateByOneMonth(stDate Date)
+{
+	short DaysInCurrentMonth = NumberOfDaysInAMonth(Date.Year, Date.Month);
+
+	return Date = IncreaseDateByXDays(Date, DaysInCurrentMonth);
+}
+
+stDate IncreaseDateByXMonth(stDate Date, int Months)
+{
+	for (int i = 0; i < Months; i++)
 	{
-		Days++;
-		Date1 = IncreaseDateByOneDay(Date1);
+		Date = IncreaseDateByOneMonth(Date);
 	}
 
-	return (IncludeEndDay ? ++Days : Days) * SwapFlagValue;
+	return Date;
 }
 
 
 int main()
 {
-	stDate Date1 = ReadFullDate();
-	stDate Date2 = ReadFullDate();
+	stDate Date = ReadFullDate();
+	cout << "\nDate After:\n";
 
-	cout << "\nDiffrence is: "
-		<< GetDifferenceInDays(Date1, Date2) << " Days(s).";
-	cout << "\nDiffrence (Including End Day) is: "
-		<< GetDifferenceInDays(Date1, Date2, true) << " Days(s).";
+	Date = IncreaseDateByOneDay(Date);
+	cout << "\n01-Adding one day is: ";
+	PrintDate(Date);
+
+	Date = IncreaseDateByXDays(Date, 10);
+	cout << "\n02-Adding 10 days is: ";
+	PrintDate(Date);
+
+	Date = IncreaseDateByOneWeek(Date);
+	cout << "\n03-Adding one week is: ";
+	PrintDate(Date);
+
+	Date = IncreaseDateByXWeeks(Date, 10);
+	cout << "\n04-Adding 10 weeks is: ";
+	PrintDate(Date);
+
+	Date = IncreaseDateByOneMonth(Date);
+	cout << "\n05-Adding one month is: ";
+	PrintDate(Date);
+
+	Date = IncreaseDateByXMonth(Date, 5);
+	cout << "\n06-Adding 5 months is: ";
+	PrintDate(Date);
+
 
 
 	system("pause>0");
