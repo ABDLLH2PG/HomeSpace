@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #20-32: Increase Date Problems [My Solution]
+// [C08] Problem #20-32: Increase Date Problems [Optimized Code]
 
 struct stDate
 {
@@ -81,9 +81,9 @@ stDate IncreaseDateByOneDay(stDate Date)
 	return Date;
 }
 
-stDate IncreaseDateByXDays(stDate Date, int Days)
+stDate IncreaseDateByXDays(short Days, stDate Date)
 {
-	for (int i = 0; i < Days; i++)
+	for (short i = 1; i <= Days; i++)
 	{
 		Date = IncreaseDateByOneDay(Date);
 	}
@@ -93,12 +93,17 @@ stDate IncreaseDateByXDays(stDate Date, int Days)
 
 stDate IncreaseDateByOneWeek(stDate Date)
 {
-	return Date = IncreaseDateByXDays(Date, 7);
+	for (short i = 1; i <= 7; i++)
+	{
+		Date = IncreaseDateByOneDay(Date);
+	}
+
+	return Date;
 }
 
-stDate IncreaseDateByXWeeks(stDate Date, int Weeks)
+stDate IncreaseDateByXWeeks(short Weeks, stDate Date)
 {
-	for (int i = 0; i < Weeks; i++)
+	for (short i = 1; i <= Weeks; i++)
 	{
 		Date = IncreaseDateByOneWeek(Date);
 	}
@@ -108,18 +113,93 @@ stDate IncreaseDateByXWeeks(stDate Date, int Weeks)
 
 stDate IncreaseDateByOneMonth(stDate Date)
 {
-	short DaysInCurrentMonth = NumberOfDaysInAMonth(Date.Year, Date.Month);
+	if (Date.Month == 12)
+	{
+		Date.Month = 1;
+		Date.Year++;
+	}
+	else
+	{
+		Date.Month++;
+	}
 
-	return Date = IncreaseDateByXDays(Date, DaysInCurrentMonth);
+	//last check day in date should not exceed max days in the current month
+	// example if date is 31/1/2022 increasing one month should 
+	// not be 31 / 2 / 2022, it should be 28/2/2022
+
+	short NumberOfDaysInCurrentMonth = NumberOfDaysInAMonth(Date.Year, Date.Month);
+
+	if (Date.Day > NumberOfDaysInCurrentMonth)
+	{
+		Date.Day = NumberOfDaysInCurrentMonth;
+	}
+
+	return Date;
 }
 
-stDate IncreaseDateByXMonth(stDate Date, int Months)
+stDate IncreaseDateByXMonth(short Months, stDate Date)
 {
-	for (int i = 0; i < Months; i++)
+	for (int i = 1; i <= Months; i++)
 	{
 		Date = IncreaseDateByOneMonth(Date);
 	}
 
+	return Date;
+}
+
+stDate IncreaseDateByOneYear(stDate Date)
+{
+	Date.Year++;
+	return Date;
+}
+
+stDate IncreaseDateByXYears(short Years, stDate Date)
+{
+	for (short i = 1; i <= Years; i++)
+	{
+		Date = IncreaseDateByOneYear(Date);
+	}
+
+	return Date;
+}
+
+stDate IncreaseDateByXYearsFaster(short Years, stDate Date)
+{
+	Date.Year += Years;
+	return Date;
+}
+
+stDate IncreaseDateByOneDecades(stDate Date)
+{
+	Date.Year += 10;
+	return Date;
+}
+
+stDate IncreaseDateByXDecades(short Decades, stDate Date)
+{
+	for (short i = 1; i <= Decades * 10; i++)
+	{
+		Date = IncreaseDateByOneYear(Date);
+	}
+
+	return Date;
+}
+
+stDate IncreaseDateByXDecadesFaster(short Decades, stDate Date)
+{
+	Date.Year += Decades * 10;
+	return Date;
+}
+
+stDate IncreaseDateByOneCentury(stDate Date)
+{
+	Date.Year += 100;
+	return Date;
+}
+
+stDate IncreaseDateByOneMillennium(stDate Date)
+{
+	Date.Year += 1000;
 	return Date;
 }
 
@@ -133,7 +213,7 @@ int main()
 	cout << "\n01-Adding one day is: ";
 	PrintDate(Date);
 
-	Date = IncreaseDateByXDays(Date, 10);
+	Date = IncreaseDateByXDays(10, Date);
 	cout << "\n02-Adding 10 days is: ";
 	PrintDate(Date);
 
@@ -141,7 +221,7 @@ int main()
 	cout << "\n03-Adding one week is: ";
 	PrintDate(Date);
 
-	Date = IncreaseDateByXWeeks(Date, 10);
+	Date = IncreaseDateByXWeeks(10, Date);
 	cout << "\n04-Adding 10 weeks is: ";
 	PrintDate(Date);
 
@@ -149,10 +229,41 @@ int main()
 	cout << "\n05-Adding one month is: ";
 	PrintDate(Date);
 
-	Date = IncreaseDateByXMonth(Date, 5);
+	Date = IncreaseDateByXMonth(5, Date);
 	cout << "\n06-Adding 5 months is: ";
 	PrintDate(Date);
 
+	Date = IncreaseDateByOneYear(Date);
+	cout << "\n07-Adding one year is: ";
+	PrintDate(Date);
+
+	Date = IncreaseDateByXYears(10, Date);
+	cout << "\n08-Adding 10 Years is: ";
+	PrintDate(Date);
+
+	Date = IncreaseDateByXYearsFaster(10, Date);
+	cout << "\n09-Adding 10 Years (faster) is: ";
+	PrintDate(Date);
+
+	Date = IncreaseDateByOneDecades(Date);
+	cout << "\n10-Adding one Decade is: ";
+	PrintDate(Date);
+
+	Date = IncreaseDateByXDecades(10, Date);
+	cout << "\n11-Adding 10 Decades is: ";
+	PrintDate(Date);
+
+	Date = IncreaseDateByXDecadesFaster(10, Date);
+	cout << "\n11-Adding 10 Decades (faster) is: ";
+	PrintDate(Date);
+
+	Date = IncreaseDateByOneCentury(Date);
+	cout << "\n12-Adding One Century is: ";
+	PrintDate(Date);
+
+	Date = IncreaseDateByOneMillennium(Date);
+	cout << "\n13-Adding One Millennium is: ";
+	PrintDate(Date);
 
 
 	system("pause>0");
