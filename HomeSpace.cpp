@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #33-46: Decrease Date Problems [My Solution]
+// [C08] Problem #33-46: Decrease Date Problems [Optimized Code]
 
 struct stDate
 {
@@ -63,14 +63,14 @@ stDate DecreaseDateByOneDay(stDate Date)
 	{
 		if (Date.Month == 1)
 		{
-			Date.Day = NumberOfDaysInAMonth(Date.Year - 1, 12);
 			Date.Month = 12;
+			Date.Day = 31;
 			Date.Year--;
 		}
 		else
 		{
-			Date.Day = NumberOfDaysInAMonth(Date.Year, Date.Month - 1);
 			Date.Month--;
+			Date.Day = NumberOfDaysInAMonth(Date.Year, Date.Month);
 		}
 	}
 	else
@@ -123,6 +123,10 @@ stDate DecreaseDateByOneMonth(stDate Date)
 		Date.Month--;
 	}
 
+	//last check day in date should not exceed max days in the current month
+	//example if date is 31/3/2022 decreasing one month should not be 31/2/2022,
+	//it should be 28/2/2022
+
 	short NumberOfDaysInCurrentMonth = NumberOfDaysInAMonth(Date.Year, Date.Month);
 
 	if (Date.Day > NumberOfDaysInCurrentMonth)
@@ -145,7 +149,8 @@ stDate DecreaseDateByXMonth(short Months, stDate Date)
 
 stDate DecreaseDateByOneYear(stDate Date)
 {
-	return DecreaseDateByXMonth(12, Date);
+	Date.Year--;
+	return Date;
 }
 
 stDate DecreaseDateByXYear(short Years, stDate Date)
@@ -166,11 +171,7 @@ stDate DecreaseDateByXYearFaster(short Years, stDate Date)
 
 stDate DecreaseDateByOneDecade(stDate Date)
 {
-	for (short i = 1; i <= 10; i++)
-	{
-		Date = DecreaseDateByOneYear(Date);
-	}
-
+	Date.Year -= 10;
 	return Date;
 }
 
