@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #55: Calculate Vacation Return Date [My Solution]
+// [C08] Problem #55: Calculate Vacation Return Date [Optimized Code]
 
 struct stDate
 {
@@ -142,22 +142,29 @@ short CalculateVacationDays(stDate DateFrom, stDate DateTo)
 	return DaysCount;
 }
 
-stDate CalculateVacationReturnDate(stDate Date, short VacationDays)
+stDate CalculateVacationReturnDate(stDate DateFrom, short VacationDays)
 {
-	short Counter = 0;
+	short WeekEndCounter = 0;
 
-	while (Counter < VacationDays)
+	while (IsWeekEnd(DateFrom))
 	{
-		Date = IncreaseDateByOneDay(Date);
-
-		if (IsBusinessDay(Date))
-		{
-			Counter++;
-		}
-
+		DateFrom = IncreaseDateByOneDay(DateFrom);
 	}
 
-	return Date;
+	for (short i = 1; i <= VacationDays + WeekEndCounter; i++)
+	{
+		if (IsWeekEnd(DateFrom))
+			WeekEndCounter++;
+
+		DateFrom = IncreaseDateByOneDay(DateFrom);
+	}
+
+	while (IsWeekEnd(DateFrom))
+	{
+		DateFrom = IncreaseDateByOneDay(DateFrom);
+	}
+
+	return DateFrom;
 }
 
 
