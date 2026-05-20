@@ -1,10 +1,9 @@
-#pragma warning(disable : 4996)
 #include <iostream>
 #include <string>
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #47-53: More Date Problems [Optimized Code]
+// [C08] Problem #54: Calculate Vacation Days [My Solution]
 
 struct stDate
 {
@@ -12,6 +11,22 @@ struct stDate
 	short Month;
 	short Day;
 };
+
+stDate ReadFullDate()
+{
+	stDate Date;
+
+	Date.Day = MyInputLib::ReadNumber("\nPlease enter a Day? ");
+	Date.Month = MyInputLib::ReadNumber("Please enter a Month? ");
+	Date.Year = MyInputLib::ReadNumber("Please enter a Year? ");
+
+	return Date;
+}
+
+void PrintDate(stDate Date)
+{
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year;
+}
 
 bool IsLeapYear(short Year)
 {
@@ -73,47 +88,6 @@ stDate IncreaseDateByOneDay(stDate Date)
 	return Date;
 }
 
-int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
-{
-	int Days = 0;
-
-	while (IsDate1BeforeDate2(Date1, Date2))
-	{
-		Days++;
-		Date1 = IncreaseDateByOneDay(Date1);
-	}
-
-	return IncludeEndDay ? ++Days : Days;
-}
-
-void PrintDate(stDate Date)
-{
-	cout << Date.Day << "/" << Date.Month << "/" << Date.Year;
-}
-
-stDate GetSystemDate()
-{
-	stDate Date;
-
-	time_t t = time(0);
-	tm* now = localtime(&t);
-
-	Date.Year = now->tm_year + 1900;
-	Date.Month = now->tm_mon + 1;
-	Date.Day = now->tm_mday;
-
-	return Date;
-}
-
-stDate DrDate()
-{
-	stDate Date;
-
-	Date.Day = 27, Date.Month = 9, Date.Year = 2022;
-
-	return Date;
-}
-
 short DayOfWeekOrder(short Year, short Month, short Day)
 {
 	short a, y, m;
@@ -153,66 +127,36 @@ bool IsBusinessDay(stDate Date)
 	return !IsWeekEnd(Date);
 }
 
-short DaysUntiTheEndOfWeek(stDate Date)
+short GetVacationPeriod(stDate DateFrom, stDate DateTo)
 {
-	return 6 - DayOfWeekOrder(Date);
-}
+	short VacationDays = 0;
 
-short DaysUntiTheEndOfMonth(stDate Date)
-{
-	stDate EndOfMonthDate;
-	EndOfMonthDate.Day = NumberOfDaysInAMonth(Date.Year, Date.Month);
-	EndOfMonthDate.Month = Date.Month;
-	EndOfMonthDate.Year = Date.Year;
+	while (IsDate1BeforeDate2(DateFrom, DateTo))
+	{
+		if (IsBusinessDay(DateFrom))
+		{
+			VacationDays++;
+		}
 
-	return  GetDifferenceInDays(Date, EndOfMonthDate, true);
-}
+		DateFrom = IncreaseDateByOneDay(DateFrom);
+	}
 
-short DaysUntiTheEndOfYear(stDate Date)
-{
-	stDate EndOfYearDate;
-	EndOfYearDate.Day = 31;
-	EndOfYearDate.Month = 12;
-	EndOfYearDate.Year = Date.Year;
-
-	return GetDifferenceInDays(Date, EndOfYearDate, true);
+	return VacationDays;
 }
 
 
 int main()
 {
-	stDate Date = GetSystemDate();
+	cout << "\nVacation Starts:";
+	stDate DateFrom = ReadFullDate();
+	
+	cout << "\nVacation Ends:";
+	stDate DateTo = ReadFullDate();
 
-	cout << "\nToday is " << DayShortName(DayOfWeekOrder(Date)) << " , ";
-	PrintDate(Date);
+	cout << "\nVaction From: " << DayShortName(DayOfWeekOrder(DateFrom)) << " , "; PrintDate(DateFrom);
+	cout << "\nVaction To: " << DayShortName(DayOfWeekOrder(DateTo)) << " , "; PrintDate(DateTo);
 
-	//-----------------------
-	cout << "\n\nIs it End of Week?";
-	if (IsEndOfWeek(Date))
-		cout << "\nYes it is Saturday, it's of week.";
-	else
-		cout << "\nNo it's Not end of week.";
-	//-----------------------
-	cout << "\n\nIs it Weekend?\n";
-	if (IsWeekEnd(Date))
-		cout << "Yes it is a week end.";
-	else
-		cout << "No today is " << DayShortName(DayOfWeekOrder(Date)) << ", Not a weekend.";
-	//-----------------------
-	cout << "\n\nIs it Business Day?\n";
-	if (IsBusinessDay(Date))
-		cout << "Yes it is a business day.";
-	else
-		cout << "No it is NOT a business day.";
-	//-----------------------
-	cout << "\n\nDays until end of week : "
-		<< DaysUntiTheEndOfWeek(Date) << " Days(s).";
-	//-----------------------
-	cout << "\nDays until end of month : "
-		<< DaysUntiTheEndOfMonth(Date) << " Days(s).";
-	//-----------------------
-	cout << "\nDays until end of year : "
-		<< DaysUntiTheEndOfYear(Date) << " Days(s).";
+	cout << "\n\n\nActucal Vacation Days is: " << GetVacationPeriod(DateFrom, DateTo);
 
 
 	system("pause>0");
