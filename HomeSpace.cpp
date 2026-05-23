@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #55: Calculate Vacation Return Date [Optimized Code]
+// [C08] Problem #56: Is Date1 After Date2 [My Solution]
 
 struct stDate
 {
@@ -167,20 +167,29 @@ stDate CalculateVacationReturnDate(stDate DateFrom, short VacationDays)
 	return DateFrom;
 }
 
+bool IsDate1AfterDate2(stDate Date1, stDate Date2)
+{
+	return !IsDate1BeforeDate2(Date1, Date2);
+}
+
 
 int main()
 {
-	cout << "\nVacation Starts:";
-	stDate Date = ReadFullDate();
+	cout << "\nEnter Date1:";
+	stDate Date1 = ReadFullDate();
 
-	short VacationDays = MyInputLib::ReadNumber("\nPlease enter vacation days? ");
+	cout << "\nEnter Date2:";
+	stDate Date2 = ReadFullDate();
 
-	Date = CalculateVacationReturnDate(Date, VacationDays);
+	if (IsDate1AfterDate2(Date1, Date2))
+	{
+		cout << "\nYes, Date1 is After Date2.";
+	}
+	else
+	{
+		cout << "\nNo, Date1 is NOT after Date2.";
+	}
 
-	cout << "\n\nReturn Date: " << DayShortName(DayOfWeekOrder(Date)) << " , ";
-	PrintDate(Date);
-
-	
 
 	system("pause>0");
 
