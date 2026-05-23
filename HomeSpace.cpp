@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #56: Is Date1 After Date2 [Optimized Code]
+// [C08] Problem #57: Compare Date Function [My Solution]
 
 struct stDate
 {
@@ -67,6 +67,18 @@ bool IsDate1AfterDate2(stDate Date1, stDate Date2)
 	return (!IsDate1BeforeDate2(Date1, Date2)) && (!IsDate1EqualDate2(Date1, Date2));
 }
 
+enum enCompareDate { Before = -1, Equal = 0, After = 1 };
+
+enCompareDate CompareDate(stDate Date1, stDate Date2)
+{
+	if (IsDate1BeforeDate2(Date1, Date2))
+		return enCompareDate::Before;
+	else if (IsDate1EqualDate2(Date1, Date2))
+		return enCompareDate::Equal;
+	else
+		return enCompareDate::After;
+}
+
 
 int main()
 {
@@ -76,14 +88,10 @@ int main()
 	cout << "\nEnter Date2:";
 	stDate Date2 = ReadFullDate();
 
-	if (IsDate1AfterDate2(Date1, Date2))
-	{
-		cout << "\nYes, Date1 is After Date2.";
-	}
-	else
-	{
-		cout << "\nNo, Date1 is NOT after Date2.";
-	}
+	enCompareDate CompareResult = CompareDate(Date1, Date2);
+
+	cout << "\nCompare Result = " << CompareResult;
+	
 
 
 	system("pause>0");
