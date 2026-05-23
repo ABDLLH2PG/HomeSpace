@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #59: Period Length In Days [My Solution]
+// [C08] Problem #59: Period Length In Days [Optimized Code]
 
 struct stDate
 {
