@@ -3,13 +3,19 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #57: Compare Date Function [Optimized Code]
+// [C08] Problem #58: Is Overlap Periods [My Solution]
 
 struct stDate
 {
 	short Year;
 	short Month;
 	short Day;
+};
+
+struct stPeriod
+{
+	stDate Start;
+	stDate End;
 };
 
 stDate ReadFullDate()
@@ -80,18 +86,36 @@ enDateCompare CompareDate(stDate Date1, stDate Date2)
 	return enDateCompare::After;
 }
 
+bool IsOverlapPeriods(stPeriod Period1, stPeriod Period2)
+{
+	return (IsDate1BeforeDate2(Period2.Start, Period1.End) && IsDate1BeforeDate2(Period1.Start, Period2.End));
+}
+
 
 int main()
 {
-	cout << "\nEnter Date1:";
-	stDate Date1 = ReadFullDate();
+	cout << "\nEnter Period 1:";
+	stPeriod Period1;
+	cout << "\nEnter Start Date:\n";
+	Period1.Start = ReadFullDate();
+	cout << "\nEnter End Date:\n";
+	Period1.End = ReadFullDate();
 
-	cout << "\nEnter Date2:";
-	stDate Date2 = ReadFullDate();
+	cout << "\nEnter Period 2:";
+	stPeriod Period2;
+	cout << "\nEnter Start Date:\n";
+	Period2.Start = ReadFullDate();
+	cout << "\nEnter End Date:\n";
+	Period2.End = ReadFullDate();
 
-	cout << "\nCompare Result = " << CompareDate(Date1, Date2);
-	
-
+	if (IsOverlapPeriods(Period1, Period2))
+	{
+		cout << "\nYes, Periods Overlap";
+	}
+	else
+	{
+		cout << "\nNo, Periods Not Overlap";
+	}
 
 	system("pause>0");
 
