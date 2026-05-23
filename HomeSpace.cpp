@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #58: Is Overlap Periods [My Solution]
+// [C08] Problem #58: Is Overlap Periods [Optimized Code]
 
 struct stDate
 {
@@ -14,8 +14,8 @@ struct stDate
 
 struct stPeriod
 {
-	stDate Start;
-	stDate End;
+	stDate StartDate;
+	stDate EndDate;
 };
 
 stDate ReadFullDate()
@@ -29,28 +29,16 @@ stDate ReadFullDate()
 	return Date;
 }
 
-void PrintDate(stDate Date)
+stPeriod ReadPeriod()
 {
-	cout << Date.Day << "/" << Date.Month << "/" << Date.Year;
-}
+	stPeriod Period;
+	cout << "\nEnter Start Date:\n";
+	Period.StartDate = ReadFullDate();
 
-bool IsLeapYear(short Year)
-{
-	// if year is divisible by 4 AND bot divisible by 100
-	// OR if year is divisible by 400
-	// them it is a leap year
+	cout << "\nEnter End Date:\n";
+	Period.EndDate = ReadFullDate();
 
-	return ((Year % 400 == 0) || (Year % 100 != 0 && Year % 4 == 0));
-}
-
-short NumberOfDaysInAMonth(short Year, short Month)
-{
-	if (Month < 1 || Month > 12)
-		return 0;
-
-	int NumberOfDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-	return (Month == 2) ? IsLeapYear(Year) ? 29 : 28 : NumberOfDays[Month - 1];
+	return Period;
 }
 
 bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
@@ -75,7 +63,7 @@ bool IsDate1AfterDate2(stDate Date1, stDate Date2)
 
 enum enDateCompare { Before = -1, Equal = 0, After = 1 };
 
-enDateCompare CompareDate(stDate Date1, stDate Date2)
+enDateCompare CompareDates(stDate Date1, stDate Date2)
 {
 	if (IsDate1BeforeDate2(Date1, Date2))
 		return enDateCompare::Before;
@@ -88,33 +76,33 @@ enDateCompare CompareDate(stDate Date1, stDate Date2)
 
 bool IsOverlapPeriods(stPeriod Period1, stPeriod Period2)
 {
-	return (IsDate1BeforeDate2(Period2.Start, Period1.End) && IsDate1BeforeDate2(Period1.Start, Period2.End));
+	if (
+		CompareDates(Period2.EndDate, Period1.StartDate) == enDateCompare::Before
+		||
+		CompareDates(Period2.StartDate, Period1.EndDate) == enDateCompare::After
+		)
+		return false;
+	else
+		return true;
 }
 
 
 int main()
 {
 	cout << "\nEnter Period 1:";
-	stPeriod Period1;
-	cout << "\nEnter Start Date:\n";
-	Period1.Start = ReadFullDate();
-	cout << "\nEnter End Date:\n";
-	Period1.End = ReadFullDate();
+	stPeriod Period1 = ReadPeriod();
 
 	cout << "\nEnter Period 2:";
-	stPeriod Period2;
-	cout << "\nEnter Start Date:\n";
-	Period2.Start = ReadFullDate();
-	cout << "\nEnter End Date:\n";
-	Period2.End = ReadFullDate();
+	stPeriod Period2 = ReadPeriod();
+
 
 	if (IsOverlapPeriods(Period1, Period2))
 	{
-		cout << "\nYes, Periods Overlap";
+		cout << "\nYes, Periods Overlap\n";
 	}
 	else
 	{
-		cout << "\nNo, Periods Not Overlap";
+		cout << "\nNo, Periods do not Overlap\n";
 	}
 
 	system("pause>0");
