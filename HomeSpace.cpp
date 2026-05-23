@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #56: Is Date1 After Date2 [My Solution]
+// [C08] Problem #56: Is Date1 After Date2 [Optimized Code]
 
 struct stDate
 {
@@ -54,122 +54,17 @@ bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
 			? Date1.Day < Date2.Day : false)) : false);
 }
 
-bool IsLastDayInMonth(stDate Date)
+bool IsDate1EqualDate2(stDate Date1, stDate Date2)
 {
-	return (Date.Day == NumberOfDaysInAMonth(Date.Year, Date.Month));
-}
-
-bool IsLastMonthInYear(short Month)
-{
-	return (Month == 12);
-}
-
-stDate IncreaseDateByOneDay(stDate Date)
-{
-	if (IsLastDayInMonth(Date))
-	{
-		if (IsLastMonthInYear(Date.Month))
-		{
-			Date.Month = 1;
-			Date.Day = 1;
-			Date.Year++;
-		}
-		else
-		{
-			Date.Day = 1;
-			Date.Month++;
-		}
-	}
-	else
-	{
-		Date.Day++;
-	}
-
-	return Date;
-}
-
-short DayOfWeekOrder(short Year, short Month, short Day)
-{
-	short a, y, m;
-	a = (14 - Month) / 12;
-	y = Year - a;
-	m = Month + (12 * a) - 2;
-
-	return (Day + y + (y / 4) - (y / 100) + (y / 400) + ((31 * m) / 12)) % 7;
-}
-
-short DayOfWeekOrder(stDate Date)
-{
-	return DayOfWeekOrder(Date.Year, Date.Month, Date.Day);
-}
-
-string DayShortName(short DayOfWeekOrder)
-{
-	string arrDayNames[] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
-
-	return arrDayNames[DayOfWeekOrder];
-}
-
-bool IsEndOfWeek(stDate Date)
-{
-	return DayOfWeekOrder(Date) == 6;
-}
-
-bool IsWeekEnd(stDate Date)
-{
-	//Weekends are Fri and Sat
-	short DayIndex = DayOfWeekOrder(Date);
-	return (DayIndex == 5 || DayIndex == 6);
-}
-
-bool IsBusinessDay(stDate Date)
-{
-	return !IsWeekEnd(Date);
-}
-
-short CalculateVacationDays(stDate DateFrom, stDate DateTo)
-{
-	short DaysCount = 0;
-
-	while (IsDate1BeforeDate2(DateFrom, DateTo))
-	{
-		if (IsBusinessDay(DateFrom))
-			DaysCount++;
-
-		DateFrom = IncreaseDateByOneDay(DateFrom);
-	}
-
-	return DaysCount;
-}
-
-stDate CalculateVacationReturnDate(stDate DateFrom, short VacationDays)
-{
-	short WeekEndCounter = 0;
-
-	while (IsWeekEnd(DateFrom))
-	{
-		DateFrom = IncreaseDateByOneDay(DateFrom);
-	}
-
-	for (short i = 1; i <= VacationDays + WeekEndCounter; i++)
-	{
-		if (IsWeekEnd(DateFrom))
-			WeekEndCounter++;
-
-		DateFrom = IncreaseDateByOneDay(DateFrom);
-	}
-
-	while (IsWeekEnd(DateFrom))
-	{
-		DateFrom = IncreaseDateByOneDay(DateFrom);
-	}
-
-	return DateFrom;
+	return (Date1.Year == Date2.Year)
+		? ((Date1.Month == Date2.Month)
+			? ((Date1.Day == Date2.Day)
+				? true : false) : false) : false;
 }
 
 bool IsDate1AfterDate2(stDate Date1, stDate Date2)
 {
-	return !IsDate1BeforeDate2(Date1, Date2);
+	return (!IsDate1BeforeDate2(Date1, Date2)) && (!IsDate1EqualDate2(Date1, Date2));
 }
 
 
