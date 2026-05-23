@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #57: Compare Date Function [My Solution]
+// [C08] Problem #57: Compare Date Function [Optimized Code]
 
 struct stDate
 {
@@ -67,16 +67,17 @@ bool IsDate1AfterDate2(stDate Date1, stDate Date2)
 	return (!IsDate1BeforeDate2(Date1, Date2)) && (!IsDate1EqualDate2(Date1, Date2));
 }
 
-enum enCompareDate { Before = -1, Equal = 0, After = 1 };
+enum enDateCompare { Before = -1, Equal = 0, After = 1 };
 
-enCompareDate CompareDate(stDate Date1, stDate Date2)
+enDateCompare CompareDate(stDate Date1, stDate Date2)
 {
 	if (IsDate1BeforeDate2(Date1, Date2))
-		return enCompareDate::Before;
-	else if (IsDate1EqualDate2(Date1, Date2))
-		return enCompareDate::Equal;
-	else
-		return enCompareDate::After;
+		return enDateCompare::Before;
+
+	if (IsDate1EqualDate2(Date1, Date2))
+		return enDateCompare::Equal;
+
+	return enDateCompare::After;
 }
 
 
@@ -88,9 +89,7 @@ int main()
 	cout << "\nEnter Date2:";
 	stDate Date2 = ReadFullDate();
 
-	enCompareDate CompareResult = CompareDate(Date1, Date2);
-
-	cout << "\nCompare Result = " << CompareResult;
+	cout << "\nCompare Result = " << CompareDate(Date1, Date2);
 	
 
 
