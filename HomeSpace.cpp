@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #60: Is Date Within Period [My Solution]
+// [C08] Problem #60: Is Date Within Period [Optimized Code]
 
 struct stDate
 {
