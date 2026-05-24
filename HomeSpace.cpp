@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #59: Period Length In Days [Optimized Code]
+// [C08] Problem #60: Is Date Within Period [My Solution]
 
 struct stDate
 {
@@ -169,14 +169,27 @@ int PeriodLengthInDays(stPeriod Period, bool IncludeEndDay = false)
 	return GetDifferenceInDays(Period.StartDate, Period.EndDate, IncludeEndDay);
 }
 
+bool IsDateInPeriod(stDate Date, stPeriod Period)
+{
+	return !(CompareDates(Date, Period.StartDate) == enDateCompare::Before
+
+		||
+		     CompareDates(Date, Period.EndDate) == enDateCompare::After);
+}
+
 
 int main()
 {
-	cout << "\nEnter Period 1:";
+	cout << "\nEnter Period :";
 	stPeriod Period = ReadPeriod();
 
-	cout << "\nPeriod Length is: " << PeriodLengthInDays(Period);
-	cout << "\nPeriod Length (Including End Date) is: " << PeriodLengthInDays(Period, true);
+	cout << "\nEnter Date to check:\n";
+	stDate Date = ReadFullDate();
+
+	if (IsDateInPeriod(Date, Period))
+		cout << "\nYes, Date is within period\n";
+	else
+		cout << "\nNo, Date is NOT within period\n";
 
 
 	system("pause>0");
