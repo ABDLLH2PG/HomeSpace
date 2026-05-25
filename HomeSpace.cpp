@@ -4,7 +4,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #63 & 64: Read/Print Date String [Optimized Code]
+// [C08] Problem #65 FormatDate [My Solution]
 
 struct stDate
 {
@@ -118,6 +118,27 @@ string DateToString(stDate Date)
 	return to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
 }
 
+string FormateDate(stDate Date, string DateFormate)
+{
+	if (DateFormate == "dd/mm/yyyy")
+		return to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
+
+	if (DateFormate == "yyyy/dd/mm")
+		return to_string(Date.Year) + "/" + to_string(Date.Day) + "/" + to_string(Date.Month);
+
+	if (DateFormate == "mm/dd/yyyy")
+		return to_string(Date.Month) + "/" + to_string(Date.Day) + "/" + to_string(Date.Year);
+
+	if (DateFormate == "mm-dd-yyyy")
+		return to_string(Date.Month) + "-" + to_string(Date.Day) + "-" + to_string(Date.Year);
+
+	if (DateFormate == "dd-mm-yyyy")
+		return to_string(Date.Day) + "-" + to_string(Date.Month) + "-" + to_string(Date.Year);
+
+	if (DateFormate == "Day:dd, Month:mm, Year:yyyy")
+		return "Day:" + to_string(Date.Day) + ", Month:" + to_string(Date.Month) + ", Year:" + to_string(Date.Year);
+}
+
 
 int main()
 {
@@ -125,11 +146,12 @@ int main()
 
 	stDate Date = StringToDate(DateString);
 
-	cout << "\nDay: " << Date.Day;
-	cout << "\nMonth: " << Date.Month;
-	cout << "\nYear: " << Date.Year;
-
-	cout << "\n\nYou Entered: " << DateToString(Date);
+	cout << "\n" << FormateDate(Date, "dd/mm/yyyy");
+	cout << "\n\n" << FormateDate(Date, "yyyy/dd/mm");
+	cout << "\n\n" << FormateDate(Date, "mm/dd/yyyy");
+	cout << "\n\n" << FormateDate(Date, "mm-dd-yyyy");
+	cout << "\n\n" << FormateDate(Date, "dd-mm-yyyy");
+	cout << "\n\n" << FormateDate(Date, "Day:dd, Month:mm, Year:yyyy");
 
 
 	system("pause>0");
