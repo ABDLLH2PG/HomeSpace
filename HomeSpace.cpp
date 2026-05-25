@@ -4,7 +4,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #65 FormatDate [My Solution]
+// [C08] Problem #65 FormatDate [Optimized Code]
 
 struct stDate
 {
@@ -118,25 +118,27 @@ string DateToString(stDate Date)
 	return to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
 }
 
-string FormateDate(stDate Date, string DateFormate)
+string ReplaceWordInString(string S1, string StringToReplace, string ReplaceTo)
 {
-	if (DateFormate == "dd/mm/yyyy")
-		return to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
+	short pos = S1.find(StringToReplace);
 
-	if (DateFormate == "yyyy/dd/mm")
-		return to_string(Date.Year) + "/" + to_string(Date.Day) + "/" + to_string(Date.Month);
+	while (pos != string::npos)
+	{
+		S1.replace(pos, StringToReplace.length(), ReplaceTo);
+		pos = S1.find(StringToReplace); // find next
+	}
 
-	if (DateFormate == "mm/dd/yyyy")
-		return to_string(Date.Month) + "/" + to_string(Date.Day) + "/" + to_string(Date.Year);
+	return S1;
+}
 
-	if (DateFormate == "mm-dd-yyyy")
-		return to_string(Date.Month) + "-" + to_string(Date.Day) + "-" + to_string(Date.Year);
+string FormateDate(stDate Date, string DateFormate = "dd/mm/yyyy")
+{
+	string FormattedDateString = "";
+	FormattedDateString = ReplaceWordInString(DateFormate, "dd", to_string(Date.Day));
+	FormattedDateString = ReplaceWordInString(FormattedDateString, "mm", to_string(Date.Month));
+	FormattedDateString = ReplaceWordInString(FormattedDateString, "yyyy", to_string(Date.Year));
 
-	if (DateFormate == "dd-mm-yyyy")
-		return to_string(Date.Day) + "-" + to_string(Date.Month) + "-" + to_string(Date.Year);
-
-	if (DateFormate == "Day:dd, Month:mm, Year:yyyy")
-		return "Day:" + to_string(Date.Day) + ", Month:" + to_string(Date.Month) + ", Year:" + to_string(Date.Year);
+	return FormattedDateString;
 }
 
 
@@ -146,11 +148,16 @@ int main()
 
 	stDate Date = StringToDate(DateString);
 
-	cout << "\n" << FormateDate(Date, "dd/mm/yyyy");
+	cout << "\n"   << FormateDate(Date, "dd/mm/yyyy");
+
 	cout << "\n\n" << FormateDate(Date, "yyyy/dd/mm");
+
 	cout << "\n\n" << FormateDate(Date, "mm/dd/yyyy");
+
 	cout << "\n\n" << FormateDate(Date, "mm-dd-yyyy");
+
 	cout << "\n\n" << FormateDate(Date, "dd-mm-yyyy");
+
 	cout << "\n\n" << FormateDate(Date, "Day:dd, Month:mm, Year:yyyy");
 
 
