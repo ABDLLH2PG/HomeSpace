@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #61: Count Overlap Days [Optimized Code]
+// [C08] Problem #62: Validate Date [My Solution]
 
 struct stDate
 {
@@ -210,16 +210,26 @@ int CountOverlapDays(stPeriod Period1, stPeriod Period2)
 	return OverlapDays;
 }
 
+bool IsValidDate(stDate Date)
+{
+	if (Date.Day > NumberOfDaysInAMonth(Date.Year, Date.Month))
+		return false;
+	else if (Date.Month > 12)
+		return false;
+	else
+		return true;
+}
+
 
 int main()
 {
-	cout << "\nEnter Period 1 :";
-	stPeriod Period1 = ReadPeriod();
+	stDate Date = ReadFullDate();
 
-	cout << "\nEnter Period 2 :";
-	stPeriod Period2 = ReadPeriod();
-	
-	cout << "\nOverlap Days Count Is: " << CountOverlapDays(Period1, Period2);
+	if (IsValidDate(Date))
+		cout << "\nYes, Date is a valide date";
+	else
+		cout << "\nNo, Date is a NOT valide date";
+
 
 
 	system("pause>0");
