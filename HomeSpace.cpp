@@ -3,7 +3,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #60: Is Date Within Period [Optimized Code]
+// [C08] Problem #61: Count Overlap Days [My Solution]
 
 struct stDate
 {
@@ -172,24 +172,38 @@ int PeriodLengthInDays(stPeriod Period, bool IncludeEndDay = false)
 bool IsDateInPeriod(stDate Date, stPeriod Period)
 {
 	return !(CompareDates(Date, Period.StartDate) == enDateCompare::Before
-
 		||
 		     CompareDates(Date, Period.EndDate) == enDateCompare::After);
+}
+
+int CountOverlapDays(stPeriod Period1, stPeriod Period2)
+{
+	int Days = 0;
+
+	if (CompareDates(Period2.StartDate, Period1.EndDate) == enDateCompare::Before)
+	{
+		Days = GetDifferenceInDays(Period2.StartDate, Period1.EndDate);
+	}
+	if (CompareDates(Period2.EndDate, Period1.StartDate) == enDateCompare::Before)
+	{
+		Days = GetDifferenceInDays(Period2.EndDate, Period1.StartDate);
+	}
+
+
+	return Days;
 }
 
 
 int main()
 {
-	cout << "\nEnter Period :";
-	stPeriod Period = ReadPeriod();
+	cout << "\nEnter Period 1 :";
+	stPeriod Period1 = ReadPeriod();
 
-	cout << "\nEnter Date to check:\n";
-	stDate Date = ReadFullDate();
+	cout << "\nEnter Period 2 :";
+	stPeriod Period2 = ReadPeriod();
+	
+	cout << "\nOverlap Days Count Is: " << CountOverlapDays(Period1, Period2);
 
-	if (IsDateInPeriod(Date, Period))
-		cout << "\nYes, Date is within period\n";
-	else
-		cout << "\nNo, Date is NOT within period\n";
 
 
 	system("pause>0");
