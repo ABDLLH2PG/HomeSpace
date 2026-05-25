@@ -4,7 +4,7 @@
 #include "MyLib/MyInputLib.h"
 using namespace std;
 
-// [C08] Problem #63 & 64: Read/Print Date String [My Solution]
+// [C08] Problem #63 & 64: Read/Print Date String [Optimized Code]
 
 struct stDate
 {
@@ -100,12 +100,12 @@ vector <string> SplitString(string S1, string Delim = " ")
 	return vString;
 }
 
-stDate StringToDate(string sDate)
+stDate StringToDate(string DateString)
 {
 	stDate Date;
+	vector <string> vDate;
 
-	vector <string> vDate = SplitString(sDate, "/");
-
+	vDate = SplitString(DateString, "/");
 	Date.Day = stoi(vDate[0]);
 	Date.Month = stoi(vDate[1]);
 	Date.Year = stoi(vDate[2]);
@@ -115,29 +115,21 @@ stDate StringToDate(string sDate)
 
 string DateToString(stDate Date)
 {
-	string stDate = "", Seperator = "/";
-
-	stDate += to_string(Date.Day) + Seperator;
-	stDate += to_string(Date.Month) + Seperator;
-	stDate += to_string(Date.Year);
-
-	return stDate;
+	return to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
 }
 
 
 int main()
 {
-	string sDate = MyInputLib::ReadString("\nPlease Enter Date dd/mm/yyyy? ");
+	string DateString = MyInputLib::ReadString("\nPlease Enter Date dd/mm/yyyy? ");
 
-	stDate stDate = StringToDate(sDate);
+	stDate Date = StringToDate(DateString);
 
-	cout << "\nDay: " << stDate.Day;
-	cout << "\nMonth: " << stDate.Month;
-	cout << "\nYear: " << stDate.Year;
+	cout << "\nDay: " << Date.Day;
+	cout << "\nMonth: " << Date.Month;
+	cout << "\nYear: " << Date.Year;
 
-	string  s2Date = DateToString(stDate);
-
-	cout << "\n\nYou Entered: " << s2Date;
+	cout << "\n\nYou Entered: " << DateToString(Date);
 
 
 	system("pause>0");
