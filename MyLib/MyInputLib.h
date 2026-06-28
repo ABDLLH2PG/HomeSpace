@@ -94,7 +94,7 @@ namespace MyInputLib
 	double ReadDoubleNumber(string Message)
 	{
 		double Number;
-		cout << Message << endl;
+		cout << Message;
 		cin >> Number;
 		return Number;
 	}

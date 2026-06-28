@@ -20,22 +20,28 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyArrayLib.h">
+    <ClInclude Include="MyLib\MyArrayLib.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyDateLib.h">
+    <ClInclude Include="MyLib\MyDateLib.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyInputLib.h">
+    <ClInclude Include="MyLib\MyFileLib.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyMathLib.h">
+    <ClInclude Include="MyLib\MyInputLib.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyStringLib.h">
+    <ClInclude Include="MyLib\MyMathLib.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyUtilityLib.h">
+    <ClInclude Include="MyLib\MyMatrixLib.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyLib\MyStringLib.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyLib\MyUtilityLib.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
