@@ -141,5 +141,4 @@ namespace MyUtilityLib
         }
         return Text;
     }
-
 }

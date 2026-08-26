@@ -131,7 +131,7 @@ namespace MyStringLib
 
 		return Counter;
 	}
-
+	
 	short CountLetters(string S1, enWhatToCount WhatToCount = enWhatToCount::All)
 	{
 		if (WhatToCount == enWhatToCount::All)
