@@ -130,6 +130,14 @@
     <ClCompile Include="HomeSpace.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DS\clsDblLinkedList.h" />
+    <ClInclude Include="DS\clsDynamicArray.h" />
+    <ClInclude Include="DS\clsMyQueue.h" />
+    <ClInclude Include="DS\clsMyQueueArr.h" />
+    <ClInclude Include="DS\clsMyStack.h" />
+    <ClInclude Include="DS\clsMyStackArr.h" />
+    <ClInclude Include="DS\clsMyString.h" />
+    <ClInclude Include="DS\clsQueueLine.h" />
     <ClInclude Include="Myclasses\clsDate.h" />
     <ClInclude Include="Myclasses\clsInputValidate.h" />
     <ClInclude Include="Myclasses\clsPeriod.h" />

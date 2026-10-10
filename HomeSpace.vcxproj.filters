@@ -16,6 +16,9 @@
     <Filter Include="Resource Files\MyClasses">
       <UniqueIdentifier>{d7b6e289-8322-4b8f-b67e-94af1bb58a94}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\DS">
+      <UniqueIdentifier>{b056a873-e489-4e40-8224-f43b53211fc3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HomeSpace.cpp">
@@ -37,6 +40,30 @@
     </ClInclude>
     <ClInclude Include="Myclasses\clsUtil.h">
       <Filter>Resource Files\MyClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="DS\clsDblLinkedList.h">
+      <Filter>Resource Files\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="DS\clsDynamicArray.h">
+      <Filter>Resource Files\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="DS\clsMyQueue.h">
+      <Filter>Resource Files\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="DS\clsMyQueueArr.h">
+      <Filter>Resource Files\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="DS\clsMyStack.h">
+      <Filter>Resource Files\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="DS\clsMyStackArr.h">
+      <Filter>Resource Files\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="DS\clsMyString.h">
+      <Filter>Resource Files\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="DS\clsQueueLine.h">
+      <Filter>Resource Files\DS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
